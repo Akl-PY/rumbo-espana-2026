@@ -1,0 +1,28 @@
+---
+import { COPY } from "../data/config";
+---
+
+<section id="historia">
+  <div class="container">
+    <p class="eyebrow reveal">Nuestra historia</p>
+    <h2 class="reveal">El camino hasta acá</h2>
+
+    <div class="story-grid">
+      <div class="img-frame story-photo reveal">
+        <img
+          src="/images/team.jpg"
+          alt="Delegación de Taekwondo"
+          loading="lazy"
+          onload="this.classList.add('is-loaded')"
+          onerror="this.remove()"
+        />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3 7l9-4 9 4-9 4-9-4z" />
+          <path d="M3 7v10l9 4 9-4V7" />
+        </svg>
+      </div>
+
+      <p class="story-text reveal">{COPY.storyText}</p>
+    </div>
+  </div>
+</section>

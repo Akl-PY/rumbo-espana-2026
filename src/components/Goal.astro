@@ -1,0 +1,63 @@
+---
+import { GOAL, RAISED } from "../data/config";
+import { donations } from "../data/donations";
+
+const percent = Math.min(100, Math.round((RAISED / GOAL) * 100));
+const donorCount = donations.length;
+
+function formatARS(n: number) {
+  return new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 }).format(n);
+}
+---
+
+<section id="objetivo">
+  <div class="container">
+    <p class="eyebrow reveal">Nuestro objetivo</p>
+    <h2 class="reveal">${formatARS(GOAL)}</h2>
+    <p class="section-lead reveal">
+      Este es el monto que necesitamos reunir para cubrir pasajes, alojamiento e
+      inscripción de toda la delegación.
+    </p>
+
+    <div class="card reveal" style="padding: 26px 22px;">
+      <div class="progress-track">
+        <div class="progress-fill" id="goal-progress-fill" style={`width: ${percent}%`}></div>
+      </div>
+      <div class="progress-meta">
+        <span>$<strong>{formatARS(RAISED)}</strong> recaudados de ${formatARS(GOAL)}</span>
+        <span><strong>{percent}%</strong></span>
+      </div>
+
+      <div class="goal-stats">
+        <div class="goal-stat">
+          <div class="goal-stat-number">${formatARS(RAISED)}</div>
+          <div class="goal-stat-label">Recaudado</div>
+        </div>
+        <div class="goal-stat">
+          <div class="goal-stat-number">{donorCount}</div>
+          <div class="goal-stat-label">Donaciones</div>
+        </div>
+        <div class="goal-stat">
+          <div class="goal-stat-number">{percent}%</div>
+          <div class="goal-stat-label">del objetivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Anima la barra desde 0 hasta su ancho real al entrar en pantalla.
+  function animateProgress() {
+    const fill = document.getElementById("goal-progress-fill") as HTMLElement | null;
+    if (!fill) return;
+    const target = fill.style.width;
+    fill.style.width = "0%";
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        fill.style.width = target;
+      }, 150);
+    });
+  }
+  animateProgress();
+</script>

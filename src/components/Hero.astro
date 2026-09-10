@@ -1,0 +1,33 @@
+---
+import { COPY } from "../data/config";
+import Countdown from "./Countdown.astro";
+---
+
+<section id="hero" class="hero">
+  <div class="hero-bg" id="hero-bg">
+    <img
+      src="/images/hero.jpg"
+      alt=""
+      id="hero-image"
+      onload="this.classList.add('is-loaded')"
+      onerror="this.remove()"
+    />
+  </div>
+  <span class="hero-flag" aria-hidden="true"></span>
+
+  <div class="container hero-content">
+    <p class="eyebrow">Copa del Mundo · Benidorm, España</p>
+    <h1 class="hero-title">
+      RUMBO A <span class="accent">ESPAÑA</span> 2026
+    </h1>
+    <p class="hero-subtitle">{COPY.heroSubtitle}</p>
+    <p class="hero-text">{COPY.heroText}</p>
+
+    <div class="hero-actions">
+      <a href="#donar" class="btn btn-primary">Quiero ayudar</a>
+      <a href="#historia" class="btn btn-outline">Conocer nuestra historia</a>
+    </div>
+
+    <Countdown />
+  </div>
+</section>

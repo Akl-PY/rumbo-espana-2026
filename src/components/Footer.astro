@@ -1,0 +1,45 @@
+---
+import { SOCIAL } from "../data/config";
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-title">Rumbo a España 2026 🇦🇷</div>
+    <div class="footer-sub">Taekwondo · Argentina</div>
+
+    <div class="footer-social">
+      {
+        SOCIAL.instagram && (
+          <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+            </svg>
+          </a>
+        )
+      }
+      {
+        SOCIAL.facebook && (
+          <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M14 9h3V5h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9a1 1 0 0 1 1-1z" />
+            </svg>
+          </a>
+        )
+      }
+      {
+        SOCIAL.whatsapp && (
+          <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+              <path d="M20 12a8 8 0 1 1-3.6-6.7L20 4l-1.2 3.5A8 8 0 0 1 20 12z" />
+              <path d="M9 10c0 3 2 5 5 5" />
+            </svg>
+          </a>
+        )
+      }
+    </div>
+
+    <div class="footer-legal">Campaña solidaria sin fines de lucro · {new Date().getFullYear()}</div>
+  </div>
+</footer>

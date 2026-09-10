@@ -1,0 +1,73 @@
+---
+import { EVENT_DATE_ISO } from "../data/config";
+---
+
+<div class="countdown" id="countdown" data-target={EVENT_DATE_ISO} aria-live="polite">
+  <div class="countdown-unit">
+    <div class="countdown-number" data-unit="days">--</div>
+    <div class="countdown-label">Días</div>
+  </div>
+  <div class="countdown-unit">
+    <div class="countdown-number" data-unit="hours">--</div>
+    <div class="countdown-label">Horas</div>
+  </div>
+  <div class="countdown-unit">
+    <div class="countdown-number" data-unit="minutes">--</div>
+    <div class="countdown-label">Minutos</div>
+  </div>
+  <div class="countdown-unit">
+    <div class="countdown-number" data-unit="seconds">--</div>
+    <div class="countdown-label">Segundos</div>
+  </div>
+</div>
+
+<script>
+  function initCountdown() {
+    const el = document.getElementById("countdown");
+    if (!el) return;
+
+    const targetISO = el.dataset.target;
+    if (!targetISO) return;
+
+    // La fecha objetivo viene con el offset de Argentina (-03:00)
+    // incluido en el propio string ISO, por lo que el cálculo es
+    // correcto sin importar en qué zona horaria esté el visitante.
+    const target = new Date(targetISO).getTime();
+
+    const daysEl = el.querySelector('[data-unit="days"]');
+    const hoursEl = el.querySelector('[data-unit="hours"]');
+    const minutesEl = el.querySelector('[data-unit="minutes"]');
+    const secondsEl = el.querySelector('[data-unit="seconds"]');
+
+    function pad(n: number) {
+      return n.toString().padStart(2, "0");
+    }
+
+    function tick() {
+      const now = Date.now();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        el.innerHTML = '<div class="countdown-done">¡Llegó el momento! 🇦🇷</div>';
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      if (daysEl) daysEl.textContent = String(days);
+      if (hoursEl) hoursEl.textContent = pad(hours);
+      if (minutesEl) minutesEl.textContent = pad(minutes);
+      if (secondsEl) secondsEl.textContent = pad(seconds);
+    }
+
+    tick();
+    const timer = setInterval(tick, 1000);
+  }
+
+  initCountdown();
+  document.addEventListener("astro:page-load", initCountdown);
+</script>

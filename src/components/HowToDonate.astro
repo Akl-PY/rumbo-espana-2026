@@ -1,0 +1,88 @@
+---
+import { ALIAS } from "../data/config";
+---
+
+<section id="donar">
+  <div class="container">
+    <p class="eyebrow reveal">¿Querés ayudarnos?</p>
+    <h2 class="reveal">Podés colaborar con el monto que quieras</h2>
+    <p class="section-lead reveal">
+      Todo lo que puedas aportar suma. Copiá el alias y transferí desde tu
+      app bancaria o de Mercado Pago.
+    </p>
+
+    <div class="card donate-box reveal">
+      <div>
+        <div class="alias-row">
+          <div>
+            <div class="alias-label">Alias</div>
+            <div class="alias-value">{ALIAS}</div>
+          </div>
+          <button class="btn btn-primary copy-btn js-copy-alias" data-alias={ALIAS}>
+            Copiar alias
+          </button>
+        </div>
+        <p class="donate-note" style="margin-top: 16px; text-align: left;">
+          Próximamente vamos a sumar QR de Mercado Pago, QR bancario y CBU en
+          esta misma sección.
+        </p>
+      </div>
+
+      <div>
+        <div class="img-frame qr-box">
+          <img
+            src="/images/qr-donacion.png"
+            alt="QR para donar"
+            onload="this.classList.add('is-loaded')"
+            onerror="this.remove()"
+          />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v.01"></path>
+          </svg>
+        </div>
+        <p class="donate-note" style="margin-top: 10px;">QR próximamente</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initCopyButtons() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".js-copy-alias");
+
+    buttons.forEach((btn) => {
+      const originalText = btn.textContent || "Copiar alias";
+
+      btn.addEventListener("click", async () => {
+        const alias = btn.getAttribute("data-alias") || "";
+
+        try {
+          await navigator.clipboard.writeText(alias);
+        } catch {
+          // Fallback para navegadores sin soporte de Clipboard API
+          const input = document.createElement("textarea");
+          input.value = alias;
+          input.style.position = "fixed";
+          input.style.opacity = "0";
+          document.body.appendChild(input);
+          input.select();
+          document.execCommand("copy");
+          document.body.removeChild(input);
+        }
+
+        btn.textContent = "✓ Alias copiado";
+        btn.classList.add("is-copied");
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove("is-copied");
+        }, 2200);
+      });
+    });
+  }
+
+  initCopyButtons();
+</script>

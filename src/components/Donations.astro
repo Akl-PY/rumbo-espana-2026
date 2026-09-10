@@ -1,0 +1,40 @@
+---
+import { donations } from "../data/donations";
+
+function formatARS(n: number) {
+  return new Intl.NumberFormat("es-AR", { maximumFractionDigits: 0 }).format(n);
+}
+
+const sorted = [...donations].sort((a, b) => b.amount - a.amount);
+---
+
+<section id="donaciones">
+  <div class="container">
+    <p class="eyebrow reveal">Gracias</p>
+    <h2 class="reveal">Quienes ya nos ayudaron</h2>
+    <p class="section-lead reveal">
+      Cada aporte, grande o chico, nos acerca un poco más a Benidorm.
+    </p>
+
+    {
+      sorted.length === 0 ? (
+        <div class="donations-empty reveal">
+          <strong>Todavía no hay donaciones cargadas</strong>
+          <span>Sé la primera o el primero en ayudarnos a llegar. 🇦🇷</span>
+        </div>
+      ) : (
+        <div class="donations-list">
+          {sorted.map((d) => (
+            <div class="card donation-item reveal">
+              <div>
+                <div class="donation-name">{d.name}</div>
+                {d.message && <div class="donation-message">"{d.message}"</div>}
+              </div>
+              <div class="donation-amount">${formatARS(d.amount)}</div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>
