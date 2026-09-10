@@ -2,38 +2,68 @@
 import { TEAM } from "../data/config";
 ---
 
-<section id="delegacion">
-  <div class="container">
-    <p class="eyebrow reveal">Quiénes somos</p>
-    <h2 class="reveal">Nuestra delegación</h2>
-    <p class="section-lead reveal">
+<section id="delegacion" class="relative px-5 py-[88px]">
+  <div class="mx-auto max-w-[1100px]">
+    <p
+      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+    >
+      <span class="h-0.5 w-[22px] bg-primary"></span>
+      Quiénes somos
+    </p>
+
+    <h2
+      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+    >
+      Nuestra delegación
+    </h2>
+
+    <p class="mb-10 max-w-[560px] text-base leading-relaxed text-foreground-muted">
       Competidores y coaches que representan a Argentina en Benidorm.
     </p>
 
-    <div class="team-grid">
-      {
-        TEAM.map((member) => (
-          <div class="card team-card reveal">
-            <div class="img-frame team-photo">
-              <img
-                src={member.image}
-                alt={member.name}
-                loading="lazy"
-                onload="this.classList.add('is-loaded')"
-                onerror="this.remove()"
-              />
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="8" r="4" />
-                <path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6" />
-              </svg>
+    <div class="grid grid-cols-2 gap-4 min-[680px]:grid-cols-3 min-[860px]:grid-cols-5">
+      {TEAM.map((member) => (
+        <article
+          class="group overflow-hidden rounded-brand border border-border bg-card shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
+        >
+          <div
+            class="relative aspect-[3/4] overflow-hidden rounded-t-brand bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25"
+          >
+            <img
+              src={member.image}
+              alt={member.name}
+              loading="lazy"
+              class="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-500 ease-brand group-hover:scale-[1.03]"
+              onload="this.classList.add('is-loaded')"
+              onerror="this.remove()"
+            />
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              class="absolute left-1/2 top-1/2 h-[34px] w-[34px] -translate-x-1/2 -translate-y-1/2 opacity-50"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="8" r="4"></circle>
+              <path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"></path>
+            </svg>
+          </div>
+
+          <div class="px-4 pt-3.5 pb-[18px]">
+            <div class="text-[15px] font-extrabold text-foreground">
+              {member.name}
             </div>
-            <div class="team-info">
-              <div class="team-name">{member.name}</div>
-              <div class="team-role">{member.role}</div>
+
+            <div
+              class="mt-[3px] text-[11.5px] font-medium uppercase tracking-[0.08em] text-primary"
+            >
+              {member.role}
             </div>
           </div>
-        ))
-      }
+        </article>
+      ))}
     </div>
   </div>
 </section>

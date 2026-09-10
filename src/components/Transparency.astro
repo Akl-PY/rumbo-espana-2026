@@ -1,108 +1,75 @@
 ---
 const EXPENSES = [
-  { icon: "✈️", title: "Pasajes aéreos", desc: "Vuelos ida y vuelta hacia España para competidores y coaches." },
-  { icon: "🏨", title: "Alojamiento oficial", desc: "Estadía durante los días reglamentarios del certamen en Benidorm." },
-  { icon: "🥋", title: "Inscripciones y licencias", desc: "Acreditación oficial a la Copa del Mundo y seguros deportivos." },
-  { icon: "🚕", title: "Traslados internos", desc: "Movilidad aeropuerto-hotel-estadio y logística de la delegación." },
-  { icon: "🍽️", title: "Nutrición y gastos de viaje", desc: "Alimentación deportiva, pesaje e hidratación durante la competencia." },
+  {
+    icon: "✈️",
+    title: "Pasajes aéreos",
+    desc: "Vuelos ida y vuelta hacia España para competidores y coaches.",
+  },
+  {
+    icon: "🏨",
+    title: "Alojamiento oficial",
+    desc: "Estadía durante los días reglamentarios del certamen en Benidorm.",
+  },
+  {
+    icon: "🥋",
+    title: "Inscripciones y licencias",
+    desc: "Acreditación oficial a la Copa del Mundo y seguros deportivos.",
+  },
+  {
+    icon: "🚕",
+    title: "Traslados internos",
+    desc: "Movilidad aeropuerto-hotel-estadio y logística de la delegación.",
+  },
+  {
+    icon: "🍽️",
+    title: "Nutrición y gastos de viaje",
+    desc: "Alimentación deportiva, pesaje e hidratación durante la competencia.",
+  },
 ];
 ---
 
-<section id="transparencia" class="section transparency-section">
-  <div class="container">
-    <div class="section-header text-center">
-      <span class="badge">Claridad y Compromiso</span>
-      <h2 class="section-title">¿A dónde va nuestro objetivo?</h2>
-      <p class="section-subtitle">
-        Cada aporte de la comunidad y de los sponsors se destina exclusivamente a hacer viable la participación en la Copa del Mundo.
+<section id="transparencia" class="px-5 py-[88px]">
+  <div class="mx-auto max-w-[1100px]">
+    <div class="mb-12 text-center">
+      <span
+        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+      >
+        <span class="h-0.5 w-[22px] bg-primary"></span>
+        Claridad y Compromiso
+      </span>
+
+      <h2
+        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+      >
+        ¿A dónde va nuestro objetivo?
+      </h2>
+
+      <p
+        class="mx-auto max-w-[600px] text-base leading-relaxed text-foreground-muted"
+      >
+        Cada aporte de la comunidad y de los sponsors se destina exclusivamente
+        a hacer viable la participación en la Copa del Mundo.
       </p>
     </div>
 
-    <div class="expenses-grid">
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {EXPENSES.map((item) => (
-        <div class="expense-card">
-          <span class="expense-icon">{item.icon}</span>
-          <h3 class="expense-title">{item.title}</h3>
-          <p class="expense-desc">{item.desc}</p>
-        </div>
+        <article
+          class="rounded-brand border border-border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
+        >
+          <span class="mb-4 block text-[2rem] leading-none">
+            {item.icon}
+          </span>
+
+          <h3 class="mb-2 font-display text-lg text-foreground">
+            {item.title}
+          </h3>
+
+          <p class="text-sm leading-relaxed text-foreground-muted">
+            {item.desc}
+          </p>
+        </article>
       ))}
     </div>
   </div>
 </section>
-
-<style>
-  .transparency-section {
-    padding: 4.5rem 1rem;
-    background: #0f172a;
-  }
-
-  .container {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: rgba(16, 185, 129, 0.15);
-    color: #10b981;
-    border-radius: 9999px;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: #fff;
-  }
-
-  .section-subtitle {
-    color: #94a3b8;
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    font-size: 1.05rem;
-  }
-
-  .expenses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.25rem;
-  }
-
-  .expense-card {
-    background: #111827;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 0.85rem;
-    padding: 1.5rem;
-    text-align: left;
-  }
-
-  .expense-icon {
-    font-size: 2rem;
-    display: inline-block;
-    margin-bottom: 0.75rem;
-  }
-
-  .expense-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #f8fafc;
-    margin-bottom: 0.4rem;
-  }
-
-  .expense-desc {
-    color: #94a3b8;
-    font-size: 0.9rem;
-    line-height: 1.4;
-    margin: 0;
-  }
-</style>

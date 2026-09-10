@@ -2,17 +2,82 @@
 import { ALIAS } from "../data/config";
 ---
 
-<section class="cta-final">
-  <div class="container">
-    <h2 class="reveal">AYUDANOS A LLEGAR</h2>
-    <p class="reveal">Cada aporte nos acerca un poco más a Benidorm.</p>
+<section
+  class="relative border-y border-border bg-[radial-gradient(circle_at_50%_0%,rgba(224,30,43,0.18),transparent_60%),#141414] px-5 py-[88px] text-center min-[860px]:py-[120px]"
+>
+  <div class="mx-auto max-w-[1100px]">
+    <h2
+      class="mb-3.5 font-display text-[clamp(30px,8vw,48px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+    >
+      AYUDANOS A LLEGAR
+    </h2>
 
-    <div class="cta-alias reveal">{ALIAS}</div>
-    <div class="reveal">
-      <button class="btn btn-primary js-copy-alias" data-alias={ALIAS}>
-        Copiar alias
-      </button>
+    <p
+      class="mx-auto mb-[30px] max-w-[480px] text-base leading-relaxed text-foreground-muted"
+    >
+      Cada aporte nos acerca un poco más a Benidorm.
+    </p>
+
+    <div
+      class="mb-6 font-display text-[clamp(20px,6vw,28px)] tracking-[0.02em] text-accent"
+    >
+      {ALIAS}
     </div>
+
+    <button
+      class="rounded-full bg-primary px-7 py-4 text-[15px] font-bold text-white shadow-[0_8px_24px_rgba(224,30,43,0.35)] transition-all duration-200 ease-brand hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_10px_30px_rgba(224,30,43,0.5)] active:scale-[0.97]"
+      type="button"
+      data-alias={ALIAS}
+      aria-label="Copiar alias de donación"
+    >
+      Copiar alias
+    </button>
   </div>
 </section>
 
+<script>
+  function initFinalCopyButton() {
+    const button =
+      document.querySelector<HTMLButtonElement>("button[data-alias]");
+
+    if (!button || button.dataset.copyInitialized === "true") return;
+
+    button.dataset.copyInitialized = "true";
+
+    const originalText = button.textContent || "Copiar alias";
+
+    button.addEventListener("click", async () => {
+      const alias = button.getAttribute("data-alias") || "";
+
+      try {
+        await navigator.clipboard.writeText(alias);
+      } catch {
+        const input = document.createElement("textarea");
+
+        input.value = alias;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+
+      button.textContent = "✓ Alias copiado";
+
+      button.classList.remove("bg-primary", "hover:bg-primary-dark");
+      button.classList.add("bg-[#1c8a4b]");
+
+      setTimeout(() => {
+        button.textContent = originalText;
+
+        button.classList.remove("bg-[#1c8a4b]");
+        button.classList.add("bg-primary");
+      }, 2200);
+    });
+  }
+
+  initFinalCopyButton();
+  document.addEventListener("astro:page-load", initFinalCopyButton);
+</script>

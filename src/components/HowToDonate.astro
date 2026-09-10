@@ -2,48 +2,93 @@
 import { ALIAS } from "../data/config";
 ---
 
-<section id="donar">
-  <div class="container">
-    <p class="eyebrow reveal">¿Querés ayudarnos?</p>
-    <h2 class="reveal">Podés colaborar con el monto que quieras</h2>
-    <p class="section-lead reveal">
-      Todo lo que puedas aportar suma. Copiá el alias y transferí desde tu
-      app bancaria o de Mercado Pago.
+<section id="donar" class="relative px-5 py-[88px]">
+  <div class="mx-auto max-w-[1100px]">
+    <p
+      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+    >
+      <span class="h-0.5 w-[22px] bg-primary"></span>
+      ¿Querés ayudarnos?
     </p>
 
-    <div class="card donate-box reveal">
+    <h2
+      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+    >
+      Podés colaborar con el monto que quieras
+    </h2>
+
+    <p class="mb-10 max-w-[560px] text-base leading-relaxed text-foreground-muted">
+      Todo lo que puedas aportar suma. Copiá el alias y transferí desde tu app
+      bancaria o de Mercado Pago.
+    </p>
+
+    <div
+      class="grid gap-7 rounded-brand border border-border bg-card p-6 shadow-card sm:p-8 lg:grid-cols-[1.3fr_1fr] lg:items-center"
+    >
       <div>
-        <div class="alias-row">
+        <div
+          class="flex flex-col gap-4 rounded-brand-sm border border-border bg-white/[0.05] p-4 sm:flex-row sm:items-center sm:justify-between sm:px-[18px]"
+        >
           <div>
-            <div class="alias-label">Alias</div>
-            <div class="alias-value">{ALIAS}</div>
+            <div
+              class="mb-1 text-[11.5px] font-medium uppercase tracking-[0.08em] text-foreground-muted"
+            >
+              Alias
+            </div>
+
+            <div
+              class="font-display text-[clamp(18px,5vw,24px)] tracking-[0.02em] text-accent"
+            >
+              {ALIAS}
+            </div>
           </div>
-          <button class="btn btn-primary copy-btn js-copy-alias" data-alias={ALIAS}>
+
+          <button
+            class="min-w-[132px] rounded-full bg-primary px-7 py-4 text-[15px] font-bold text-white shadow-[0_8px_24px_rgba(224,30,43,0.35)] transition-all duration-200 ease-brand hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_10px_30px_rgba(224,30,43,0.5)] active:scale-[0.97]"
+            type="button"
+            data-alias={ALIAS}
+            aria-label="Copiar alias de donación"
+          >
             Copiar alias
           </button>
         </div>
-        <p class="donate-note" style="margin-top: 16px; text-align: left;">
+
+        <p class="mt-4 text-left text-[13px] leading-relaxed text-foreground-muted">
           Próximamente vamos a sumar QR de Mercado Pago, QR bancario y CBU en
           esta misma sección.
         </p>
       </div>
 
       <div>
-        <div class="img-frame qr-box">
+        <div
+          class="relative mx-auto flex h-[180px] w-[180px] items-center justify-center overflow-hidden rounded-brand-sm border border-border bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25"
+        >
           <img
             src="/images/qr-donacion.png"
             alt="QR para donar"
+            class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-400 ease-brand"
             onload="this.classList.add('is-loaded')"
             onerror="this.remove()"
           />
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="h-[34px] w-[34px] opacity-50"
+            aria-hidden="true"
+          >
             <rect x="3" y="3" width="7" height="7" rx="1"></rect>
             <rect x="14" y="3" width="7" height="7" rx="1"></rect>
             <rect x="3" y="14" width="7" height="7" rx="1"></rect>
             <path d="M14 14h3v3h-3zM20 14v3M14 20h3M20 20v.01"></path>
           </svg>
         </div>
-        <p class="donate-note" style="margin-top: 10px;">QR próximamente</p>
+
+        <p class="mt-2.5 text-center text-[13px] text-foreground-muted">
+          QR próximamente
+        </p>
       </div>
     </div>
   </div>
@@ -51,9 +96,14 @@ import { ALIAS } from "../data/config";
 
 <script>
   function initCopyButtons() {
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".js-copy-alias");
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>("button[data-alias]");
 
     buttons.forEach((btn) => {
+      if (btn.dataset.copyInitialized === "true") return;
+
+      btn.dataset.copyInitialized = "true";
+
       const originalText = btn.textContent || "Copiar alias";
 
       btn.addEventListener("click", async () => {
@@ -62,11 +112,12 @@ import { ALIAS } from "../data/config";
         try {
           await navigator.clipboard.writeText(alias);
         } catch {
-          // Fallback para navegadores sin soporte de Clipboard API
           const input = document.createElement("textarea");
+
           input.value = alias;
           input.style.position = "fixed";
           input.style.opacity = "0";
+
           document.body.appendChild(input);
           input.select();
           document.execCommand("copy");
@@ -74,15 +125,20 @@ import { ALIAS } from "../data/config";
         }
 
         btn.textContent = "✓ Alias copiado";
-        btn.classList.add("is-copied");
+
+        btn.classList.remove("bg-primary", "hover:bg-primary-dark");
+        btn.classList.add("bg-[#1c8a4b]");
 
         setTimeout(() => {
           btn.textContent = originalText;
-          btn.classList.remove("is-copied");
+
+          btn.classList.remove("bg-[#1c8a4b]");
+          btn.classList.add("bg-primary");
         }, 2200);
       });
     });
   }
 
   initCopyButtons();
+  document.addEventListener("astro:page-load", initCopyButtons);
 </script>

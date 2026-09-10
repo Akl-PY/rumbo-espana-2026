@@ -2,22 +2,37 @@
 import { GALLERY_PATH, GALLERY_MAX_ITEMS } from "../data/config";
 ---
 
-<section id="galeria">
-  <div class="container">
-    <p class="eyebrow reveal">Momentos</p>
-    <h2 class="reveal">Galería</h2>
-    <p class="section-lead reveal">
+<section id="galeria" class="relative px-5 py-[88px]">
+  <div class="mx-auto max-w-[1100px]">
+    <p
+      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+    >
+      <span class="h-0.5 w-[22px] bg-primary"></span>
+      Momentos
+    </p>
+
+    <h2
+      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+    >
+      Galería
+    </h2>
+
+    <p class="mb-10 max-w-[560px] text-base leading-relaxed text-foreground-muted">
       Entrenamientos, competencias y preparación rumbo a Benidorm.
     </p>
 
     <div
-      class="gallery-grid"
+      class="grid grid-cols-2 gap-2.5 min-[680px]:grid-cols-3"
       id="gallery-grid"
       data-base={GALLERY_PATH}
       data-max={GALLERY_MAX_ITEMS}
     >
     </div>
-    <p class="gallery-empty" id="gallery-empty" style="display: none;">
+
+    <p
+      class="hidden rounded-brand border border-dashed border-border px-5 py-10 text-center text-sm text-foreground-muted"
+      id="gallery-empty"
+    >
       Todavía no hay fotos cargadas en la galería. Vas a poder agregarlas
       subiendo archivos a <code>/public/images/gallery/</code>.
     </p>
@@ -28,12 +43,16 @@ import { GALLERY_PATH, GALLERY_MAX_ITEMS } from "../data/config";
   function initGallery() {
     const grid = document.getElementById("gallery-grid");
     const empty = document.getElementById("gallery-empty");
+
     if (!grid) return;
 
     const base = grid.dataset.base || "/images/gallery";
     const max = Number(grid.dataset.max || 6);
+
     let found = 0;
     let checked = 0;
+
+    grid.innerHTML = "";
 
     for (let i = 1; i <= max; i++) {
       const src = `${base}/gallery-${i}.jpg`;
@@ -44,19 +63,27 @@ import { GALLERY_PATH, GALLERY_MAX_ITEMS } from "../data/config";
         checked++;
 
         const item = document.createElement("div");
-        item.className = "gallery-item";
+
+        item.className =
+          "group aspect-square overflow-hidden rounded-brand-sm opacity-0 scale-[0.96] transition-[opacity,transform] duration-500 ease-brand";
 
         const img = document.createElement("img");
+
         img.src = src;
         img.alt = `Foto ${i} de la delegación`;
         img.loading = "lazy";
 
+        img.className =
+          "h-full w-full object-cover transition-transform duration-500 ease-brand group-hover:scale-[1.06]";
+
         item.appendChild(img);
         grid.appendChild(item);
 
-        // Pequeño delay para que la animación de aparición se note.
         requestAnimationFrame(() => {
-          setTimeout(() => item.classList.add("is-loaded"), 30);
+          setTimeout(() => {
+            item.classList.remove("opacity-0", "scale-[0.96]");
+            item.classList.add("opacity-100", "scale-100");
+          }, 30);
         });
 
         checkDone();
@@ -72,10 +99,12 @@ import { GALLERY_PATH, GALLERY_MAX_ITEMS } from "../data/config";
 
     function checkDone() {
       if (checked === max && found === 0 && empty) {
-        empty.style.display = "block";
+        empty.classList.remove("hidden");
+        empty.classList.add("block");
       }
     }
   }
 
   initGallery();
+  document.addEventListener("astro:page-load", initGallery);
 </script>

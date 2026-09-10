@@ -1,206 +1,162 @@
 ---
-import { ALIAS, SOCIAL } from "../data/config";
+import { ALIAS } from "../data/config";
 
 const getShareLink = () => {
-  const text = encodeURIComponent("¡Hola! Te comparto la campaña Rumbo a España 2026 de la delegación argentina de Taekwondo. Podés sumar tu apoyo o compartirla: https://rumbo-espana-2026.vercel.app");
+  const text = encodeURIComponent(
+    "¡Hola! Te comparto la campaña Rumbo a España 2026 de la delegación argentina de Taekwondo. Podés sumar tu apoyo o compartirla: https://rumbo-espana-2026.vercel.app",
+  );
+
   return `https://wa.me/?text=${text}`;
 };
 ---
 
-<section id="como-ayudar" class="section how-to-help-section">
-  <div class="container">
-    <div class="section-header text-center">
-      <span class="badge">Participá</span>
-      <h2 class="section-title">¿Cómo podés ayudarnos?</h2>
-      <p class="section-subtitle">
-        Hay muchas formas de ser parte de este sueño mundialista. Elegí la que mejor se adapte a vos o a tu empresa.
+<section id="como-ayudar" class="px-5 py-[88px]">
+  <div class="mx-auto max-w-[1100px]">
+    <div class="mb-10 text-center">
+      <span
+        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+      >
+        <span class="h-0.5 w-[22px] bg-primary"></span>
+        Participá
+      </span>
+
+      <h2
+        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+      >
+        ¿Cómo podés ayudarnos?
+      </h2>
+
+      <p
+        class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted"
+      >
+        Hay muchas formas de ser parte de este sueño mundialista. Elegí la que
+        mejor se adapte a vos o a tu empresa.
       </p>
     </div>
 
-    <div class="help-grid">
-      <!-- 1. Donar -->
-      <div class="help-card">
-        <div class="icon-wrapper">❤️</div>
-        <h3>Donar</h3>
-        <p>Aportá el monto que puedas desde cualquier billetera virtual o cuenta bancaria.</p>
-        <div class="alias-tag">
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Donar -->
+      <div
+        class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
+      >
+        <div class="mb-4 text-[2.5rem] leading-none">❤️</div>
+
+        <h3 class="mb-3 font-display text-xl text-foreground">
+          Donar
+        </h3>
+
+        <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
+          Aportá el monto que puedas desde cualquier billetera virtual o cuenta
+          bancaria.
+        </p>
+
+        <div
+          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
+        >
           <span>Alias:</span>
-          <strong>{ALIAS}</strong>
+          <strong class="ml-1 font-bold text-accent">{ALIAS}</strong>
         </div>
-        <a href="#donar" class="btn-action">Ir a Donar</a>
+
+        <a
+          href="#donar"
+          class="w-full rounded-brand-sm border border-border bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition-all duration-200 hover:border-white/25 hover:bg-white/[0.08]"
+        >
+          Ir a Donar
+        </a>
       </div>
 
-      <!-- 2. Ser Sponsor -->
-      <div class="help-card highlight">
-        <div class="icon-wrapper">🤝</div>
-        <h3>Ser Sponsor</h3>
-        <p>Impulsá tu marca junto a nuestra delegación con paquetes pensados para comercios.</p>
-        <div class="tiers-summary">
-          <span>$50.000</span> · <span>$100.000</span> · <span>$150.000</span>
+      <!-- Sponsor -->
+      <div
+        class="group flex flex-col rounded-brand border border-primary/35 bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-primary/60 hover:shadow-card-lg"
+      >
+        <div class="mb-4 text-[2.5rem] leading-none">🤝</div>
+
+        <h3 class="mb-3 font-display text-xl text-foreground">
+          Ser Sponsor
+        </h3>
+
+        <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
+          Impulsá tu marca junto a nuestra delegación con paquetes pensados para
+          comercios.
+        </p>
+
+        <div
+          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
+        >
+          <span class="font-bold text-primary">$50.000</span>
+          ·
+          <span class="font-bold text-primary">$100.000</span>
+          ·
+          <span class="font-bold text-primary">$150.000</span>
         </div>
-        <a href="#convertite-en-sponsor" class="btn-action primary">Ver Paquetes</a>
+
+        <a
+          href="#convertite-en-sponsor"
+          class="w-full rounded-brand-sm bg-primary px-4 py-3 text-sm font-bold text-white shadow-[0_8px_24px_rgba(224,30,43,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark"
+        >
+          Ver Paquetes
+        </a>
       </div>
 
-      <!-- 3. Proyectos -->
-      <div class="help-card">
-        <div class="icon-wrapper">💼</div>
-        <h3>Nuestros Servicios</h3>
-        <p>Contratá o colaborá con alguno de nuestros emprendimientos y servicios profesionales.</p>
-        <div class="services-tag">
-          <span>Tecnología · Diseño · Taekwondo</span>
+      <!-- Servicios -->
+      <div
+        class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
+      >
+        <div class="mb-4 text-[2.5rem] leading-none">💼</div>
+
+        <h3 class="mb-3 font-display text-xl text-foreground">
+          Nuestros Servicios
+        </h3>
+
+        <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
+          Contratá o colaborá con alguno de nuestros emprendimientos y servicios
+          profesionales.
+        </p>
+
+        <div
+          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
+        >
+          Tecnología · Diseño · Taekwondo
         </div>
-        <a href="#nuestros-proyectos" class="btn-action">Ver Proyectos</a>
+
+        <a
+          href="#nuestros-proyectos"
+          class="w-full rounded-brand-sm border border-border bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition-all duration-200 hover:border-white/25 hover:bg-white/[0.08]"
+        >
+          Ver Proyectos
+        </a>
       </div>
 
-      <!-- 4. Difusión -->
-      <div class="help-card">
-        <div class="icon-wrapper">📣</div>
-        <h3>Compartir</h3>
-        <p>Ayudanos haciendo correr la voz entre amigos, familiares o en tus redes sociales.</p>
-        <div class="share-tag">
-          <span>Difusión gratuita</span>
+      <!-- Compartir -->
+      <div
+        class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
+      >
+        <div class="mb-4 text-[2.5rem] leading-none">📣</div>
+
+        <h3 class="mb-3 font-display text-xl text-foreground">
+          Compartir
+        </h3>
+
+        <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
+          Ayudanos haciendo correr la voz entre amigos, familiares o en tus
+          redes sociales.
+        </p>
+
+        <div
+          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
+        >
+          Difusión gratuita
         </div>
-        <a href={getShareLink()} target="_blank" rel="noopener noreferrer" class="btn-action">Difundir por WhatsApp</a>
+
+        <a
+          href={getShareLink()}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full rounded-brand-sm border border-border bg-white/[0.04] px-4 py-3 text-sm font-bold text-foreground transition-all duration-200 hover:border-white/25 hover:bg-white/[0.08]"
+        >
+          Difundir por WhatsApp
+        </a>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .how-to-help-section {
-    padding: 4.5rem 1rem;
-    background: #0b1120;
-  }
-
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: rgba(56, 189, 248, 0.15);
-    color: #38bdf8;
-    border-radius: 9999px;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: #fff;
-  }
-
-  .section-subtitle {
-    color: #94a3b8;
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    font-size: 1.05rem;
-  }
-
-  .help-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .help-card {
-    background: #111827;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
-    padding: 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    transition: transform 0.2s ease, border-color 0.2s ease;
-  }
-
-  .help-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(56, 189, 248, 0.3);
-  }
-
-  .help-card.highlight {
-    border-color: rgba(245, 158, 11, 0.4);
-    background: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(17, 24, 39, 0.9) 100%);
-  }
-
-  .icon-wrapper {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    line-height: 1;
-  }
-
-  .help-card h3 {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 0.75rem;
-  }
-
-  .help-card p {
-    color: #94a3b8;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
-  }
-
-  .alias-tag, .tiers-summary, .services-tag, .share-tag {
-    background: rgba(255, 255, 255, 0.04);
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    font-size: 0.85rem;
-    color: #cbd5e1;
-    margin-bottom: 1.5rem;
-  }
-
-  .alias-tag strong {
-    color: #38bdf8;
-    margin-left: 0.35rem;
-  }
-
-  .tiers-summary span {
-    font-weight: 700;
-    color: #f59e0b;
-  }
-
-  .btn-action {
-    display: inline-block;
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-decoration: none;
-    background: #1e293b;
-    color: #f8fafc;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .btn-action:hover {
-    background: #334155;
-    border-color: rgba(255, 255, 255, 0.25);
-  }
-
-  .btn-action.primary {
-    background: #2563eb;
-    border-color: #2563eb;
-    color: #fff;
-  }
-
-  .btn-action.primary:hover {
-    background: #1d4ed8;
-  }
-</style>

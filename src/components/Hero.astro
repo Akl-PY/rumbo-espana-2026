@@ -3,31 +3,72 @@ import { COPY } from "../data/config";
 import Countdown from "./Countdown.astro";
 ---
 
-<section id="hero" class="hero">
-  <div class="hero-bg" id="hero-bg">
+<section
+  id="hero"
+  class="relative flex min-h-svh items-end overflow-hidden px-5 pt-[120px] pb-14"
+>
+  <!-- Fondo -->
+  <div
+    class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(10,10,10,0.4)_0%,rgba(10,10,10,0.55)_40%,#0a0a0a_92%),radial-gradient(circle_at_15%_15%,rgba(79,176,217,0.12),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(224,30,43,0.18),transparent_50%),linear-gradient(160deg,#1b1b1b,#0a0a0a_60%)]"
+  >
     <img
       src="/images/hero.jpg"
       alt=""
       id="hero-image"
+      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-brand"
       onload="this.classList.add('is-loaded')"
       onerror="this.remove()"
     />
   </div>
-  <span class="hero-flag" aria-hidden="true"></span>
 
-  <div class="container hero-content">
-    <p class="eyebrow">Copa del Mundo · Benidorm, España</p>
-    <h1 class="hero-title">
-      RUMBO A <span class="accent">ESPAÑA</span> 2026
-    </h1>
-    <p class="hero-subtitle">{COPY.heroSubtitle}</p>
-    <p class="hero-text">{COPY.heroText}</p>
+  <!-- Detalle de bandera -->
+  <span
+    class="absolute top-4 right-1 h-[46px] w-[3px] rounded-[3px] bg-[linear-gradient(180deg,#4fb0d9_0_33%,#fafafa_33%_66%,#4fb0d9_66%_100%)] opacity-55"
+    aria-hidden="true"
+  ></span>
 
-    <div class="hero-actions">
-      <a href="#donar" class="btn btn-primary">Quiero ayudar</a>
-      <a href="#historia" class="btn btn-outline">Conocer nuestra historia</a>
+  <div class="mx-auto w-full max-w-[1100px]">
+    <div class="max-w-[760px]">
+      <p
+        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+      >
+        <span class="h-0.5 w-[22px] bg-primary"></span>
+        Copa del Mundo · Benidorm, España
+      </p>
+
+      <h1
+        class="mb-2.5 font-display text-[clamp(36px,10vw,68px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+      >
+        RUMBO A <span class="text-primary">ESPAÑA</span> 2026
+      </h1>
+
+      <p
+        class="mb-[18px] text-[clamp(16px,4vw,20px)] font-bold text-accent"
+      >
+        {COPY.heroSubtitle}
+      </p>
+
+      <p class="mb-[34px] max-w-[520px] text-base text-foreground-muted">
+        {COPY.heroText}
+      </p>
+
+      <div class="mb-11 flex flex-wrap gap-3">
+        <a href="#donar" class="btn btn-primary">
+          Quiero ayudar
+        </a>
+
+        <a href="#historia" class="btn btn-outline">
+          Conocer nuestra historia
+        </a>
+      </div>
+
+      <Countdown />
     </div>
-
-    <Countdown />
   </div>
 </section>
+
+<style>
+  #hero-image.is-loaded {
+    opacity: 0.55;
+  }
+</style>

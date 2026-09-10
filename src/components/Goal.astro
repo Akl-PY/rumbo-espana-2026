@@ -3,16 +3,24 @@ import { GOAL, RAISED } from "../data/config";
 import { donations } from "../data/donations";
 import { SPONSORS } from "../data/sponsors";
 
-// 1. Total de donaciones particulares
-const donationsTotalFromList = donations.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+const donationsTotalFromList = donations.reduce(
+  (acc, curr) => acc + (curr.amount || 0),
+  0,
+);
+
 const totalDonations = RAISED > 0 ? RAISED : donationsTotalFromList;
 
-// 2. Total aportado por sponsors
-const totalSponsors = SPONSORS.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+const totalSponsors = SPONSORS.reduce(
+  (acc, curr) => acc + (curr.amount || 0),
+  0,
+);
 
-// 3. Monto global unificado y porcentaje
 const totalRaised = totalDonations + totalSponsors;
-const progressPercent = Math.min(100, Math.round((totalRaised / GOAL) * 100));
+
+const progressPercent = Math.min(
+  100,
+  Math.round((totalRaised / GOAL) * 100),
+);
 
 const formatCurrency = (val: number) => {
   return new Intl.NumberFormat("es-AR", {
@@ -23,234 +31,141 @@ const formatCurrency = (val: number) => {
 };
 ---
 
-<section id="objetivo" class="section goal-section">
-  <div class="container">
-    <div class="section-header text-center">
-      <span class="badge">Transparencia y Meta</span>
-      <h2 class="section-title">Nuestro Objetivo</h2>
-      <p class="section-subtitle">
-        El viaje a la Copa del Mundo en Benidorm se financia gracias al apoyo de nuestra comunidad y las marcas aliadas.
+<section id="objetivo" class="px-5 py-[88px]">
+  <div class="mx-auto max-w-[900px]">
+    <div class="mb-10 text-center">
+      <span
+        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+      >
+        <span class="h-0.5 w-[22px] bg-primary"></span>
+        Transparencia y Meta
+      </span>
+
+      <h2
+        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+      >
+        Nuestro Objetivo
+      </h2>
+
+      <p
+        class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted"
+      >
+        El viaje a la Copa del Mundo en Benidorm se financia gracias al apoyo
+        de nuestra comunidad y las marcas aliadas.
       </p>
     </div>
 
-    <div class="goal-card">
-      <div class="goal-header">
-        <div class="goal-amount">
-          <span class="label">Meta final</span>
-          <span class="val highlight">{formatCurrency(GOAL)}</span>
+    <div
+      class="rounded-brand border border-border bg-card p-5 shadow-card sm:p-8"
+    >
+      <div class="mb-5 flex items-end justify-between gap-4">
+        <div>
+          <span
+            class="mb-1 block text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted"
+          >
+            Meta final
+          </span>
+
+          <span
+            class="font-display text-[clamp(30px,8vw,44px)] leading-none text-primary"
+          >
+            {formatCurrency(GOAL)}
+          </span>
         </div>
-        <div class="goal-percentage">
-          <span class="pct">{progressPercent}%</span>
-          <span class="pct-label">alcanzado</span>
+
+        <div class="text-right">
+          <span
+            class="block font-display text-[clamp(28px,7vw,40px)] leading-none text-accent"
+          >
+            {progressPercent}%
+          </span>
+
+          <span
+            class="text-[11px] uppercase tracking-[0.08em] text-foreground-muted"
+          >
+            alcanzado
+          </span>
         </div>
       </div>
 
-      <!-- Barra de progreso -->
-      <div class="progress-wrapper">
-        <div 
-          class="progress-bar" 
-          role="progressbar" 
-          aria-valuenow={progressPercent} 
-          aria-valuemin="0" 
-          aria-valuemax="100"
+      <div
+        class="mb-8 h-4 w-full overflow-hidden rounded-full border border-border bg-white/[0.07]"
+        role="progressbar"
+        aria-valuenow={progressPercent}
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-label="Porcentaje de la meta alcanzado"
+      >
+        <div
+          class="h-full rounded-full bg-[linear-gradient(90deg,#e01e2b,#ff5a63)] transition-[width] duration-1000 ease-brand"
           style={`width: ${progressPercent}%;`}
+        ></div>
+      </div>
+
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div
+          class="rounded-brand-sm border border-primary/30 bg-primary/[0.04] px-4 py-[18px] text-center sm:border-l-4"
         >
+          <span
+            class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted"
+          >
+            Total Recaudado
+          </span>
+
+          <span
+            class="block font-display text-[clamp(20px,4vw,24px)] text-primary"
+          >
+            {formatCurrency(totalRaised)}
+          </span>
+        </div>
+
+        <div
+          class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center"
+        >
+          <span
+            class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted"
+          >
+            ❤️ Donaciones
+          </span>
+
+          <span
+            class="block font-display text-[clamp(20px,4vw,24px)] text-accent"
+          >
+            {formatCurrency(totalDonations)}
+          </span>
+
+          <span class="mt-1 block text-xs text-foreground-subtle">
+            {donations.length} aportes
+          </span>
+        </div>
+
+        <div
+          class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center"
+        >
+          <span
+            class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted"
+          >
+            🤝 Sponsors
+          </span>
+
+          <span
+            class="block font-display text-[clamp(20px,4vw,24px)] text-accent"
+          >
+            {formatCurrency(totalSponsors)}
+          </span>
+
+          <span class="mt-1 block text-xs text-foreground-subtle">
+            {SPONSORS.length} marcas
+          </span>
         </div>
       </div>
 
-      <div class="goal-breakdown-grid">
-        <div class="breakdown-item total">
-          <span class="breakdown-label">Total Recaudado</span>
-          <span class="breakdown-value">{formatCurrency(totalRaised)}</span>
-        </div>
-
-        <div class="breakdown-item">
-          <span class="breakdown-label">❤️ Donaciones</span>
-          <span class="breakdown-value">{formatCurrency(totalDonations)}</span>
-          <span class="breakdown-sub">{donations.length} aportes</span>
-        </div>
-
-        <div class="breakdown-item">
-          <span class="breakdown-label">🤝 Sponsors</span>
-          <span class="breakdown-value">{formatCurrency(totalSponsors)}</span>
-          <span class="breakdown-sub">{SPONSORS.length} marcas</span>
-        </div>
-      </div>
-
-      <div class="goal-footer">
-        <p>
-          Meta fijada para pasajes, alojamiento, inscripciones y traslados de los 3 competidores y 2 coaches.
+      <div class="mt-6 border-t border-border pt-5 text-center">
+        <p class="text-[13px] leading-relaxed text-foreground-muted">
+          Meta fijada para pasajes, alojamiento, inscripciones y traslados de
+          los 3 competidores y 2 coaches.
         </p>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .goal-section {
-    padding: 4rem 1rem;
-  }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .badge {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: rgba(59, 130, 246, 0.15);
-    color: #60a5fa;
-    border-radius: 9999px;
-    margin-bottom: 0.75rem;
-  }
-
-  .section-title {
-    font-size: 2.25rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: #fff;
-  }
-
-  .section-subtitle {
-    color: #94a3b8;
-    max-width: 600px;
-    margin: 0 auto 2.5rem;
-    font-size: 1.05rem;
-  }
-
-  .goal-card {
-    background: #111827;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  }
-
-  .goal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 1.25rem;
-  }
-
-  .goal-amount .label {
-    display: block;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: #94a3b8;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-
-  .goal-amount .val {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: #38bdf8;
-    line-height: 1;
-  }
-
-  .goal-percentage {
-    text-align: right;
-  }
-
-  .goal-percentage .pct {
-    display: block;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #f59e0b;
-    line-height: 1;
-  }
-
-  .goal-percentage .pct-label {
-    font-size: 0.8rem;
-    color: #94a3b8;
-    text-transform: uppercase;
-  }
-
-  .progress-wrapper {
-    width: 100%;
-    height: 18px;
-    background: #1f2937;
-    border-radius: 9999px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 50%, #10b981 100%);
-    border-radius: 9999px;
-    transition: width 0.6s ease-in-out;
-  }
-
-  .goal-breakdown-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .breakdown-item {
-    background: #1e293b;
-    padding: 1rem 1.25rem;
-    border-radius: 0.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.04);
-  }
-
-  .breakdown-item.total {
-    border-left: 4px solid #38bdf8;
-  }
-
-  .breakdown-label {
-    display: block;
-    font-size: 0.85rem;
-    color: #94a3b8;
-    margin-bottom: 0.25rem;
-  }
-
-  .breakdown-value {
-    display: block;
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: #f8fafc;
-  }
-
-  .breakdown-sub {
-    font-size: 0.75rem;
-    color: #64748b;
-  }
-
-  .goal-footer {
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding-top: 1.25rem;
-  }
-
-  .goal-footer p {
-    font-size: 0.85rem;
-    color: #94a3b8;
-    margin: 0;
-  }
-
-  @media (max-width: 640px) {
-    .goal-card {
-      padding: 1.25rem;
-    }
-    .goal-amount .val {
-      font-size: 1.75rem;
-    }
-    .goal-percentage .pct {
-      font-size: 1.6rem;
-    }
-  }
-</style>

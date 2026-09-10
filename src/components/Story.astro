@@ -2,27 +2,52 @@
 import { COPY } from "../data/config";
 ---
 
-<section id="historia">
-  <div class="container">
-    <p class="eyebrow reveal">Nuestra historia</p>
-    <h2 class="reveal">El camino hasta acá</h2>
+<section id="historia" class="relative px-5 py-[88px]">
+  <div class="mx-auto max-w-[1100px]">
+    <p
+      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+    >
+      <span class="h-0.5 w-[22px] bg-primary"></span>
+      Nuestra historia
+    </p>
 
-    <div class="story-grid">
-      <div class="img-frame story-photo reveal">
+    <h2
+      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
+    >
+      El camino hasta acá
+    </h2>
+
+    <div class="grid gap-7 lg:grid-cols-2 lg:items-center">
+      <div
+        class="relative aspect-[16/10] overflow-hidden rounded-brand border border-border bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25"
+      >
         <img
           src="/images/team.jpg"
           alt="Delegación de Taekwondo"
           loading="lazy"
+          class="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-400 ease-brand"
           onload="this.classList.add('is-loaded')"
           onerror="this.remove()"
         />
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M3 7l9-4 9 4-9 4-9-4z" />
-          <path d="M3 7v10l9 4 9-4V7" />
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          class="absolute left-1/2 top-1/2 h-[34px] w-[34px] -translate-x-1/2 -translate-y-1/2 opacity-50"
+          aria-hidden="true"
+        >
+          <path d="M3 7l9-4 9 4-9 4-9-4z"></path>
+          <path d="M3 7v10l9 4 9-4V7"></path>
         </svg>
       </div>
 
-      <p class="story-text reveal">{COPY.storyText}</p>
+      <p
+        class="text-[17px] leading-[1.75] text-foreground-muted"
+      >
+        {COPY.storyText}
+      </p>
     </div>
   </div>
 </section>

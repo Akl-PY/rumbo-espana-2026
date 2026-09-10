@@ -2,36 +2,88 @@
 import { SOCIAL } from "../data/config";
 ---
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-title">Rumbo a España 2026 🇦🇷</div>
-    <div class="footer-sub">Taekwondo · Argentina</div>
+<footer class="border-t border-border px-5 py-12 text-center">
+  <div class="mx-auto max-w-[1100px]">
+    <div class="mb-1.5 font-display text-lg text-foreground">
+      Rumbo a España 2026 🇦🇷
+    </div>
 
-    <div class="footer-social">
+    <div class="mb-6 text-[13.5px] text-foreground-muted">
+      Taekwondo · Argentina
+    </div>
+
+    <div class="mb-7 flex justify-center gap-3.5">
       {
         SOCIAL.instagram && (
-          <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <a
+            href={SOCIAL.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-border text-foreground transition-all duration-200 ease-brand hover:-translate-y-0.5 hover:border-accent"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              class="h-[18px] w-[18px]"
+              aria-hidden="true"
+            >
               <rect x="3" y="3" width="18" height="18" rx="5" />
               <circle cx="12" cy="12" r="4" />
-              <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
+              <circle
+                cx="17.2"
+                cy="6.8"
+                r="1"
+                fill="currentColor"
+                stroke="none"
+              />
             </svg>
           </a>
         )
       }
+
       {
         SOCIAL.facebook && (
-          <a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <a
+            href={SOCIAL.facebook}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            class="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-border text-foreground transition-all duration-200 ease-brand hover:-translate-y-0.5 hover:border-accent"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              class="h-[18px] w-[18px]"
+              aria-hidden="true"
+            >
               <path d="M14 9h3V5h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9a1 1 0 0 1 1-1z" />
             </svg>
           </a>
         )
       }
+
       {
         SOCIAL.whatsapp && (
-          <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+          <a
+            href={SOCIAL.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            class="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-border text-foreground transition-all duration-200 ease-brand hover:-translate-y-0.5 hover:border-accent"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              class="h-[18px] w-[18px]"
+              aria-hidden="true"
+            >
               <path d="M20 12a8 8 0 1 1-3.6-6.7L20 4l-1.2 3.5A8 8 0 0 1 20 12z" />
               <path d="M9 10c0 3 2 5 5 5" />
             </svg>
@@ -40,6 +92,8 @@ import { SOCIAL } from "../data/config";
       }
     </div>
 
-    <div class="footer-legal">Campaña solidaria sin fines de lucro · {new Date().getFullYear()}</div>
+    <div class="text-xs text-white/35">
+      Campaña solidaria sin fines de lucro · {new Date().getFullYear()}
+    </div>
   </div>
 </footer>
