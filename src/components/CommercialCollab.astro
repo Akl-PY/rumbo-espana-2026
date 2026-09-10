@@ -1,0 +1,161 @@
+---
+import { SOCIAL } from "../data/config";
+
+const getCollabLink = () => {
+  const text = encodeURIComponent("Hola, vi la campaña Rumbo a España 2026 y me gustaría colaborar con mi comercio/emprendimiento.");
+  const baseUrl = SOCIAL.whatsapp.includes("wa.me") ? SOCIAL.whatsapp.replace(/\/$/, "") : "https://wa.me/5490000000000";
+  return `${baseUrl}?text=${text}`;
+};
+---
+
+<section id="colaboraciones-comerciales" class="section commercial-section">
+  <div class="container">
+    <div class="commercial-card">
+      <div class="commercial-content">
+        <span class="badge">Alianzas Comerciales</span>
+        <h2 class="title">¿Tenés un comercio o emprendimiento?</h2>
+        <p class="subtitle">
+          Podés acompañarnos rumbo a España y, al mismo tiempo, encontrar una forma de colaborar con alguno de nuestros proyectos.
+        </p>
+
+        <div class="options-grid">
+          <div class="opt-item">
+            <div class="opt-icon">🤝</div>
+            <h4>Sponsorizar</h4>
+            <p>Elegí entre los niveles de $50.000, $100.000 o $150.000 con presencia web y en redes.</p>
+          </div>
+
+          <div class="opt-item">
+            <div class="opt-icon">💼</div>
+            <h4>Contratar un servicio</h4>
+            <p>Soluciones con AIM, desarrollo a medida, consultoría IT, HES1994 o Scalinky.</p>
+          </div>
+
+          <div class="opt-item">
+            <div class="opt-icon">🔄</div>
+            <h4>Hacer una colaboración</h4>
+            <p>Intercambio de productos o servicios, difusión conjunta, sorteos o eventos especiales.</p>
+          </div>
+        </div>
+
+        <div class="commercial-action">
+          <a href={getCollabLink()} target="_blank" rel="noopener noreferrer" class="btn-commercial">
+            Quiero colaborar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .commercial-section {
+    padding: 4rem 1rem;
+    background: #0b1120;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .commercial-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 1.25rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .commercial-content {
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+  }
+
+  .title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.5;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    text-align: left;
+    margin-bottom: 2.5rem;
+  }
+
+  .opt-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .opt-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .opt-item h4 {
+    font-size: 1.15rem;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .opt-item p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .btn-commercial {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    background: #0284c7;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+
+  .btn-commercial:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 640px) {
+    .commercial-card {
+      padding: 2rem 1.25rem;
+    }
+    .title {
+      font-size: 1.75rem;
+    }
+  }
+</style>

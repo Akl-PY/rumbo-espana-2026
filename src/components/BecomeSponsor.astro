@@ -1,0 +1,211 @@
+---
+import { SPONSOR_TIERS } from "../data/sponsors";
+import { SOCIAL } from "../data/config";
+
+const formatCurrency = (val: number) => {
+  return new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+    maximumFractionDigits: 0,
+  }).format(val);
+};
+
+const getWhatsAppLink = (tierName: string) => {
+  const text = encodeURIComponent(`Hola, vi la campaña Rumbo a España 2026 y quiero consultar por el sponsoreo nivel ${tierName}.`);
+  const baseUrl = SOCIAL.whatsapp.includes("wa.me") ? SOCIAL.whatsapp.replace(/\/$/, "") : "https://wa.me/5490000000000";
+  return `${baseUrl}?text=${text}`;
+};
+---
+
+<section id="convertite-en-sponsor" class="section become-sponsor-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="badge">Propuesta Comercial</span>
+      <h2 class="section-title">Convertite en Sponsor</h2>
+      <p class="section-subtitle">
+        Sumá tu marca a nuestra delegación rumbo al Mundial. Ofrecemos visibilidad genuina, presencia digital y difusión deportiva.
+      </p>
+    </div>
+
+    <div class="tiers-grid">
+      {SPONSOR_TIERS.map((tier) => (
+        <div class={`tier-card tier-${tier.id}`}>
+          <div class="tier-header">
+            <span class="tier-badge-icon">{tier.badge}</span>
+            <h3 class="tier-name">{tier.name}</h3>
+            <div class="tier-price">
+              <span class="val">{formatCurrency(tier.price)}</span>
+            </div>
+          </div>
+
+          <ul class="tier-features">
+            {tier.features.map((feature) => (
+              <li>
+                <svg class="check-icon" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="tier-action">
+            <a 
+              href={getWhatsAppLink(tier.name)} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-tier"
+            >
+              Elegir {tier.name}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .become-sponsor-section {
+    padding: 4.5rem 1rem;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+
+  .section-subtitle {
+    color: #94a3b8;
+    max-width: 620px;
+    margin: 0 auto 3rem;
+    font-size: 1.05rem;
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .tier-card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .tier-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .tier-oro {
+    border-color: rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 25px -5px rgba(255, 215, 0, 0.15);
+  }
+
+  .tier-header {
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tier-badge-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-name {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-price .val {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #38bdf8;
+  }
+
+  .tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    flex-grow: 1;
+  }
+
+  .tier-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .check-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #10b981;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .btn-tier {
+    display: block;
+    text-align: center;
+    padding: 0.85rem 1.25rem;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-tier:hover {
+    background: #1d4ed8;
+  }
+
+  .tier-oro .btn-tier {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  }
+
+  .tier-oro .btn-tier:hover {
+    background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+  }
+</style>

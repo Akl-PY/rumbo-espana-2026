@@ -1,0 +1,229 @@
+---
+import { PROJECTS } from "../data/projects";
+import { SOCIAL } from "../data/config";
+
+const getProjectWhatsApp = (msg: string) => {
+  const text = encodeURIComponent(msg);
+  const baseUrl = SOCIAL.whatsapp.includes("wa.me") ? SOCIAL.whatsapp.replace(/\/$/, "") : "https://wa.me/5490000000000";
+  return `${baseUrl}?text=${text}`;
+};
+---
+
+<section id="nuestros-proyectos" class="section projects-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="badge">Emprendimientos & Servicios</span>
+      <h2 class="section-title">También podés colaborar con nuestros proyectos</h2>
+      <p class="section-subtitle">
+        Detrás del equipo hay trabajo profesional y proyectos que podés contratar o impulsar mediante alianzas estratégicas.
+      </p>
+    </div>
+
+    <div class="projects-grid">
+      {PROJECTS.map((project) => (
+        <div class={`project-card ${project.id === "scalinky" ? "card-scalinky" : ""}`}>
+          <div class="card-top">
+            <div class="project-header">
+              <span class="project-badge-icon">{project.badge}</span>
+              <div>
+                <h3 class="project-title">{project.name}</h3>
+                <span class="project-tagline">{project.tagline}</span>
+              </div>
+            </div>
+            <p class="project-description">{project.description}</p>
+            
+            <div class="collab-box">
+              <h4 class="collab-title">Formas de colaborar y servicios:</h4>
+              <ul class="collab-list">
+                {project.collaborations.map((item) => (
+                  <li>
+                    <span class="bullet">›</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div class="card-bottom">
+            <a 
+              href={getProjectWhatsApp(project.whatsappMessage)} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class={`btn-project ${project.id === "scalinky" ? "btn-scalinky" : ""}`}
+            >
+              {project.ctaText}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    padding: 4.5rem 1rem;
+    background: #0f172a;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(168, 85, 247, 0.15);
+    color: #c084fc;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+
+  .section-subtitle {
+    color: #94a3b8;
+    max-width: 650px;
+    margin: 0 auto 3rem;
+    font-size: 1.05rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.75rem;
+  }
+
+  .project-card {
+    background: #111827;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Identidad exclusiva para Scalinky */
+  .card-scalinky {
+    border-color: rgba(14, 165, 233, 0.3);
+    background: linear-gradient(180deg, rgba(14, 165, 233, 0.05) 0%, rgba(17, 24, 39, 1) 100%);
+  }
+
+  .project-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-badge-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .project-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+  }
+
+  .project-tagline {
+    font-size: 0.8rem;
+    color: #38bdf8;
+    display: block;
+  }
+
+  .project-description {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+
+  .collab-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .collab-title {
+    font-size: 0.85rem;
+    color: #e2e8f0;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .collab-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .collab-list li {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .bullet {
+    color: #38bdf8;
+    font-weight: 800;
+  }
+
+  .btn-project {
+    display: block;
+    text-align: center;
+    padding: 0.8rem 1.25rem;
+    border-radius: 0.5rem;
+    background: #1e293b;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .btn-project:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+
+  .btn-scalinky {
+    background: #0284c7;
+    border-color: #0284c7;
+  }
+
+  .btn-scalinky:hover {
+    background: #0369a1;
+  }
+</style>

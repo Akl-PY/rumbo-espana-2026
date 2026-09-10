@@ -1,0 +1,203 @@
+---
+import { SPONSORS } from "../data/sponsors";
+---
+
+<section id="sponsors-actuales" class="section current-sponsors-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <span class="badge">Alianzas</span>
+      <h2 class="section-title">Ellos ya son parte del viaje</h2>
+      <p class="section-subtitle">
+        Agradecemos a los comercios y marcas que confían y apuestan por nuestra delegación rumbo a Benidorm 2026.
+      </p>
+    </div>
+
+    <div class="sponsors-grid">
+      {SPONSORS.map((sponsor) => (
+        <a 
+          href={sponsor.url || "#"} 
+          target={sponsor.url && sponsor.url !== "#" ? "_blank" : "_self"} 
+          rel="noopener noreferrer" 
+          class={`sponsor-card tier-${sponsor.level}`}
+          title={`${sponsor.name} - Sponsor ${sponsor.level.toUpperCase()}`}
+        >
+          <div class="logo-container">
+            {sponsor.logo ? (
+              <img 
+                src={sponsor.logo} 
+                alt={`Logo de ${sponsor.name}`} 
+                loading="lazy" 
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+            ) : null}
+            <div class="logo-fallback" style={sponsor.logo ? "display: none;" : "display: flex;"}>
+              <span class="initial">{sponsor.name.charAt(0)}</span>
+              <span class="full-name">{sponsor.name}</span>
+            </div>
+          </div>
+          <div class="sponsor-meta">
+            <span class="sponsor-name">{sponsor.name}</span>
+            <span class="sponsor-badge">{sponsor.level}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .current-sponsors-section {
+    padding: 4.5rem 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+
+  .section-subtitle {
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    font-size: 1.05rem;
+  }
+
+  .sponsors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .sponsor-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 1rem;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.85rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .sponsor-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(56, 189, 248, 0.4);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  .logo-container {
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .logo-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .logo-fallback {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #334155;
+    color: #94a3b8;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .logo-fallback .initial {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f8fafc;
+    line-height: 1;
+  }
+
+  .logo-fallback .full-name {
+    font-size: 0.65rem;
+    max-width: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sponsor-meta {
+    text-align: center;
+    width: 100%;
+  }
+
+  .sponsor-name {
+    display: block;
+    color: #f8fafc;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .sponsor-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+  }
+
+  .tier-oro .sponsor-badge {
+    background: rgba(255, 215, 0, 0.15);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+  }
+
+  .tier-plata .sponsor-badge {
+    background: rgba(192, 192, 192, 0.15);
+    color: #e2e8f0;
+    border: 1px solid rgba(192, 192, 192, 0.3);
+  }
+
+  .tier-bronce .sponsor-badge {
+    background: rgba(205, 127, 50, 0.15);
+    color: #d97706;
+    border: 1px solid rgba(205, 127, 50, 0.3);
+  }
+</style>
