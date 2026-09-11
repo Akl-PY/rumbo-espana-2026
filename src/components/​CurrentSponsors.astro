@@ -27,71 +27,73 @@ import { SPONSORS } from "../data/sponsors";
     </div>
 
     <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {SPONSORS.map((sponsor) => {
-        const tierClasses =
-          sponsor.level === "oro"
-            ? "border-yellow-500/25 hover:border-yellow-400/50"
-            : sponsor.level === "plata"
-              ? "border-slate-400/20 hover:border-slate-300/40"
-              : sponsor.level === "bronce"
-                ? "border-orange-700/25 hover:border-orange-600/45"
-                : "border-border hover:border-white/[0.18]";
+      {
+        SPONSORS.map((sponsor) => {
+          const tierClasses =
+            sponsor.level === "oro"
+              ? "border-yellow-500/25 hover:border-yellow-400/70"
+              : sponsor.level === "plata"
+                ? "border-slate-400/20 hover:border-slate-300/70"
+                : sponsor.level === "bronce"
+                  ? "border-orange-700/25 hover:border-orange-600/75"
+                  : "border-border hover:border-white/[0.18]";
 
-        const badgeClasses =
-          sponsor.level === "oro"
-            ? "border border-yellow-400/30 bg-yellow-400/10 text-yellow-300"
-            : sponsor.level === "plata"
-              ? "border border-slate-300/30 bg-slate-300/10 text-slate-200"
-              : sponsor.level === "bronce"
-                ? "border border-orange-500/30 bg-orange-500/10 text-orange-400"
-                : "border border-border bg-white/[0.08] text-foreground-muted";
+          const badgeClasses =
+            sponsor.level === "oro"
+              ? "border border-yellow-500/80 bg-yellow-200/20 text-yellow-700"
+              : sponsor.level === "plata"
+                ? "border border-slate-300/80 bg-slate-300/40 text-slate-600"
+                : sponsor.level === "bronce"
+                  ? "border border-orange-500/80 bg-orange-500/40 text-orange-400"
+                  : "border border-border bg-white/[0.08] text-foreground-muted";
 
-        return (
-          <a
-            href={sponsor.url || "#"}
-            target={sponsor.url && sponsor.url !== "#" ? "_blank" : "_self"}
-            rel="noopener noreferrer"
-            title={`${sponsor.name} - Sponsor ${sponsor.level.toUpperCase()}`}
-            class={`group flex min-h-[190px] flex-col items-center justify-between rounded-brand border bg-card px-4 py-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg ${tierClasses}`}
-          >
-            <div class="flex h-[90px] w-full items-center justify-center">
-              {sponsor.logo ? (
-                <img
-                  src={sponsor.logo}
-                  alt={`Logo de ${sponsor.name}`}
-                  loading="lazy"
-                  class="max-h-full max-w-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                />
-              ) : null}
+          return (
+            <a
+              href={sponsor.url || "#"}
+              target={sponsor.url && sponsor.url !== "#" ? "_blank" : "_self"}
+              rel="noopener noreferrer"
+              title={`${sponsor.name} - Sponsor ${sponsor.level.toUpperCase()}`}
+              class={`group flex min-h-[190px] flex-col items-center justify-between rounded-brand border bg-white px-4 py-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg ${tierClasses}`}
+            >
+              <div class="flex h-[90px] w-full items-center justify-center">
+                {sponsor.logo ? (
+                  <img
+                    src={sponsor.logo}
+                    alt={`Logo de ${sponsor.name}`}
+                    loading="lazy"
+                    class="max-h-full max-w-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                  />
+                ) : null}
 
-              <div
-                class={`h-[70px] w-[70px] flex-col items-center justify-center rounded-full border border-border bg-background-soft ${sponsor.logo ? "hidden" : "flex"}`}
-              >
-                <span class="font-display text-2xl leading-none text-foreground">
-                  {sponsor.name.charAt(0)}
-                </span>
+                <div
+                  class={`h-[70px] w-[70px] flex-col items-center justify-center rounded-full border border-border bg-background-soft ${sponsor.logo ? "hidden" : "flex"}`}
+                >
+                  <span class="font-display text-2xl leading-none text-gray-600">
+                    {sponsor.name.charAt(0)}
+                  </span>
 
-                <span class="mt-1 max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-[10px] text-foreground-subtle">
+                  <span class="mt-1 max-w-[60px] overflow-hidden text-ellipsis whitespace-nowrap text-[10px] text-foreground-subtle">
+                    {sponsor.name}
+                  </span>
+                </div>
+              </div>
+
+              <div class="w-full">
+                <span class="mb-2 block text-sm font-bold text-gray-600">
                   {sponsor.name}
                 </span>
+
+                <span
+                  class={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.05em] ${badgeClasses}`}
+                >
+                  {sponsor.level}
+                </span>
               </div>
-            </div>
-
-            <div class="w-full">
-              <span class="mb-2 block text-sm font-bold text-foreground">
-                {sponsor.name}
-              </span>
-
-              <span
-                class={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.05em] ${badgeClasses}`}
-              >
-                {sponsor.level}
-              </span>
-            </div>
-          </a>
-        );
-      })}
+            </a>
+          );
+        })
+      }
     </div>
   </div>
 </section>

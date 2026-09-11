@@ -27,8 +27,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
       "Logo en la web oficial de la campaña",
       "Presencia destacada en la sección de sponsors",
       "Historia de agradecimiento en redes sociales",
-      "Mención en publicaciones oficiales de la campaña"
-    ]
+      "Mención en publicaciones oficiales de la campaña",
+    ],
   },
   {
     id: "plata",
@@ -41,8 +41,8 @@ export const SPONSOR_TIERS: SponsorTier[] = [
       "Logo con mayor tamaño y visibilidad prioritaria",
       "Publicación dedicada en nuestro feed",
       "Historias adicionales de difusión durante la preparación",
-      "Mayor exposición en la plataforma web"
-    ]
+      "Mayor exposición en la plataforma web",
+    ],
   },
   {
     id: "oro",
@@ -56,45 +56,45 @@ export const SPONSOR_TIERS: SponsorTier[] = [
       "Publicación exclusiva y fija en redes sociales",
       "Presencia de marca documentada durante el viaje en España",
       "Contenido y cobertura audiovisual especial con tu logo",
-      "Agradecimiento institucional final al culminar el Mundial"
-    ]
-  }
+      "Agradecimiento institucional final al culminar el Mundial",
+    ],
+  },
 ];
 
 export const SPONSORS: Sponsor[] = [
   {
     name: "Canelo",
-    level: "plata",
+    level: "oro",
     amount: 0,
     logo: "/images/sponsors/canelo.png",
-    url: "#"
+    url: "#",
   },
   {
     name: "Esencia Arati",
-    level: "plata",
+    level: "oro",
     amount: 0,
     logo: "/images/sponsors/esencia-arati.png",
-    url: "#"
+    url: "#",
   },
   {
     name: "Nelio's",
-    level: "bronce",
+    level: "plata",
     amount: 0,
     logo: "/images/sponsors/nelios.png",
-    url: "#"
+    url: "#",
   },
   {
     name: "Laporta",
-    level: "bronce",
+    level: "plata",
     amount: 0,
     logo: "/images/sponsors/laporta.png",
-    url: "#"
+    url: "#",
   },
   {
     name: "Disfit",
-    level: "bronce",
+    level: "oro",
     amount: 0,
     logo: "/images/sponsors/disfit.png",
-    url: "#"
-  }
+    url: "#",
+  },
 ];
