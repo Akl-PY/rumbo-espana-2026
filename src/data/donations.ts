@@ -13,6 +13,11 @@ export interface Donation {
 }
 
 export const donations: Donation[] = [
+  {
+    name: "Juan Ledesma",
+    amount: 50000,
+    message: "Mucha suerte",
+  },
   // Ejemplo (descomentá y editá, o agregá nuevas líneas así):
   // { name: "Juan Pérez", amount: 50000, message: "Mucha suerte" },
   // { name: "María González", amount: 20000 },
