@@ -1,46 +1,44 @@
-
 {
   "items": [
     {
       "name": "Canelo",
       "level": "oro",
       "amount": 150000,
-      "logo": "/images/sponsors/canelo.png",
-      "url": "https://instagram.com/canelo",
-      "description": "Indumentaria y equipamiento deportivo especializado."
+      "logo": "/images/sponsors/items/0/logo.png",
+      "url": "https://www.instagram.com/canelo.tiendasaludable/",
+      "description": "Tienda saludable"
     },
     {
       "name": "Esencia Arati",
       "level": "oro",
       "amount": 150000,
-      "logo": "/images/sponsors/esencia-arati.png",
-      "url": "https://instagram.com/esenciaarati",
+      "logo": "/images/sponsors/items/1/logo.png",
+      "url": "https://instagram.com/esencia.arati",
       "description": "Productos naturales, bienestar y aromaterapia."
+    },
+    {
+      "name": "Disfit",
+      "level": "oro",
+      "amount": 150000,
+      "logo": "/images/sponsors/items/2/logo.png",
+      "url": "https://www.instagram.com/suplementos_disfit/",
+      "description": "Nutrición deportiva y suplementación de calidad."
     },
     {
       "name": "Nelio's",
       "level": "plata",
       "amount": 100000,
-      "logo": "/images/sponsors/nelios.png",
-      "url": "https://instagram.com/nelios",
+      "logo": "/images/sponsors/items/3/logo.png",
+      "url": "https://instagram.com/neliospizzeria",
       "description": "Gastronomía y espacio de encuentro local."
     },
     {
       "name": "Laporta",
       "level": "plata",
       "amount": 100000,
-      "logo": "/images/sponsors/laporta.png",
-      "url": "https://instagram.com/laporta",
+      "logo": "/images/sponsors/items/4/logo.png",
+      "url": "https://www.instagram.com/ferreterialaporta/",
       "description": "Soluciones comerciales y servicios gráficos."
-    },
-    {
-      "name": "Disfit",
-      "level": "oro",
-      "amount": 150000,
-      "logo": "/images/sponsors/disfit.png",
-      "url": "https://instagram.com/disfit",
-      "description": "Nutrición deportiva y suplementación de calidad."
     }
   ]
 }
-
