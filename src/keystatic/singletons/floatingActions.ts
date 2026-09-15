@@ -4,6 +4,7 @@ export const floatingActions = {
   label: 'Acciones flotantes',
 
   path: 'src/data/floating-actions',
+  format: { data: 'json' },
 
   schema: {
     enabled: fields.checkbox({

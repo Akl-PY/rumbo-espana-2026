@@ -9,6 +9,7 @@ import { howToHelp } from './src/keystatic/singletons/howToHelp';
 import { projects } from './src/keystatic/singletons/projects';
 import { team } from './src/keystatic/singletons/team';
 import { gallery } from './src/keystatic/singletons/gallery';
+import { floatingActions } from './src/keystatic/singletons/floatingActions';
 
 const isProd = import.meta.env.PROD;
 
@@ -29,6 +30,7 @@ export default config({
     goalSingleton,
     transparencySingleton,
     sponsorTiers,
+    floatingActions,
     sponsors,
     howToHelp,
     gallery,

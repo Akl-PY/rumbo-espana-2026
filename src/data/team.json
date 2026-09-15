@@ -10,11 +10,13 @@
       "type": "competidor",
       "image": "/images/team/members/0/image.jpeg",
       "age": 20,
-      "competingSince": 2015,
+      "competingSince": 2012,
       "bio": "Daniel forma parte de esta historia desde los primeros años de competencia internacional y continúa preparándose para afrontar uno de los mayores desafíos de su carrera en Benidorm.",
       "highlights": [
+        "III DAN ITF",
+        "Hasta 75kg",
         "Representante de Alta Gracia",
-        "Integrante de la delegación argentina",
+        "Integrante de equipo para España",
         "Experiencia en competencias nacionales e internacionales"
       ],
       "podiums": [
@@ -34,6 +36,21 @@
           "position": "2"
         },
         {
+          "year": 2023,
+          "competition": "Copa America",
+          "position": "1"
+        },
+        {
+          "year": 2024,
+          "competition": "Copa America",
+          "position": "1"
+        },
+        {
+          "year": 2025,
+          "competition": "Copa America",
+          "position": "2"
+        },
+        {
           "year": 2026,
           "competition": "Competencia internacional en Perú",
           "position": "3"
@@ -47,12 +64,14 @@
       "role": "Competidora",
       "type": "competidor",
       "image": "/images/team/members/1/image.jpeg",
-      "age": 0,
-      "competingSince": 2019,
+      "age": 22,
+      "competingSince": 2018,
       "bio": "Constanza forma parte de la delegación y ha acompañado el crecimiento competitivo del equipo durante los últimos años, sumando resultados internacionales y experiencia en grandes competencias.",
       "highlights": [
+        "I DAN ITF",
+        "Hasta 50kg",
         "Representante de Alta Gracia",
-        "Integrante de la delegación argentina",
+        "Integrante de equipo para España",
         "Múltiples resultados internacionales"
       ],
       "podiums": [
@@ -64,6 +83,21 @@
         {
           "year": 2024,
           "competition": "Copa América",
+          "position": "1"
+        },
+        {
+          "year": 2025,
+          "competition": "Copa America",
+          "position": "1"
+        },
+        {
+          "year": 2025,
+          "competition": "Centro Sudamericano Chile",
+          "position": "1"
+        },
+        {
+          "year": 2026,
+          "competition": "Copa America",
           "position": "1"
         },
         {
@@ -80,19 +114,36 @@
       "role": "Competidor",
       "type": "competidor",
       "image": "/images/team/members/2/image.jpeg",
-      "age": 0,
+      "age": 13,
       "competingSince": 2024,
       "bio": "Joaquín se sumó al recorrido competitivo de la delegación y viene acumulando experiencia en competencias nacionales e internacionales, con grandes resultados en los últimos años.",
       "highlights": [
+        "I DAN ITF",
+        "Hasta 45kg",
         "Representante de Alta Gracia",
-        "Integrante de la delegación argentina",
+        "Integrante de equipo para España",
         "Experiencia en competencias internacionales"
       ],
       "podiums": [
         {
+          "year": 2023,
+          "competition": "Copa America",
+          "position": "1"
+        },
+        {
+          "year": 2024,
+          "competition": "Copa America",
+          "position": "1"
+        },
+        {
           "year": 2024,
           "competition": "Competencia internacional en Paraguay",
           "position": "2"
+        },
+        {
+          "year": 2025,
+          "competition": "Copa America",
+          "position": "1"
         },
         {
           "year": 2025,
@@ -113,15 +164,22 @@
       "role": "Coach",
       "type": "coach",
       "image": "/images/team/members/3/image.jpeg",
-      "age": 0,
+      "age": 40,
       "competingSince": 0,
       "bio": "Coach de la delegación y parte del acompañamiento técnico y humano que sostiene nuestro camino competitivo en cada viaje y competencia.",
       "highlights": [
-        "Coach de la delegación",
+        "VI DAN ITF",
+        "Coach",
         "Acompañamiento técnico y deportivo",
         "Experiencia acompañando competencias internacionales"
       ],
-      "podiums": [],
+      "podiums": [
+        {
+          "year": 2004,
+          "competition": "Copa del Mundo Brasil",
+          "position": "2"
+        }
+      ],
       "social": {}
     },
     {
@@ -129,11 +187,13 @@
       "name": "Fabiana Ledesma",
       "role": "Coach",
       "type": "coach",
-      "age": 0,
+      "image": "/images/team/members/4/image.jpeg",
+      "age": 40,
       "competingSince": 0,
       "bio": "Fabiana acompaña a la delegación como coach, formando parte del equipo que prepara, guía y acompaña a nuestros competidores durante cada desafío.",
       "highlights": [
-        "Coach de la delegación",
+        "V DAN ITF",
+        "Coach",
         "Acompañamiento técnico y deportivo",
         "Parte del equipo desde las primeras competencias internacionales"
       ],
