@@ -1,0 +1,46 @@
+
+{
+  "eyebrow": "Participá",
+  "title": "¿Cómo podés ayudarnos?",
+  "description": "Hay muchas formas de ser parte de este sueño mundialista. Elegí la que mejor se adapte a vos, a tu empresa o a tus posibilidades.",
+  "donationAlias": "RUMBOESP26",
+  "items": [
+    {
+      "id": "donar",
+      "icon": "heart",
+      "title": "Donar",
+      "description": "Aportá el monto que puedas desde cualquier billetera virtual o cuenta bancaria. Cada aporte nos acerca un poco más a Benidorm.",
+      "highlight": "Aporte libre",
+      "buttonLabel": "Ir a donar",
+      "buttonHref": "#donaciones"
+    },
+    {
+      "id": "sponsor",
+      "icon": "handshake",
+      "title": "Ser Sponsor",
+      "description": "Impulsá tu marca junto a nuestra delegación con propuestas pensadas para comercios y empresas.",
+      "highlight": "$50.000 · $100.000 · $150.000",
+      "buttonLabel": "Ver paquetes",
+      "buttonHref": "#convertite-en-sponsor"
+    },
+    {
+      "id": "services",
+      "icon": "briefcase",
+      "title": "Contratar servicios",
+      "description": "También podés colaborar contratando alguno de nuestros emprendimientos, servicios profesionales o proyectos.",
+      "highlight": "Tecnología · Diseño · Taekwondo",
+      "buttonLabel": "Ver proyectos",
+      "buttonHref": "#nuestros-proyectos"
+    },
+    {
+      "id": "share",
+      "icon": "megaphone",
+      "title": "Compartir",
+      "description": "Ayudanos haciendo correr la voz entre amigos, familiares y comunidades. Difundir la campaña también es una forma de acompañarnos.",
+      "highlight": "Difusión gratuita",
+      "buttonLabel": "Compartir campaña",
+      "buttonHref": "#"
+    }
+  ]
+}
+

@@ -1,112 +1,728 @@
 ---
-import { SPONSORS } from '../data/sponsors';
+import sponsorsData from '../data/sponsors.json';
+
+const sponsors = sponsorsData.items ?? [];
+
+const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    maximumFractionDigits: 0,
+  }).format(value);
+};
+
+const slugify = (value: string) => {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+const levelConfig = {
+  oro: {
+    label: 'Sponsor Oro',
+    icon: '🥇',
+    border: 'border-yellow-400/30 hover:border-yellow-300/70',
+    badge: 'border-yellow-400/30 bg-yellow-400/[0.08] text-yellow-300',
+    glow: 'bg-yellow-400/[0.08]',
+    amount: 'text-yellow-300',
+    line: 'bg-[linear-gradient(90deg,transparent,#facc15,#fff8b0,#facc15,transparent)]',
+  },
+
+  plata: {
+    label: 'Sponsor Plata',
+    icon: '🥈',
+    border: 'border-slate-300/25 hover:border-slate-200/60',
+    badge: 'border-slate-300/30 bg-slate-300/[0.08] text-slate-200',
+    glow: 'bg-slate-200/[0.07]',
+    amount: 'text-slate-200',
+    line: 'bg-[linear-gradient(90deg,transparent,#cbd5e1,#ffffff,#cbd5e1,transparent)]',
+  },
+
+  bronce: {
+    label: 'Sponsor Bronce',
+    icon: '🥉',
+    border: 'border-orange-500/25 hover:border-orange-400/60',
+    badge: 'border-orange-500/30 bg-orange-500/[0.08] text-orange-300',
+    glow: 'bg-orange-500/[0.07]',
+    amount: 'text-orange-300',
+    line: 'bg-[linear-gradient(90deg,transparent,#f97316,#fdba74,#f97316,transparent)]',
+  },
+} as const;
+
+const sponsorsWithSlug = sponsors.map((sponsor) => ({
+  ...sponsor,
+  slug: slugify(sponsor.name),
+}));
 ---
 
 <section id="sponsors-actuales" class="border-y border-border px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
     <!-- Header -->
-    <div class="mb-10 text-center">
+    <div class="mb-12 text-center">
       <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Alianzas
       </span>
+
       <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         Ellos ya son parte del viaje
       </h2>
-      <p class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted">
-        Agradecemos a los comercios y marcas que confían y apuestan por nuestra
-        delegación rumbo a Benidorm 2026.
+
+      <p class="mx-auto max-w-[600px] text-base leading-relaxed text-foreground-muted">
+        Cada sponsor nos acerca un poco más a Benidorm. Gracias por confiar en
+        nuestra delegación y acompañarnos en este desafío.
       </p>
     </div>
 
-    <!-- Sponsors Grid -->
-    <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {SPONSORS.map((sponsor) => {
-        const tierClasses =
-          sponsor.level === 'oro'
-            ? 'border-yellow-500/20 hover:border-yellow-400/60'
-            : sponsor.level === 'plata'
-              ? 'border-slate-400/20 hover:border-slate-300/60'
-              : sponsor.level === 'bronce'
-                ? 'border-orange-700/20 hover:border-orange-500/60'
-                : 'border-border hover:border-white/20';
-
-        const badgeClasses =
-          sponsor.level === 'oro'
-            ? 'border-yellow-500/40 bg-yellow-500/10 text-yellow-400'
-            : sponsor.level === 'plata'
-              ? 'border-slate-400/40 bg-slate-400/10 text-slate-300'
-              : sponsor.level === 'bronce'
-                ? 'border-orange-500/40 bg-orange-500/10 text-orange-400'
-                : 'border-border bg-white/5 text-foreground-muted';
+    <!-- Sponsors -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {sponsorsWithSlug.map((sponsor) => {
+        const config = levelConfig[sponsor.level as keyof typeof levelConfig];
 
         return (
-          <a
-            href={sponsor.url || '#'}
-            target={sponsor.url && sponsor.url !== '#' ? '_blank' : '_self'}
-            rel="noopener noreferrer"
-            title={`${sponsor.name} - Sponsor ${sponsor.level.toUpperCase()}`}
-            class={`group relative flex min-h-[210px] flex-col items-center justify-between overflow-hidden rounded-brand border bg-card px-4 py-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg ${tierClasses}`}
+          <article
+            class:list={[
+              'group relative overflow-hidden rounded-brand border bg-card shadow-card transition-all duration-300 ease-brand',
+              'hover:-translate-y-1 hover:shadow-card-lg',
+              config.border,
+            ]}
+            data-sponsor-card
+            data-sponsor-slug={sponsor.slug}
           >
-            <!-- Glow sutil del nivel -->
+            <!-- Glow -->
             <div
-              class={`pointer-events-none absolute -right-10 -top-10 h-24 w-24 rounded-full blur-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 ${
-                sponsor.level === 'oro'
-                  ? 'bg-yellow-400/10'
-                  : sponsor.level === 'plata'
-                    ? 'bg-slate-300/10'
-                    : sponsor.level === 'bronce'
-                      ? 'bg-orange-500/10'
-                      : 'bg-primary/10'
-              }`}
+              class:list={[
+                'pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100',
+                config.glow,
+              ]}
             ></div>
 
-            <!-- Logo con ancho adaptativo -->
-            <div class="relative flex h-[85px] max-w-full items-center justify-center rounded-brand-sm border border-white/[0.06] bg-background-soft/70 px-4">
-              {sponsor.logo ? (
-                <img
-                  src={sponsor.logo}
-                  alt={`Logo de ${sponsor.name}`}
-                  loading="lazy"
-                  class="max-h-[60px] w-auto max-w-full object-contain opacity-90 transition-all duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                />
-              ) : null}
+            <!-- Línea -->
+            <div
+              class:list={[
+                'absolute inset-x-0 top-0 h-[2px] opacity-80',
+                config.line,
+              ]}
+            ></div>
 
-              <!-- Fallback -->
-              <div
-                class={`h-[65px] w-[65px] flex-col items-center justify-center rounded-full border border-border bg-card ${sponsor.logo ? 'hidden' : 'flex'}`}
-              >
-                <span class="font-display text-xl leading-none text-foreground-muted">
-                  {sponsor.name.charAt(0)}
+            <div class="relative p-6">
+              <!-- Tier -->
+              <div class="mb-6 flex items-center justify-between gap-3">
+                <span
+                  class:list={[
+                    'inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.06em]',
+                    config.badge,
+                  ]}
+                >
+                  <span>{config.icon}</span>
+                  {config.label}
                 </span>
-                <span class="mt-1 max-w-[50px] overflow-hidden text-ellipsis whitespace-nowrap text-[9px] text-foreground-muted">
-                  {sponsor.name}
+
+                <span class="text-[10px] uppercase tracking-[0.08em] text-foreground-subtle">
+                  Gracias
                 </span>
               </div>
+
+              <!-- Logo -->
+              <div class="mb-6 flex h-[125px] items-center justify-center overflow-hidden rounded-brand-sm border border-border bg-background-soft/70 px-6">
+                {sponsor.logo ? (
+                  <img
+                    src={sponsor.logo}
+                    alt={`Logo de ${sponsor.name}`}
+                    loading="lazy"
+                    class="max-h-[82px] max-w-full object-contain opacity-85 transition-all duration-300 group-hover:scale-[1.04] group-hover:opacity-100"
+                  />
+                ) : (
+                  <div class="flex h-16 w-16 items-center justify-center rounded-full border border-border bg-card">
+                    <span class="font-display text-2xl text-foreground-muted">
+                      {sponsor.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <!-- Nombre -->
+              <div class="mb-5">
+                <h3 class="font-display text-[22px] leading-tight text-foreground">
+                  {sponsor.name}
+                </h3>
+
+                {sponsor.description && (
+                  <p class="mt-2 text-sm leading-relaxed text-foreground-muted">
+                    {sponsor.description}
+                  </p>
+                )}
+              </div>
+
+              <!-- Footer -->
+              <div class="flex items-end justify-between gap-3 border-t border-border pt-4">
+                <div>
+                  <span class="block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+                    Aporte
+                  </span>
+
+                  <span class:list={['font-display text-xl', config.amount]}>
+                    {formatCurrency(sponsor.amount)}
+                  </span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  {sponsor.url && (
+                    <a
+                      href={sponsor.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visitar ${sponsor.name}`}
+                      class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground-muted transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.06] hover:text-primary"
+                    >
+                      <svg
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        class="h-4 w-4"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M7 13L13 7M8 7H13V12"
+                          stroke="currentColor"
+                          stroke-width="1.6"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  )}
+
+                  <!-- Compartir -->
+                  <button
+                    type="button"
+                    data-share-sponsor
+                    data-sponsor={sponsor.slug}
+                    aria-label={`Compartir a ${sponsor.name}`}
+                    class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-foreground-muted transition-all duration-200 hover:border-primary/40 hover:bg-primary/[0.06] hover:text-primary"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      class="h-[17px] w-[17px]"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="18"
+                        cy="5"
+                        r="2.5"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                      />
+                      <circle
+                        cx="6"
+                        cy="12"
+                        r="2.5"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                      />
+                      <circle
+                        cx="18"
+                        cy="19"
+                        r="2.5"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                      />
+                      <path
+                        d="M8.2 10.8L15.8 6.2M8.2 13.2L15.8 17.8"
+                        stroke="currentColor"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-
-            <!-- Información y Descripción -->
-            <div class="relative w-full mt-3">
-              <span class="mb-1 block text-sm font-bold text-foreground">
-                {sponsor.name}
-              </span>
-
-              {sponsor.description && (
-                <p class="mb-2 text-[11px] leading-tight text-foreground-muted line-clamp-2">
-                  {sponsor.description}
-                </p>
-              )}
-
-              <span
-                class={`inline-block rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.05em] ${badgeClasses}`}
-              >
-                {sponsor.level}
-              </span>
-            </div>
-          </a>
+          </article>
         );
       })}
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     MODAL COMPARTIR
+     ============================================================ -->
+
+<div
+  id="sponsor-share-modal"
+  class="fixed inset-0 z-[100] hidden items-end justify-center bg-black/70 p-4 backdrop-blur-sm sm:items-center"
+  aria-hidden="true"
+>
+  <div
+    id="sponsor-share-panel"
+    class="w-full max-w-md translate-y-6 rounded-[28px] border border-border bg-card p-6 opacity-0 shadow-2xl transition-all duration-300 sm:translate-y-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="share-modal-title"
+  >
+    <div class="mb-6 flex items-start justify-between gap-4">
+      <div>
+        <span class="mb-2 block text-[10px] font-bold uppercase tracking-[0.12em] text-primary">
+          Compartir
+        </span>
+
+        <h3
+          id="share-modal-title"
+          class="font-display text-2xl leading-tight text-foreground"
+        >
+          Compartir sponsor
+        </h3>
+      </div>
+
+      <button
+        type="button"
+        data-close-share
+        aria-label="Cerrar"
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition hover:border-primary/40 hover:text-primary"
+      >
+        <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
+          <path
+            d="M5 5L15 15M15 5L5 15"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="mb-5 rounded-brand-sm border border-border bg-background-soft/60 p-4">
+      <span class="block text-xs text-foreground-muted">
+        Estás compartiendo
+      </span>
+
+      <strong
+        id="share-sponsor-name"
+        class="mt-1 block font-display text-lg text-foreground"
+      ></strong>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <button
+        type="button"
+        data-share-native
+        class="col-span-2 flex items-center justify-center gap-2 rounded-brand-sm bg-primary px-4 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
+      >
+        <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
+          <path
+            d="M12 16V4M8 8L12 4L16 8M5 13V19H19V13"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Compartir
+      </button>
+
+      <a
+        id="share-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        WhatsApp
+      </a>
+
+      <a
+        id="share-facebook"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        Facebook
+      </a>
+
+      <a
+        id="share-x"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        X
+      </a>
+
+      <a
+        id="share-telegram"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-2 rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        Telegram
+      </a>
+
+      <button
+        type="button"
+        data-copy-share
+        class="col-span-2 flex items-center justify-center gap-2 rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        Copiar enlace
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL DEL SPONSOR DESDE EL ENLACE
+     ============================================================ -->
+
+<div
+  id="sponsor-info-modal"
+  class="fixed inset-0 z-[101] hidden items-end justify-center bg-black/75 p-4 backdrop-blur-sm sm:items-center"
+  aria-hidden="true"
+>
+  <div
+    id="sponsor-info-panel"
+    class="w-full max-w-lg translate-y-6 rounded-[28px] border border-border bg-card p-7 opacity-0 shadow-2xl transition-all duration-300 sm:translate-y-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="sponsor-info-title"
+  >
+    <div class="mb-6 flex items-start justify-between gap-4">
+      <div>
+        <span
+          id="sponsor-info-tier"
+          class="mb-2 inline-flex rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em]"
+        ></span>
+
+        <h3
+          id="sponsor-info-title"
+          class="mt-3 font-display text-3xl leading-tight text-foreground"
+        ></h3>
+      </div>
+
+      <button
+        type="button"
+        data-close-info
+        aria-label="Cerrar"
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition hover:border-primary/40 hover:text-primary"
+      >
+        <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4">
+          <path
+            d="M5 5L15 15M15 5L5 15"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div
+      id="sponsor-info-description"
+      class="mb-6 text-sm leading-relaxed text-foreground-muted"
+    ></div>
+
+    <div class="mb-6 rounded-brand-sm border border-primary/20 bg-primary/[0.04] p-4">
+      <span class="block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+        Ya aportó
+      </span>
+
+      <span
+        id="sponsor-info-amount"
+        class="mt-1 block font-display text-2xl text-primary"
+      ></span>
+    </div>
+
+    <div class="space-y-3">
+      <a
+        href="/#ser-sponsor"
+        class="flex w-full items-center justify-center rounded-brand-sm bg-primary px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-primary/90"
+      >
+        Quiero ser sponsor
+      </a>
+
+      <a
+        href="/#donaciones"
+        class="flex w-full items-center justify-center rounded-brand-sm border border-border px-5 py-3.5 text-sm font-semibold text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        Solo quiero donar
+      </a>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ sponsorsWithSlug }}>
+  const sponsors = sponsorsWithSlug;
+
+  const shareModal = document.getElementById('sponsor-share-modal');
+  const sharePanel = document.getElementById('sponsor-share-panel');
+
+  const infoModal = document.getElementById('sponsor-info-modal');
+  const infoPanel = document.getElementById('sponsor-info-panel');
+
+  const shareName = document.getElementById('share-sponsor-name');
+  const shareWhatsapp = document.getElementById('share-whatsapp');
+  const shareFacebook = document.getElementById('share-facebook');
+  const shareX = document.getElementById('share-x');
+  const shareTelegram = document.getElementById('share-telegram');
+
+  const infoTitle = document.getElementById('sponsor-info-title');
+  const infoTier = document.getElementById('sponsor-info-tier');
+  const infoDescription = document.getElementById('sponsor-info-description');
+  const infoAmount = document.getElementById('sponsor-info-amount');
+
+  let currentShareUrl = '';
+  let currentSponsor = null;
+
+  const openModal = (modal, panel) => {
+    if (!modal || !panel) return;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modal.setAttribute('aria-hidden', 'false');
+
+    requestAnimationFrame(() => {
+      panel.classList.remove('translate-y-6', 'opacity-0');
+    });
+
+    document.body.classList.add('overflow-hidden');
+  };
+
+  const closeModal = (modal, panel) => {
+    if (!modal || !panel) return;
+
+    panel.classList.add('translate-y-6', 'opacity-0');
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.setAttribute('aria-hidden', 'true');
+
+      if (
+        document
+          .getElementById('sponsor-share-modal')
+          ?.classList.contains('hidden') &&
+        document
+          .getElementById('sponsor-info-modal')
+          ?.classList.contains('hidden')
+      ) {
+        document.body.classList.remove('overflow-hidden');
+      }
+    }, 250);
+  };
+
+  const getSponsorUrl = (slug) => {
+    const url = new URL(window.location.href);
+    url.search = '';
+    url.hash = '';
+    url.searchParams.set('sponsor', slug);
+
+    return url.toString();
+  };
+
+  const openShareModal = (slug) => {
+    const sponsor = sponsors.find((item) => item.slug === slug);
+
+    if (!sponsor) return;
+
+    currentSponsor = sponsor;
+    currentShareUrl = getSponsorUrl(slug);
+
+    if (shareName) {
+      shareName.textContent = sponsor.name;
+    }
+
+    const shareText =
+      `Mirá a ${sponsor.name}, uno de los sponsors que acompaña ` +
+      `a nuestra delegación rumbo a la Copa del Mundo de Benidorm 2026.`;
+
+    if (shareWhatsapp) {
+      shareWhatsapp.setAttribute(
+        'href',
+        `https://wa.me/?text=${encodeURIComponent(`${shareText} ${currentShareUrl}`)}`,
+      );
+    }
+
+    if (shareFacebook) {
+      shareFacebook.setAttribute(
+        'href',
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentShareUrl)}`,
+      );
+    }
+
+    if (shareX) {
+      shareX.setAttribute(
+        'href',
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentShareUrl)}`,
+      );
+    }
+
+    if (shareTelegram) {
+      shareTelegram.setAttribute(
+        'href',
+        `https://t.me/share/url?url=${encodeURIComponent(currentShareUrl)}&text=${encodeURIComponent(shareText)}`,
+      );
+    }
+
+    openModal(shareModal, sharePanel);
+  };
+
+  const openInfoModal = (slug) => {
+    const sponsor = sponsors.find((item) => item.slug === slug);
+
+    if (!sponsor) return;
+
+    currentSponsor = sponsor;
+
+    const config = {
+      oro: {
+        label: '🥇 Sponsor Oro',
+        className: 'border-yellow-400/30 bg-yellow-400/[0.08] text-yellow-300',
+      },
+      plata: {
+        label: '🥈 Sponsor Plata',
+        className: 'border-slate-300/30 bg-slate-300/[0.08] text-slate-200',
+      },
+      bronce: {
+        label: '🥉 Sponsor Bronce',
+        className: 'border-orange-500/30 bg-orange-500/[0.08] text-orange-300',
+      },
+    }[sponsor.level];
+
+    if (infoTitle) {
+      infoTitle.textContent = `${sponsor.name} ya es parte del viaje`;
+    }
+
+    if (infoTier && config) {
+      infoTier.textContent = config.label;
+      infoTier.className =
+        `mb-2 inline-flex rounded-full border px-2.5 py-1 text-[10px] ` +
+        `font-bold uppercase tracking-[0.08em] ${config.className}`;
+    }
+
+    if (infoDescription) {
+      infoDescription.textContent =
+        sponsor.description ||
+        'Este sponsor decidió acompañarnos en nuestro camino rumbo a Benidorm 2026.';
+    }
+
+    if (infoAmount) {
+      infoAmount.textContent = new Intl.NumberFormat('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+        maximumFractionDigits: 0,
+      }).format(sponsor.amount);
+    }
+
+    openModal(infoModal, infoPanel);
+  };
+
+  document.querySelectorAll('[data-share-sponsor]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const slug = button.getAttribute('data-sponsor');
+
+      if (slug) {
+        openShareModal(slug);
+      }
+    });
+  });
+
+  document
+    .querySelector('[data-close-share]')
+    ?.addEventListener('click', () => {
+      closeModal(shareModal, sharePanel);
+    });
+
+  document.querySelector('[data-close-info]')?.addEventListener('click', () => {
+    closeModal(infoModal, infoPanel);
+  });
+
+  shareModal?.addEventListener('click', (event) => {
+    if (event.target === shareModal) {
+      closeModal(shareModal, sharePanel);
+    }
+  });
+
+  infoModal?.addEventListener('click', (event) => {
+    if (event.target === infoModal) {
+      closeModal(infoModal, infoPanel);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+
+    if (!shareModal?.classList.contains('hidden')) {
+      closeModal(shareModal, sharePanel);
+    }
+
+    if (!infoModal?.classList.contains('hidden')) {
+      closeModal(infoModal, infoPanel);
+    }
+  });
+
+  document
+    .querySelector('[data-share-native]')
+    ?.addEventListener('click', async () => {
+      if (!currentSponsor || !currentShareUrl) return;
+
+      const shareText =
+        `Mirá a ${currentSponsor.name}, uno de los sponsors que acompaña ` +
+        `a nuestra delegación rumbo a la Copa del Mundo de Benidorm 2026.`;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `${currentSponsor.name} · Rumbo a Benidorm 2026`,
+            text: shareText,
+            url: currentShareUrl,
+          });
+        } catch {
+          // El usuario cerró el diálogo nativo.
+        }
+
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(currentShareUrl);
+      } catch {
+        // Fallback silencioso.
+      }
+    });
+
+  document
+    .querySelector('[data-copy-share]')
+    ?.addEventListener('click', async (event) => {
+      if (!currentShareUrl) return;
+
+      const button = event.currentTarget;
+
+      try {
+        await navigator.clipboard.writeText(currentShareUrl);
+
+        button.textContent = '✓ Enlace copiado';
+
+        setTimeout(() => {
+          button.textContent = 'Copiar enlace';
+        }, 1800);
+      } catch {
+        button.textContent = 'No se pudo copiar';
+
+        setTimeout(() => {
+          button.textContent = 'Copiar enlace';
+        }, 1800);
+      }
+    });
+
+  const sponsorFromUrl = new URLSearchParams(window.location.search).get(
+    'sponsor',
+  );
+
+  if (sponsorFromUrl) {
+    requestAnimationFrame(() => {
+      openInfoModal(sponsorFromUrl);
+    });
+  }
+</script>

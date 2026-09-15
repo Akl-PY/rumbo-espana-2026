@@ -1,56 +1,67 @@
 ---
-import { GOAL, RAISED } from '../data/config';
-import { donations } from '../data/donations';
+import goal from '../data/goal.json';
+import donationsData from '../data/donations.json';
+import transparencyData from '../data/transparency.json';
 import { SPONSORS } from '../data/sponsors';
 
-const donationsTotalFromList = donations.reduce(
+const donations = donationsData.items ?? [];
+const transparency = transparencyData.expenses ?? [];
+
+const totalDonations = donations.reduce(
   (acc, curr) => acc + (curr.amount || 0),
   0,
 );
-
-const totalDonations = RAISED > 0 ? RAISED : donationsTotalFromList;
 
 const totalSponsors = SPONSORS.reduce(
   (acc, curr) => acc + (curr.amount || 0),
   0,
 );
 
+const totalExpenses = transparency.reduce(
+  (acc, curr) => acc + (curr.amount || 0),
+  0,
+);
+const GOAL = totalExpenses || 4_000_000;
 const totalRaised = totalDonations + totalSponsors;
+
+const remaining = Math.max(0, GOAL - totalRaised);
 
 const progressPercent = Math.min(100, Math.round((totalRaised / GOAL) * 100));
 
-const formatCurrency = (val: number) => {
+const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('es-AR', {
     style: 'currency',
     currency: 'ARS',
     maximumFractionDigits: 0,
-  }).format(val);
+  }).format(value);
 };
 ---
 
-<section id="objetivo" class="px-5 py-[88px]">
+<section id="objetivo" class="relative px-5 py-[88px]">
   <div class="mx-auto max-w-[900px]">
+    <!-- Header -->
     <div class="mb-10 text-center">
       <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
-        Transparencia y Meta
+        {goal.eyebrow}
       </span>
 
       <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
-        Nuestro Objetivo
+        {goal.title}
       </h2>
 
       <p class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted">
-        El viaje a la Copa del Mundo en Benidorm se financia gracias al apoyo de
-        nuestra comunidad y las marcas aliadas.
+        {goal.description}
       </p>
     </div>
 
+    <!-- Card -->
     <div class="rounded-brand border border-border bg-card p-5 shadow-card sm:p-8">
+      <!-- Meta + porcentaje -->
       <div class="mb-5 flex items-end justify-between gap-4">
         <div>
           <span class="mb-1 block text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted">
-            Meta final
+            {goal.goalLabel}
           </span>
 
           <span class="font-display text-[clamp(30px,8vw,44px)] leading-none text-primary">
@@ -64,13 +75,14 @@ const formatCurrency = (val: number) => {
           </span>
 
           <span class="text-[11px] uppercase tracking-[0.08em] text-foreground-muted">
-            alcanzado
+            {goal.progressLabel}
           </span>
         </div>
       </div>
 
+      <!-- Progress -->
       <div
-        class="mb-8 h-4 w-full overflow-hidden rounded-full border border-border bg-white/[0.07]"
+        class="mb-5 h-4 w-full overflow-hidden rounded-full border border-border bg-white/[0.07]"
         role="progressbar"
         aria-valuenow={progressPercent}
         aria-valuemin="0"
@@ -83,10 +95,29 @@ const formatCurrency = (val: number) => {
         ></div>
       </div>
 
+      <!-- Falta -->
+      {remaining > 0 && (
+        <p class="mb-8 text-center text-sm text-foreground-muted">
+          Faltan
+          <strong class="font-semibold text-foreground">
+            {formatCurrency(remaining)}
+          </strong>
+          para alcanzar la meta.
+        </p>
+      )}
+
+      {remaining === 0 && (
+        <p class="mb-8 text-center text-sm font-semibold text-primary">
+          ¡Meta alcanzada! ❤️
+        </p>
+      )}
+
+      <!-- Estadísticas -->
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <!-- Total -->
         <div class="rounded-brand-sm border border-primary/30 bg-primary/[0.04] px-4 py-[18px] text-center sm:border-l-4">
           <span class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted">
-            Total Recaudado
+            {goal.raisedLabel}
           </span>
 
           <span class="block font-display text-[clamp(20px,4vw,24px)] text-primary">
@@ -94,9 +125,10 @@ const formatCurrency = (val: number) => {
           </span>
         </div>
 
+        <!-- Donaciones -->
         <div class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center">
           <span class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted">
-            ❤️ Donaciones
+            {goal.donationsLabel}
           </span>
 
           <span class="block font-display text-[clamp(20px,4vw,24px)] text-accent">
@@ -104,13 +136,14 @@ const formatCurrency = (val: number) => {
           </span>
 
           <span class="mt-1 block text-xs text-foreground-subtle">
-            {donations.length} aportes
+            {donations.length} {goal.donationsSuffix}
           </span>
         </div>
 
+        <!-- Sponsors -->
         <div class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center">
           <span class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted">
-            🤝 Sponsors
+            {goal.sponsorsLabel}
           </span>
 
           <span class="block font-display text-[clamp(20px,4vw,24px)] text-accent">
@@ -118,16 +151,44 @@ const formatCurrency = (val: number) => {
           </span>
 
           <span class="mt-1 block text-xs text-foreground-subtle">
-            {SPONSORS.length} marcas
+            {SPONSORS.length} {goal.sponsorsSuffix}
           </span>
         </div>
       </div>
 
+      <!-- Footer -->
       <div class="mt-6 border-t border-border pt-5 text-center">
         <p class="text-[13px] leading-relaxed text-foreground-muted">
-          Meta fijada para pasajes, alojamiento, inscripciones y traslados de
-          los 3 competidores y 2 coaches.
+          {goal.footerText}
         </p>
+
+        <div class="mt-6 flex flex-col items-center gap-3 border-t border-border pt-6 text-center">
+          <p class="text-[13px] text-foreground-muted">
+            ¿Querés saber cómo se administra lo recaudado?
+          </p>
+
+          <a
+            href="/#transparencia"
+            class="group inline-flex items-center gap-2 rounded-brand-sm border border-primary/35 bg-primary/[0.06] px-4 py-2.5 text-[13px] font-semibold text-primary transition-all duration-300 hover:border-primary/60 hover:bg-primary/[0.12] hover:shadow-[0_0_20px_rgba(224,30,43,0.12)]"
+          >
+            Ver transparencia
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 10H16M11 5L16 10L11 15"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>

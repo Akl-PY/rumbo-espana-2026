@@ -1,65 +1,233 @@
 ---
-const EXPENSES = [
-  {
-    icon: '✈️',
-    title: 'Pasajes aéreos',
-    desc: 'Vuelos ida y vuelta hacia España para competidores y coaches.',
-  },
-  {
-    icon: '🏨',
-    title: 'Alojamiento oficial',
-    desc: 'Estadía durante los días reglamentarios del certamen en Benidorm.',
-  },
-  {
-    icon: '🥋',
-    title: 'Inscripciones y licencias',
-    desc: 'Acreditación oficial a la Copa del Mundo y seguros deportivos.',
-  },
-  {
-    icon: '🚕',
-    title: 'Traslados internos',
-    desc: 'Movilidad aeropuerto-hotel-estadio y logística de la delegación.',
-  },
-  {
-    icon: '🍽️',
-    title: 'Nutrición y gastos de viaje',
-    desc: 'Alimentación deportiva, pesaje e hidratación durante la competencia.',
-  },
-];
+import transparency from '../data/transparency.json';
+const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    maximumFractionDigits: 0,
+  }).format(value);
+};
+const totalExpenses = transparency.expenses.reduce(
+  (acc, item) => acc + item.amount,
+  0,
+);
+const argentinaGradientId = 'argentina-gradient';
 ---
 
-<section id="transparencia" class="px-5 py-[88px]">
+<section id="transparencia" class="relative overflow-hidden px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
+    <!-- Header -->
     <div class="mb-12 text-center">
       <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
-        <span class="h-0.5 w-[22px] bg-primary"></span>
-        Claridad y Compromiso
+        {' '}
+        <span class="h-0.5 w-[22px] bg-primary"></span>{' '}
+        {transparency.eyebrow}{' '}
       </span>
-
       <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
-        ¿A dónde va nuestro objetivo?
+        {transparency.title}
       </h2>
-
       <p class="mx-auto max-w-[600px] text-base leading-relaxed text-foreground-muted">
-        Cada aporte de la comunidad y de los sponsors se destina exclusivamente
-        a hacer viable la participación en la Copa del Mundo.
+        {transparency.description}
       </p>
     </div>
-
-    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {EXPENSES.map((item) => (
-        <article class="rounded-brand border border-border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
-          <span class="mb-4 block text-[2rem] leading-none">{item.icon}</span>
-
-          <h3 class="mb-2 font-display text-lg text-foreground">
-            {item.title}
-          </h3>
-
-          <p class="text-sm leading-relaxed text-foreground-muted">
-            {item.desc}
-          </p>
+    <!-- Total -->
+    <div class="mb-8 flex justify-center">
+      <div class="inline-flex items-center gap-4 rounded-full border border-primary/20 bg-primary/[0.04] px-5 py-3">
+        <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            class="h-5 w-5 text-primary"
+            aria-hidden="true"
+          >
+            <path
+              d="M12 3V21M17 7.5C17 5.84 14.76 5 12 5C9.24 5 7 5.84 7 7.5C7 9.16 9.24 10 12 10C14.76 10 17 10.84 17 12.5C17 14.16 14.76 15 12 15C9.24 15 7 15.84 7 17.5C7 19.16 9.24 20 12 20C14.76 20 17 19.16 17 17.5"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div>
+          <span class="block text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground-muted">
+            {' '}
+            Distribución estimada{' '}
+          </span>{' '}
+          <span class="font-display text-lg text-foreground">
+            {' '}
+            {formatCurrency(totalExpenses)}{' '}
+          </span>
+        </div>
+      </div>
+    </div>
+    <!-- Expenses -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {transparency.expenses.map((item, index) => (
+        <article
+          class:list={[
+            'group relative overflow-hidden rounded-brand border border-border bg-card p-6 shadow-card transition-all duration-300 ease-brand',
+            'hover:-translate-y-1 hover:border-primary/30 hover:shadow-card-lg',
+            index === transparency.expenses.length - 1 &&
+            transparency.expenses.length % 3 === 2
+              ? 'lg:col-start-2'
+              : '',
+          ]}
+        >
+          {' '}
+          <!-- Línea argentina -->{' '}
+          <div class="absolute inset-x-0 top-0 h-[2px] bg-[linear-gradient(90deg,#74acdf_0%,#ffffff_50%,#74acdf_100%)] opacity-70 transition-opacity duration-300 group-hover:opacity-100"></div>{' '}
+          <!-- Icon -->{' '}
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl border border-primary/15 bg-primary/[0.05]">
+            {' '}
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              class="h-6 w-6"
+              aria-hidden="true"
+            >
+              {' '}
+              {index === 0 && (
+                <>
+                  {' '}
+                  <path
+                    d="M3 13L21 7L14 21L11 14L3 13Z"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />{' '}
+                  <path
+                    d="M11 14L7 18"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />{' '}
+                </>
+              )}{' '}
+              {index === 1 && (
+                <>
+                  {' '}
+                  <path
+                    d="M4 21V10L12 4L20 10V21"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />{' '}
+                  <path
+                    d="M9 21V14H15V21"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                  />{' '}
+                </>
+              )}{' '}
+              {index === 2 && (
+                <>
+                  {' '}
+                  <path
+                    d="M7 4L17 8L15 20L5 16L7 4Z"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  />{' '}
+                  <path
+                    d="M9 8L15 10M8 12L14 14"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />{' '}
+                </>
+              )}{' '}
+              {index === 3 && (
+                <>
+                  {' '}
+                  <path
+                    d="M5 17L8 10L15 8L19 11L17 15L11 15L9 20"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />{' '}
+                  <circle
+                    cx="7"
+                    cy="18"
+                    r="2"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                  />{' '}
+                  <circle
+                    cx="17"
+                    cy="18"
+                    r="2"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                  />{' '}
+                </>
+              )}{' '}
+              {index === 4 && (
+                <>
+                  {' '}
+                  <path
+                    d="M5 4H19V20H5V4Z"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                  />{' '}
+                  <path
+                    d="M8 8H16M8 12H16M8 16H13"
+                    stroke={`url(#${argentinaGradientId})`}
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />{' '}
+                </>
+              )}{' '}
+            </svg>{' '}
+          </div>{' '}
+          <!-- Content -->{' '}
+          <div class="mb-5">
+            {' '}
+            <h3 class="mb-2 font-display text-lg text-foreground">
+              {' '}
+              {item.title}{' '}
+            </h3>{' '}
+            <p class="text-sm leading-relaxed text-foreground-muted">
+              {' '}
+              {item.description}{' '}
+            </p>{' '}
+          </div>{' '}
+          <!-- Amount -->{' '}
+          <div class="flex items-end justify-between border-t border-border pt-4">
+            {' '}
+            <span class="text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+              {' '}
+              Aproximado{' '}
+            </span>{' '}
+            <span class="font-display text-xl text-primary">
+              {' '}
+              {formatCurrency(item.amount)}{' '}
+            </span>{' '}
+          </div>{' '}
         </article>
       ))}
     </div>
+    <!-- Footer -->
+    <div class="mx-auto mt-8 max-w-[700px] border-t border-border pt-6 text-center">
+      <p class="text-xs leading-relaxed text-foreground-subtle">
+        {transparency.footer}
+      </p>
+    </div>
   </div>
+  <!-- SVG gradient definition -->{' '}
+  <svg width="0" height="0" class="absolute" aria-hidden="true">
+    <defs>
+      <linearGradient
+        id={argentinaGradientId}
+        x1="0%"
+        y1="0%"
+        x2="100%"
+        y2="100%"
+      >
+        <stop offset="0%" stop-color="#74ACDF" />
+        <stop offset="50%" stop-color="#FFFFFF" />
+        <stop offset="100%" stop-color="#74ACDF" />
+      </linearGradient>
+    </defs>
+  </svg>
 </section>

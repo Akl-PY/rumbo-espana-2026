@@ -1,0 +1,33 @@
+{
+  "eyebrow": "Claridad y compromiso",
+  "title": "¿A dónde va nuestro objetivo?",
+  "description": "Cada aporte de la comunidad y de los sponsors se destina a hacer posible nuestra participación en la Copa del Mundo de Benidorm.",
+  "expenses": [
+    {
+      "title": "Pasajes aéreos",
+      "description": "Vuelos de ida y vuelta hacia España para los competidores y coaches.",
+      "amount": 8000000
+    },
+    {
+      "title": "Alojamiento",
+      "description": "Estadía durante los días del certamen y el período necesario para la delegación.",
+      "amount": 1500000
+    },
+    {
+      "title": "Inscripciones y licencias",
+      "description": "Acreditación oficial, inscripción al torneo y licencias correspondientes.",
+      "amount": 2400000
+    },
+    {
+      "title": "Traslados internos",
+      "description": "Movilidad entre aeropuerto, alojamiento, competencia y otros puntos necesarios.",
+      "amount": 500000
+    },
+    {
+      "title": "Alimentación y gastos de viaje",
+      "description": "Alimentación, hidratación y otros gastos necesarios durante nuestra estadía.",
+      "amount": 600000
+    }
+  ],
+  "footer": "Los valores son aproximados y pueden variar según precios, cotizaciones y condiciones del viaje."
+}

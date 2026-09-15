@@ -1,13 +1,27 @@
+
 ---
-import { SPONSOR_TIERS } from '../data/sponsors';
+import sponsorData from '../data/sponsor-tiers.json';
 import { SOCIAL } from '../data/config';
 
-const formatCurrency = (val: number) => {
+const tiers = [...(sponsorData.tiers ?? [])].sort((a, b) => {
+  const order = {
+    oro: 0,
+    plata: 1,
+    bronce: 2,
+  };
+
+  return (
+    (order[a.id as keyof typeof order] ?? 99) -
+    (order[b.id as keyof typeof order] ?? 99)
+  );
+});
+
+const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('es-AR', {
     style: 'currency',
     currency: 'ARS',
     maximumFractionDigits: 0,
-  }).format(val);
+  }).format(value);
 };
 
 const getWhatsAppLink = (tierName: string) => {
@@ -23,102 +37,238 @@ const getWhatsAppLink = (tierName: string) => {
 };
 ---
 
-<section id="convertite-en-sponsor" class="px-5 py-[88px]">
+<section
+  id="convertite-en-sponsor"
+  class="relative overflow-hidden px-5 py-[88px]"
+>
   <div class="mx-auto max-w-[1100px]">
-    <div class="mb-12 text-center">
-      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
+
+    <!-- Header -->
+    <div class="mx-auto mb-14 max-w-[700px] text-center">
+
+      <span
+        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
+      >
         <span class="h-0.5 w-[22px] bg-primary"></span>
-        Propuesta Comercial
+        Propuesta comercial
       </span>
 
-      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
+      <h2
+        class="mb-4 font-display text-[clamp(30px,6vw,46px)] leading-[1.02] tracking-[-0.015em] text-foreground"
+      >
         Convertite en Sponsor
       </h2>
 
-      <p class="mx-auto max-w-[620px] text-base leading-relaxed text-foreground-muted">
-        Sumá tu marca a nuestra delegación rumbo al Mundial. Ofrecemos
-        visibilidad genuina, presencia digital y difusión deportiva.
+      <p class="mx-auto max-w-[620px] text-base leading-[1.75] text-foreground-muted">
+        Sumá tu marca a nuestra delegación rumbo a Benidorm 2026. Elegí el nivel
+        de acompañamiento que mejor se adapte a tu marca y formá parte de este
+        desafío internacional.
       </p>
+
     </div>
 
-    <div class="grid grid-cols-1 items-stretch gap-4 md:grid-cols-3">
-      {SPONSOR_TIERS.map((tier) => {
+    <!-- Tiers -->
+    <div class="grid items-stretch gap-5 lg:grid-cols-3">
+
+      {tiers.map((tier) => {
         const isGold = tier.id === 'oro';
+        const isSilver = tier.id === 'plata';
+
+        const cardClasses = isGold
+          ? 'border-yellow-400/40 shadow-[0_20px_60px_rgba(250,204,21,0.08)]'
+          : isSilver
+            ? 'border-slate-300/25'
+            : 'border-border';
+
+        const badgeClasses = isGold
+          ? 'border-yellow-400/30 bg-yellow-400/[0.08] text-yellow-300'
+          : isSilver
+            ? 'border-slate-300/30 bg-slate-300/[0.08] text-slate-200'
+            : 'border-orange-500/30 bg-orange-500/[0.08] text-orange-300';
+
+        const priceClasses = isGold
+          ? 'text-yellow-300'
+          : isSilver
+            ? 'text-slate-200'
+            : 'text-orange-300';
+
+        const accentClasses = isGold
+          ? 'bg-[linear-gradient(90deg,transparent,#facc15,#fff8b0,#facc15,transparent)]'
+          : isSilver
+            ? 'bg-[linear-gradient(90deg,transparent,#cbd5e1,#ffffff,#cbd5e1,transparent)]'
+            : 'bg-[linear-gradient(90deg,transparent,#f97316,#fdba74,#f97316,transparent)]';
 
         return (
           <article
             class:list={[
-              'group flex flex-col justify-between rounded-brand border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg sm:p-7',
-              isGold
-                ? 'border-yellow-500/35 hover:border-yellow-400/55'
-                : 'border-border hover:border-white/[0.18]',
+              'group relative flex h-full flex-col overflow-hidden rounded-[24px] border bg-card p-6 shadow-card transition-all duration-300 ease-brand sm:p-7',
+              'hover:-translate-y-1.5 hover:shadow-card-lg',
+              cardClasses,
+              isGold ? 'lg:-translate-y-2' : '',
             ]}
           >
-            <div>
+
+            <!-- Decorative glow -->
+            <div
+              class:list={[
+                'pointer-events-none absolute -right-20 -top-20 h-48 w-48 rounded-full blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100',
+                isGold
+                  ? 'bg-yellow-400/[0.10]'
+                  : isSilver
+                    ? 'bg-slate-200/[0.07]'
+                    : 'bg-orange-500/[0.07]',
+              ]}
+            ></div>
+
+            <!-- Accent line -->
+            <div
+              class:list={[
+                'absolute inset-x-0 top-0 h-[2px] opacity-90',
+                accentClasses,
+              ]}
+            ></div>
+
+            <!-- Popular -->
+            {isGold && (
+              <div class="absolute right-5 top-5">
+                <span class="rounded-full border border-yellow-400/30 bg-yellow-400/[0.08] px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.1em] text-yellow-300">
+                  Mayor visibilidad
+                </span>
+              </div>
+            )}
+
+            <div class="relative flex flex-1 flex-col">
+
+              <!-- Heading -->
               <div
                 class:list={[
-                  'mb-6 border-b pb-6 text-center',
-                  isGold ? 'border-yellow-500/20' : 'border-border',
+                  'mb-7 border-b pb-7',
+                  isGold ? 'border-yellow-400/15' : 'border-border',
                 ]}
               >
-                <span class="mb-3 block text-[2.5rem] leading-none">
-                  {tier.badge}
+
+                <span
+                  class:list={[
+                    'mb-4 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.06em]',
+                    badgeClasses,
+                  ]}
+                >
+                  <span class="text-sm">{tier.badge}</span>
+                  Sponsor {tier.name}
                 </span>
 
-                <h3 class="mb-2 font-display text-[clamp(20px,4vw,24px)] text-foreground">
+                <h3 class="mb-2 font-display text-[28px] leading-tight text-foreground">
                   {tier.name}
                 </h3>
 
-                <div>
+                <p class="mb-5 text-sm leading-relaxed text-foreground-muted">
+                  {tier.shortDescription}
+                </p>
+
+                <div class="flex items-end gap-1">
                   <span
                     class:list={[
-                      'font-display text-[clamp(25px,5vw,32px)]',
-                      isGold ? 'text-yellow-400' : 'text-accent',
+                      'font-display text-[clamp(30px,5vw,40px)] leading-none',
+                      priceClasses,
                     ]}
                   >
                     {formatCurrency(tier.price)}
                   </span>
+
+                  <span class="mb-1 text-xs text-foreground-subtle">
+                    aporte sugerido
+                  </span>
                 </div>
+
               </div>
 
-              <ul class="mb-8 space-y-3">
-                {tier.features.map((feature) => (
-                  <li class="flex items-start gap-3 text-sm leading-relaxed text-foreground-muted">
-                    <svg
-                      class="mt-0.5 h-5 w-5 shrink-0 text-primary"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clip-rule="evenodd"
-                      />
-                    </svg>
+              <!-- Benefits -->
+              <div class="flex-1">
 
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
+                <span class="mb-4 block text-[10px] font-bold uppercase tracking-[0.1em] text-foreground-subtle">
+                  Incluye
+                </span>
+
+                <ul class="space-y-3.5">
+
+                  {tier.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-sm leading-[1.55] text-foreground-muted">
+
+                      <span class="mt-[2px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary/25 bg-primary/[0.06]">
+                        <svg
+                          viewBox="0 0 20 20"
+                          fill="none"
+                          class="h-3 w-3 text-primary"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M4.5 10L8 13.5L15.5 6"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </span>
+
+                      <span>{feature}</span>
+
+                    </li>
+                  ))}
+
+                </ul>
+              </div>
+
+              <!-- CTA -->
+              <div class="mt-8 pt-2">
+
+                <a
+                  href={getWhatsAppLink(tier.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class:list={[
+                    'flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold text-white transition-all duration-200',
+                    'hover:-translate-y-0.5 active:scale-[0.98]',
+                    isGold
+                      ? 'bg-yellow-600 shadow-[0_10px_30px_rgba(202,138,4,0.22)] hover:bg-yellow-500'
+                      : 'bg-primary shadow-[0_10px_30px_rgba(224,30,43,0.20)] hover:bg-primary-dark',
+                  ]}
+                >
+                  Consultar por {tier.name}
+
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    class="h-4 w-4"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 10H16M11 5L16 10L11 15"
+                      stroke="currentColor"
+                      stroke-width="1.7"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </a>
+
+              </div>
+
             </div>
-
-            <a
-              href={getWhatsAppLink(tier.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              class:list={[
-                'block w-full rounded-full px-5 py-3.5 text-center text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]',
-                isGold
-                  ? 'bg-yellow-600 shadow-[0_8px_24px_rgba(202,138,4,0.25)] hover:bg-yellow-700'
-                  : 'bg-primary shadow-[0_8px_24px_rgba(224,30,43,0.25)] hover:bg-primary-dark',
-              ]}
-            >
-              Elegir {tier.name}
-            </a>
           </article>
         );
       })}
+
     </div>
+
+    <!-- Bottom note -->
+    <div class="mx-auto mt-8 max-w-[760px] text-center">
+      <p class="text-xs leading-relaxed text-foreground-subtle">
+        Los niveles representan propuestas de colaboración. Podemos adaptar
+        la propuesta y sus beneficios según las necesidades de cada marca.
+      </p>
+    </div>
+
   </div>
 </section>
+

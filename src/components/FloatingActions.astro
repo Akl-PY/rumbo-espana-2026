@@ -1,0 +1,739 @@
+---
+import floatingData from '../data/floating-actions.json';
+
+const actions = floatingData.actions ?? [];
+
+const sizes = {
+  small: {
+    button: 'min-h-10 min-w-10 px-3',
+    icon: 'h-4 w-4',
+    text: 'text-xs',
+  },
+
+  medium: {
+    button: 'min-h-12 min-w-12 px-3.5',
+    icon: 'h-5 w-5',
+    text: 'text-sm',
+  },
+
+  large: {
+    button: 'min-h-14 min-w-14 px-4',
+    icon: 'h-6 w-6',
+    text: 'text-sm',
+  },
+} as const;
+
+const sanitizeSvg = (svg: string) => {
+  if (!svg?.trim()) return '';
+
+  return svg.replace(/<script[\s\S]*?<\/script>/gi, '').trim();
+};
+---
+
+{floatingData.enabled && actions.length > 0 && (
+  <div
+    id="floating-actions"
+    class="pointer-events-none fixed inset-0 z-[1000]"
+    data-side={floatingData.side}
+    data-edge-offset={floatingData.edgeOffset}
+    data-stack-gap={floatingData.stackGap}
+    aria-label="Acciones rápidas"
+  >
+    {actions.map((action) => {
+      const size = sizes[action.size as keyof typeof sizes] ?? sizes.medium;
+
+      return (
+        <div
+          class="floating-action pointer-events-none absolute"
+          data-action-id={action.id}
+          data-type={action.type}
+          data-target={action.target}
+          data-display={action.display}
+          data-position={action.position}
+          data-offset={action.offset ?? 0}
+          data-mobile={action.mobile}
+          data-desktop={action.desktop}
+          data-new-tab={action.newTab}
+        >
+          <button
+            type="button"
+            class:list={[
+              'floating-action-button pointer-events-auto group flex items-center justify-center gap-2 overflow-hidden rounded-full border border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-xl',
+              'transition-all duration-300 ease-out',
+              'hover:-translate-y-0.5 hover:shadow-[0_12px_35px_rgba(0,0,0,0.32)]',
+              'active:scale-95',
+              size.button,
+              size.text,
+            ]}
+            style={`--action-bg:${action.background};--action-fg:${action.foreground};--action-hover:${action.hoverBackground};`}
+            aria-label={action.label}
+            title={action.label}
+          >
+            <span
+              class:list={[
+                'floating-action-icon flex shrink-0 items-center justify-center',
+                size.icon,
+              ]}
+            >
+              {action.svg ? (
+                <span
+                  class="floating-action-svg flex h-full w-full items-center justify-center"
+                  set:html={sanitizeSvg(action.svg)}
+                />
+              ) : (
+                <span
+                  class="floating-action-emoji select-none leading-none"
+                  aria-hidden="true"
+                >
+                  {action.emoji || '•'}
+                </span>
+              )}
+            </span>
+
+            {action.showLabel && (
+              <span class="floating-action-label whitespace-nowrap font-semibold">
+                {action.label}
+              </span>
+            )}
+          </button>
+        </div>
+      );
+    })}
+  </div>
+)}
+
+<style>
+  .floating-action {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      top 300ms ease,
+      bottom 300ms ease,
+      left 300ms ease,
+      right 300ms ease,
+      opacity 200ms ease,
+      transform 250ms ease,
+      visibility 200ms ease;
+  }
+
+  .floating-action-button {
+    pointer-events: auto;
+    background: var(--action-bg);
+    color: var(--action-fg);
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .floating-action-button:hover {
+    background: var(--action-hover);
+  }
+
+  .floating-action-button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  .floating-action-svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .floating-action-svg :global(svg) {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .floating-action-svg :global(path),
+  .floating-action-svg :global(circle),
+  .floating-action-svg :global(rect),
+  .floating-action-svg :global(line),
+  .floating-action-svg :global(polyline),
+  .floating-action-svg :global(polygon) {
+    vector-effect: non-scaling-stroke;
+  }
+
+  .floating-action-emoji {
+    font-size: 1.15em;
+  }
+
+  .floating-action.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  @media (max-width: 767px) {
+    .floating-action[data-mobile='false'] {
+      display: none !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .floating-action[data-desktop='false'] {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  const container = document.querySelector<HTMLElement>('#floating-actions');
+
+  if (container) {
+    const actionElements = Array.from(
+      container.querySelectorAll<HTMLElement>('.floating-action'),
+    );
+
+    const edgeOffset = Number(container.dataset.edgeOffset ?? 20);
+
+    const stackGap = Number(container.dataset.stackGap ?? 10);
+
+    const side = container.dataset.side === 'left' ? 'left' : 'right';
+
+    const isMobile = () => window.matchMedia('(max-width: 767px)').matches;
+
+    const isElementEnabled = (element: HTMLElement) => {
+      const mobile = element.dataset.mobile !== 'false';
+      const desktop = element.dataset.desktop !== 'false';
+
+      return isMobile() ? mobile : desktop;
+    };
+
+    const setHorizontalPosition = (element: HTMLElement) => {
+      element.style.left = '';
+      element.style.right = '';
+
+      if (side === 'left') {
+        element.style.left = `${edgeOffset}px`;
+      } else {
+        element.style.right = `${edgeOffset}px`;
+      }
+    };
+
+    const getTarget = (element: HTMLElement): Element | null => {
+      const selector = element.dataset.target;
+
+      if (!selector) return null;
+
+      try {
+        return document.querySelector(selector);
+      } catch {
+        return null;
+      }
+    };
+
+    const updateSmartAction = (element: HTMLElement) => {
+      const target = getTarget(element);
+
+      const button = element.querySelector<HTMLButtonElement>(
+        '.floating-action-button',
+      );
+
+      const icon = element.querySelector<HTMLElement>('.floating-action-icon');
+
+      if (!target || !button || !icon) {
+        element.classList.add('is-hidden');
+        return;
+      }
+
+      const rect = target.getBoundingClientRect();
+
+      const visible = rect.bottom > 0 && rect.top < window.innerHeight;
+
+      /*
+       * La sección está actualmente dentro
+       * del viewport.
+       */
+      if (visible) {
+        element.classList.add('is-hidden');
+        return;
+      }
+
+      const isAbove = rect.bottom <= 0;
+      const isBelow = rect.top >= window.innerHeight;
+
+      const display = element.dataset.display ?? 'smart';
+
+      /*
+       * Solo arriba.
+       */
+      if (display === 'top' && !isAbove) {
+        element.classList.add('is-hidden');
+        return;
+      }
+
+      /*
+       * Solo abajo.
+       */
+      if (display === 'bottom' && !isBelow) {
+        element.classList.add('is-hidden');
+        return;
+      }
+
+      element.classList.remove('is-hidden');
+
+      /*
+       * Dirección hacia arriba.
+       */
+      if (isAbove) {
+        icon.innerHTML = `
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 19V5" />
+            <path d="M6 11l6-6 6 6" />
+          </svg>
+        `;
+
+        button.setAttribute('aria-label', 'Ir hacia la sección objetivo');
+      }
+
+      /*
+       * Dirección hacia abajo.
+       */
+      if (isBelow) {
+        icon.innerHTML = `
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14" />
+            <path d="M18 13l-6 6-6-6" />
+          </svg>
+        `;
+
+        button.setAttribute('aria-label', 'Ir hacia la sección objetivo');
+      }
+    };
+
+    const updateVisibility = () => {
+      actionElements.forEach((element) => {
+        if (!isElementEnabled(element)) {
+          element.classList.add('is-hidden');
+          return;
+        }
+
+        setHorizontalPosition(element);
+
+        if (element.dataset.type !== 'section') {
+          element.classList.remove('is-hidden');
+          return;
+        }
+
+        updateSmartAction(element);
+      });
+    };
+
+    const getVisibleActions = () => {
+      return actionElements.filter((element) => {
+        if (!isElementEnabled(element)) {
+          return false;
+        }
+
+        return !element.classList.contains('is-hidden');
+      });
+    };
+
+    const getElementHeight = (element: HTMLElement) => {
+      return element.getBoundingClientRect().height;
+    };
+
+    /**
+     * Comprueba si dos rangos verticales
+     * se superponen.
+     */
+    const rangesOverlap = (
+      topA: number,
+      bottomA: number,
+      topB: number,
+      bottomB: number,
+    ) => {
+      return topA < bottomB + stackGap && bottomA > topB - stackGap;
+    };
+
+    /**
+     * Encuentra una posición libre.
+     *
+     * Se intenta colocar desde abajo hacia arriba
+     * porque es una posición natural para las acciones
+     * flotantes.
+     */
+    const findFreePosition = (
+      height: number,
+      occupied: Array<{
+        top: number;
+        bottom: number;
+      }>,
+      viewportHeight: number,
+    ) => {
+      const minTop = edgeOffset;
+      const maxBottom = viewportHeight - edgeOffset;
+
+      /*
+       * Primer candidato:
+       * pegado abajo.
+       */
+      let candidateBottom = maxBottom;
+      let candidateTop = candidateBottom - height;
+
+      /*
+       * Recorremos hacia arriba buscando hueco.
+       */
+      while (candidateTop >= minTop) {
+        const candidateBottomCurrent = candidateBottom;
+
+        const overlaps = occupied.some((range) =>
+          rangesOverlap(
+            candidateTop,
+            candidateBottomCurrent,
+            range.top,
+            range.bottom,
+          ),
+        );
+
+        if (!overlaps) {
+          return candidateTop;
+        }
+
+        /*
+         * Saltamos por encima del rango
+         * que está bloqueando.
+         */
+        const blockingRange = occupied
+          .filter((range) =>
+            rangesOverlap(
+              candidateTop,
+              candidateBottomCurrent,
+              range.top,
+              range.bottom,
+            ),
+          )
+          .sort((a, b) => b.top - a.top)[0];
+
+        if (!blockingRange) {
+          break;
+        }
+
+        candidateBottom = blockingRange.top - stackGap;
+
+        candidateTop = candidateBottom - height;
+      }
+
+      /*
+       * Si no hay hueco hacia arriba,
+       * intentamos desde arriba hacia abajo.
+       */
+      let fallbackTop = minTop;
+
+      while (fallbackTop + height <= maxBottom) {
+        const fallbackBottom = fallbackTop + height;
+
+        const overlaps = occupied.some((range) =>
+          rangesOverlap(fallbackTop, fallbackBottom, range.top, range.bottom),
+        );
+
+        if (!overlaps) {
+          return fallbackTop;
+        }
+
+        const blockingRange = occupied
+          .filter((range) =>
+            rangesOverlap(fallbackTop, fallbackBottom, range.top, range.bottom),
+          )
+          .sort((a, b) => a.bottom - b.bottom)[0];
+
+        if (!blockingRange) {
+          break;
+        }
+
+        fallbackTop = blockingRange.bottom + stackGap;
+      }
+
+      /*
+       * Si literalmente no entra más,
+       * usamos el mínimo posible.
+       */
+      return Math.max(minTop, Math.min(candidateTop, maxBottom - height));
+    };
+
+    /**
+     * Calcula toda la columna flotante.
+     *
+     * Prioridad:
+     *
+     * 1. top explícitos
+     * 2. bottom explícitos
+     * 3. auto en el orden del singleton
+     *
+     * Las acciones automáticas jamás intentan
+     * ocupar el espacio reservado por las explícitas.
+     */
+    const calculatePositions = () => {
+      const visible = getVisibleActions();
+
+      const explicitTop = visible.filter(
+        (element) => element.dataset.position === 'top',
+      );
+
+      const explicitBottom = visible.filter(
+        (element) => element.dataset.position === 'bottom',
+      );
+
+      const automatic = visible.filter(
+        (element) =>
+          !['top', 'bottom'].includes(element.dataset.position ?? 'auto'),
+      );
+
+      const occupied: Array<{
+        top: number;
+        bottom: number;
+      }> = [];
+
+      const viewportHeight = window.innerHeight;
+
+      /*
+       * TOP
+       */
+      let topCursor = edgeOffset;
+
+      explicitTop.forEach((element) => {
+        const offset = Number(element.dataset.offset ?? 0);
+
+        const height = getElementHeight(element);
+
+        const top = topCursor + offset;
+
+        element.style.top = `${top}px`;
+
+        element.style.bottom = '';
+
+        occupied.push({
+          top,
+          bottom: top + height,
+        });
+
+        topCursor = top + height + stackGap;
+      });
+
+      /*
+       * BOTTOM
+       */
+      let bottomCursor = edgeOffset;
+
+      explicitBottom
+        .slice()
+        .reverse()
+        .forEach((element) => {
+          const offset = Number(element.dataset.offset ?? 0);
+
+          const height = getElementHeight(element);
+
+          const bottom = bottomCursor + offset;
+
+          element.style.bottom = `${bottom}px`;
+
+          element.style.top = '';
+
+          const top = viewportHeight - bottom - height;
+
+          occupied.push({
+            top,
+            bottom: top + height,
+          });
+
+          bottomCursor = bottom + height + stackGap;
+        });
+
+      /*
+       * AUTO
+       */
+      automatic.forEach((element) => {
+        const offset = Number(element.dataset.offset ?? 0);
+
+        const height = getElementHeight(element);
+
+        const top = findFreePosition(height, occupied, viewportHeight) + offset;
+
+        const clampedTop = Math.max(
+          edgeOffset,
+          Math.min(top, viewportHeight - edgeOffset - height),
+        );
+
+        element.style.top = `${clampedTop}px`;
+
+        element.style.bottom = '';
+
+        occupied.push({
+          top: clampedTop,
+          bottom: clampedTop + height,
+        });
+      });
+    };
+
+    const navigateToTarget = (element: HTMLElement) => {
+      const target = getTarget(element);
+
+      if (!target) return;
+
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    };
+
+    const openWhatsApp = () => {
+      const message = encodeURIComponent(
+        'Hola! Vi la campaña Rumbo a España 2026 y quiero consultar sobre la campaña.',
+      );
+
+      window.open(
+        `https://wa.me/?text=${message}`,
+        '_blank',
+        'noopener,noreferrer',
+      );
+    };
+
+    /*
+     * Click handlers.
+     */
+    actionElements.forEach((element) => {
+      const button = element.querySelector<HTMLButtonElement>(
+        '.floating-action-button',
+      );
+
+      if (!button) return;
+
+      button.addEventListener('click', () => {
+        const type = element.dataset.type;
+
+        const target = element.dataset.target;
+
+        /*
+         * Navegación a sección.
+         */
+        if (type === 'section') {
+          navigateToTarget(element);
+          return;
+        }
+
+        /*
+         * WhatsApp.
+         */
+        if (type === 'whatsapp') {
+          openWhatsApp();
+          return;
+        }
+
+        if (!target) return;
+
+        /*
+         * Anchor interno.
+         */
+        if (target.startsWith('#')) {
+          const targetElement = document.querySelector(target);
+
+          targetElement?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+
+          return;
+        }
+
+        /*
+         * URL externa.
+         */
+        const newTab = element.dataset.newTab === 'true';
+
+        if (newTab) {
+          window.open(target, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = target;
+        }
+      });
+    });
+
+    let raf = 0;
+
+    const update = () => {
+      if (raf) return;
+
+      raf = requestAnimationFrame(() => {
+        /*
+         * Primero determinamos qué botones
+         * están visibles.
+         */
+        updateVisibility();
+
+        /*
+         * Después calculamos su posición.
+         */
+        calculatePositions();
+
+        raf = 0;
+      });
+    };
+
+    /*
+     * El tamaño de un botón puede cambiar:
+     *
+     * - responsive
+     * - showLabel
+     * - fuentes
+     * - contenido
+     */
+    const resizeObserver = new ResizeObserver(() => {
+      update();
+    });
+
+    actionElements.forEach((element) => {
+      resizeObserver.observe(element);
+    });
+
+    window.addEventListener('scroll', update, {
+      passive: true,
+    });
+
+    window.addEventListener('resize', update, {
+      passive: true,
+    });
+
+    /*
+     * Si alguna sección cambia de tamaño,
+     * recalculamos.
+     */
+    const mutationObserver = new MutationObserver(() => {
+      update();
+    });
+
+    mutationObserver.observe(document.body, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ['class', 'style'],
+    });
+
+    /*
+     * Esperamos a que las fuentes e imágenes
+     * terminen de cargar.
+     */
+    window.addEventListener('load', update);
+
+    /*
+     * Primera ejecución.
+     */
+    update();
+  }
+</script>

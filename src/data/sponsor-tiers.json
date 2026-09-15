@@ -1,0 +1,48 @@
+
+{
+  "tiers": [
+    {
+      "id": "bronce",
+      "name": "Bronce",
+      "price": 50000,
+      "badge": "🥉",
+      "shortDescription": "Una primera forma de acompañar nuestro viaje.",
+      "features": [
+        "Logo en la web oficial de la campaña",
+        "Presencia en la sección de sponsors",
+        "Historia de agradecimiento en redes sociales",
+        "Mención en publicaciones oficiales"
+      ]
+    },
+    {
+      "id": "plata",
+      "name": "Plata",
+      "price": 100000,
+      "badge": "🥈",
+      "shortDescription": "Mayor presencia para marcas que quieren acompañarnos de cerca.",
+      "features": [
+        "Todo lo incluido en Bronce",
+        "Logo con mayor tamaño y visibilidad prioritaria",
+        "Publicación dedicada en nuestro feed",
+        "Historias adicionales durante la preparación",
+        "Mayor exposición en la plataforma web"
+      ]
+    },
+    {
+      "id": "oro",
+      "name": "Oro",
+      "price": 150000,
+      "badge": "🥇",
+      "shortDescription": "La máxima visibilidad para acompañar este desafío.",
+      "features": [
+        "Todo lo incluido en Plata y Bronce",
+        "Sponsor principal destacado en la cabecera de marcas",
+        "Publicación exclusiva y fija en redes sociales",
+        "Presencia de marca durante el viaje en España",
+        "Contenido y cobertura audiovisual especial con tu logo",
+        "Agradecimiento institucional al finalizar el Mundial"
+      ]
+    }
+  ]
+}
+
