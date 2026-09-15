@@ -4,6 +4,7 @@
   "description": "Entrenamientos, competencias, viajes y cada momento del camino rumbo a Benidorm.",
   "items": [
     {
+      "image": "/images/gallery/items/0/image.jpeg",
       "title": "Chile 2025",
       "description": "Campeonato centro-sudamericano Santiago 2025.",
       "featured": false
