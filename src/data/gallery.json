@@ -1,0 +1,67 @@
+{
+  "eyebrow": "Momentos",
+  "title": "Galería",
+  "description": "Entrenamientos, competencias, viajes y cada momento del camino rumbo a Benidorm.",
+  "items": [
+    {
+      "image": "/images/gallery/gallery-1.jpg",
+      "title": "Preparación",
+      "description": "Entrenando para el próximo desafío.",
+      "featured": true
+    },
+    {
+      "image": "/images/gallery/gallery-2.jpg",
+      "title": "Competencia",
+      "description": "Representando a nuestra escuela.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/gallery-3.jpg",
+      "title": "Entrenamiento",
+      "description": "Trabajo y constancia detrás de cada resultado.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/gallery-4.jpg",
+      "title": "Equipo",
+      "description": "Juntos dentro y fuera del tatami.",
+      "featured": true
+    },
+    {
+      "image": "/images/gallery/gallery-5.jpg",
+      "title": "Viaje",
+      "description": "Kilómetros recorridos por este objetivo.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/gallery-6.jpg",
+      "title": "Competencia internacional",
+      "description": "Una experiencia más que forma parte de nuestra historia.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/gallery-7.jpg",
+      "title": "Preparación final",
+      "description": "Cada entrenamiento nos acerca un poco más.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/gallery-8.jpg",
+      "title": "Nuestra delegación",
+      "description": "Cinco personas, un mismo objetivo.",
+      "featured": true
+    },
+    {
+      "image": "/images/gallery/gallery-9.jpg",
+      "title": "Rumbo a España",
+      "description": "Todo lo que hacemos apunta a Benidorm.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/gallery-10.jpg",
+      "title": "Momentos compartidos",
+      "description": "Una historia construida entre todos.",
+      "featured": false
+    }
+  ]
+}

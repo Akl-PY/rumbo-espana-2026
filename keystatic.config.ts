@@ -6,6 +6,9 @@ import { transparencySingleton } from './src/keystatic/singletons/transparency';
 import { sponsorTiers } from './src/keystatic/singletons/sponsorsTiers';
 import { sponsors } from './src/keystatic/singletons/sponsors';
 import { howToHelp } from './src/keystatic/singletons/howToHelp';
+import { projects } from './src/keystatic/singletons/projects';
+import { team } from './src/keystatic/singletons/team';
+import { gallery } from './src/keystatic/singletons/gallery';
 
 const isProd = import.meta.env.PROD;
 
@@ -28,5 +31,8 @@ export default config({
     sponsorTiers,
     sponsors,
     howToHelp,
+    gallery,
+    projects,
+    team,
   },
 });

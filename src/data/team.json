@@ -1,0 +1,142 @@
+{
+  "eyebrow": "Quiénes somos",
+  "title": "Nuestra delegación",
+  "description": "Cinco personas, un mismo objetivo: representar a Argentina, Córdoba y Alta Gracia en la Copa del Mundo de Benidorm.",
+  "members": [
+    {
+      "id": "daniel-galetto",
+      "name": "Daniel Galetto",
+      "role": "Competidor",
+      "type": "competidor",
+      "image": "/images/team/members/0/image.jpeg",
+      "age": 20,
+      "competingSince": 2015,
+      "bio": "Daniel forma parte de esta historia desde los primeros años de competencia internacional y continúa preparándose para afrontar uno de los mayores desafíos de su carrera en Benidorm.",
+      "highlights": [
+        "Representante de Alta Gracia",
+        "Integrante de la delegación argentina",
+        "Experiencia en competencias nacionales e internacionales"
+      ],
+      "podiums": [
+        {
+          "year": 2015,
+          "competition": "Panamericano en Brasil",
+          "position": "1"
+        },
+        {
+          "year": 2018,
+          "competition": "Competencia internacional",
+          "position": "3"
+        },
+        {
+          "year": 2019,
+          "competition": "Sudamericano en Buenos Aires",
+          "position": "2"
+        },
+        {
+          "year": 2026,
+          "competition": "Competencia internacional en Perú",
+          "position": "3"
+        }
+      ],
+      "social": {}
+    },
+    {
+      "id": "constanza-murua",
+      "name": "Constanza Murúa",
+      "role": "Competidora",
+      "type": "competidor",
+      "image": "/images/team/members/1/image.jpeg",
+      "age": 0,
+      "competingSince": 2019,
+      "bio": "Constanza forma parte de la delegación y ha acompañado el crecimiento competitivo del equipo durante los últimos años, sumando resultados internacionales y experiencia en grandes competencias.",
+      "highlights": [
+        "Representante de Alta Gracia",
+        "Integrante de la delegación argentina",
+        "Múltiples resultados internacionales"
+      ],
+      "podiums": [
+        {
+          "year": 2019,
+          "competition": "Sudamericano en Buenos Aires",
+          "position": "1"
+        },
+        {
+          "year": 2024,
+          "competition": "Copa América",
+          "position": "1"
+        },
+        {
+          "year": 2026,
+          "competition": "Competencia internacional en Perú",
+          "position": "1"
+        }
+      ],
+      "social": {}
+    },
+    {
+      "id": "joaquin-galetto",
+      "name": "Joaquín Galetto",
+      "role": "Competidor",
+      "type": "competidor",
+      "age": 0,
+      "competingSince": 2024,
+      "bio": "Joaquín se sumó al recorrido competitivo de la delegación y viene acumulando experiencia en competencias nacionales e internacionales, con grandes resultados en los últimos años.",
+      "highlights": [
+        "Representante de Alta Gracia",
+        "Integrante de la delegación argentina",
+        "Experiencia en competencias internacionales"
+      ],
+      "podiums": [
+        {
+          "year": 2024,
+          "competition": "Competencia internacional en Paraguay",
+          "position": "2"
+        },
+        {
+          "year": 2025,
+          "competition": "Panamericano en Chile",
+          "position": "3"
+        },
+        {
+          "year": 2026,
+          "competition": "Competencia internacional en Perú",
+          "position": "1"
+        }
+      ],
+      "social": {}
+    },
+    {
+      "id": "daniel-galetto-hernan",
+      "name": "Daniel Galetto Hernan",
+      "role": "Coach",
+      "type": "coach",
+      "age": 0,
+      "competingSince": 0,
+      "bio": "Coach de la delegación y parte del acompañamiento técnico y humano que sostiene nuestro camino competitivo en cada viaje y competencia.",
+      "highlights": [
+        "Coach de la delegación",
+        "Acompañamiento técnico y deportivo",
+        "Experiencia acompañando competencias internacionales"
+      ],
+      "podiums": [],
+      "social": {}
+    },
+    {
+      "id": "fabiana-ledesma",
+      "name": "Fabiana Ledesma",
+      "role": "Coach",
+      "type": "coach",
+      "age": 0,
+      "competingSince": 0,
+      "bio": "Fabiana acompaña a la delegación como coach, formando parte del equipo que prepara, guía y acompaña a nuestros competidores durante cada desafío.",
+      "highlights": [
+        "Coach de la delegación",
+        "Acompañamiento técnico y deportivo",
+        "Parte del equipo desde las primeras competencias internacionales"
+      ],
+      "podiums": [],
+      "social": {}
+    }
+  ]
+}

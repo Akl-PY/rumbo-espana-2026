@@ -2,74 +2,331 @@
 import { ALIAS } from '../data/config';
 ---
 
-<section class="relative border-y border-border bg-[radial-gradient(circle_at_50%_0%,rgba(224,30,43,0.18),transparent_60%),#141414] px-5 py-[88px] text-center min-[860px]:py-[120px]">
-  <div class="mx-auto max-w-[1100px]">
-    <h2 class="mb-3.5 font-display text-[clamp(30px,8vw,48px)] leading-[1.05] tracking-[-0.01em] text-foreground">
-      AYUDANOS A LLEGAR
-    </h2>
+<section
+  id="cta-final"
+  class="relative isolate overflow-hidden border-y border-border bg-[#0b0b0c] px-5 py-[96px] text-center min-[860px]:py-[140px]"
+>
+  <!-- ============================================================
+       FONDO AMBIENTAL
+       ============================================================ -->
 
-    <p class="mx-auto mb-[30px] max-w-[480px] text-base leading-relaxed text-foreground-muted">
-      Cada aporte nos acerca un poco más a Benidorm.
-    </p>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-90"
+    aria-hidden="true"
+  >
+    <!-- Glow central -->
+    <div class="absolute left-1/2 top-0 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-primary/20 blur-[140px]"></div>
 
-    <div class="mb-6 font-display text-[clamp(20px,6vw,28px)] tracking-[0.02em] text-accent">
-      {ALIAS}
+    <!-- Glow inferior -->
+    <div class="absolute left-1/2 bottom-[-180px] h-[420px] w-[600px] -translate-x-1/2 rounded-full bg-[#74ACDF]/[0.07] blur-[130px]"></div>
+
+    <!-- Líneas decorativas -->
+    <div class="absolute left-[-120px] top-[22%] h-px w-[420px] rotate-[12deg] bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+
+    <div class="absolute right-[-120px] top-[28%] h-px w-[420px] -rotate-[12deg] bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+
+    <div class="absolute left-[-150px] bottom-[22%] h-px w-[500px] -rotate-[7deg] bg-gradient-to-r from-transparent via-[#74ACDF]/20 to-transparent"></div>
+
+    <div class="absolute right-[-150px] bottom-[22%] h-px w-[500px] rotate-[7deg] bg-gradient-to-r from-transparent via-[#74ACDF]/20 to-transparent"></div>
+
+    <!-- Grid -->
+    <div
+      class="absolute inset-0 opacity-[0.035]"
+      style="background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px); background-size: 42px 42px;"
+    ></div>
+  </div>
+
+  <!-- ============================================================
+       CONTENIDO
+       ============================================================ -->
+
+  <div class="relative z-10 mx-auto max-w-[900px]">
+    <!-- Eyebrow -->
+    <div class="mb-7 flex justify-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-primary shadow-[0_0_30px_rgba(224,30,43,0.08)]">
+        <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-primary"></span>
+        Último empujón
+      </span>
     </div>
 
-    <button
-      class="rounded-full bg-primary px-7 py-4 text-[15px] font-bold text-white shadow-[0_8px_24px_rgba(224,30,43,0.35)] transition-all duration-200 ease-brand hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_10px_30px_rgba(224,30,43,0.5)] active:scale-[0.97]"
-      type="button"
-      data-alias={ALIAS}
-      aria-label="Copiar alias de donación"
-    >
-      Copiar alias
-    </button>
+    <!-- Heading -->
+    <h2 class="mx-auto max-w-[820px] font-display text-[clamp(42px,9vw,82px)] font-bold uppercase leading-[0.9] tracking-[-0.045em] text-foreground">
+      AYUDANOS
+      <span class="block text-primary">A LLEGAR</span>
+    </h2>
+
+    <!-- Subtitle -->
+    <p class="mx-auto mt-6 max-w-[580px] text-[clamp(15px,2vw,18px)] leading-[1.75] text-foreground-muted">
+      Después de años de entrenamiento, viajes y competencias, estamos a un paso
+      de nuestro próximo gran desafío.
+      <strong class="font-semibold text-foreground">
+        Benidorm nos espera.
+      </strong>
+    </p>
+
+    <!-- ==========================================================
+         MAIN DONATION CARD
+         ========================================================== -->
+
+    <div class="relative mx-auto mt-12 max-w-[680px] overflow-hidden rounded-[28px] border border-white/[0.10] bg-white/[0.025] p-5 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:p-8">
+      <!-- Glow interno -->
+      <div class="pointer-events-none absolute left-1/2 top-[-100px] h-[240px] w-[420px] -translate-x-1/2 rounded-full bg-primary/10 blur-[80px]"></div>
+
+      <div class="relative">
+        <!-- Small title -->
+        <span class="mb-3 block text-[10px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
+          Tu aporte puede llevarnos hasta España
+        </span>
+
+        <!-- Alias -->
+        <div class="mx-auto flex max-w-[520px] items-center justify-between gap-4 rounded-[20px] border border-primary/20 bg-primary/[0.045] px-4 py-4 sm:px-5 sm:py-5">
+          <div class="min-w-0 text-left">
+            <span class="block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+              Alias para donar
+            </span>
+
+            <span class="mt-1 block truncate font-display text-[clamp(24px,6vw,36px)] leading-none tracking-[0.02em] text-accent">
+              {ALIAS}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            data-alias={ALIAS}
+            aria-label="Copiar alias de donación"
+            class="group inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/25 bg-primary text-white shadow-[0_10px_28px_rgba(224,30,43,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_14px_34px_rgba(224,30,43,0.35)] active:scale-95"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              class="h-5 w-5"
+              aria-hidden="true"
+            >
+              <rect
+                x="8"
+                y="8"
+                width="11"
+                height="12"
+                rx="2"
+                stroke="currentColor"
+                stroke-width="1.7"
+              ></rect>
+
+              <path
+                d="M16 8V6C16 4.9 15.1 4 14 4H6C4.9 4 4 4.9 4 6V14C4 15.1 4.9 16 6 16H8"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Copy helper -->
+        <p
+          id="alias-copy-feedback"
+          class="mt-3 h-4 text-[11px] font-semibold text-primary opacity-0 transition-opacity duration-200"
+          aria-live="polite"
+        >
+          Alias copiado correctamente
+        </p>
+
+        <!-- Divider -->
+        <div class="my-7 flex items-center gap-3">
+          <span class="h-px flex-1 bg-border"></span>
+
+          <span class="text-[9px] font-bold uppercase tracking-[0.12em] text-foreground-subtle">
+            Cada aporte cuenta
+          </span>
+
+          <span class="h-px flex-1 bg-border"></span>
+        </div>
+
+        <!-- CTAs -->
+        <div class="grid gap-3 sm:grid-cols-2">
+          <a
+            href="/#donaciones"
+            class="group flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-[14px] font-bold text-white shadow-[0_12px_34px_rgba(224,30,43,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_16px_42px_rgba(224,30,43,0.35)] active:scale-[0.98]"
+          >
+            Quiero ayudar
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 10H16M11 5L16 10L11 15"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+
+          <a
+            href="/#convertite-en-sponsor"
+            class="group flex items-center justify-center gap-2 rounded-full border border-white/[0.12] bg-white/[0.03] px-6 py-4 text-[14px] font-bold text-foreground transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/[0.05] active:scale-[0.98]"
+          >
+            Quiero ser sponsor
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+              class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 10H16M11 5L16 10L11 15"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================
+         BOTTOM STATEMENT
+         ========================================================== -->
+
+    <div class="mx-auto mt-10 max-w-[650px]">
+      <div class="flex items-center justify-center gap-4 text-[11px] uppercase tracking-[0.08em] text-foreground-subtle">
+        <span class="hidden h-px w-10 bg-border sm:block"></span>
+
+        <span>Argentina → España</span>
+
+        <span class="h-1 w-1 rounded-full bg-primary"></span>
+
+        <span>Benidorm 2026</span>
+
+        <span class="hidden h-px w-10 bg-border sm:block"></span>
+      </div>
+
+      <p class="mt-4 text-xs leading-relaxed text-foreground-subtle">
+        Gracias por acompañarnos, por compartir nuestra historia y por ayudarnos
+        a hacer posible este viaje.
+      </p>
+    </div>
   </div>
+
+  <!-- Decorative corners -->
+  <div
+    class="pointer-events-none absolute left-5 top-5 h-8 w-8 border-l border-t border-primary/20"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute right-5 top-5 h-8 w-8 border-r border-t border-primary/20"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute bottom-5 left-5 h-8 w-8 border-b border-l border-primary/20"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="pointer-events-none absolute bottom-5 right-5 h-8 w-8 border-b border-r border-primary/20"
+    aria-hidden="true"
+  ></div>
 </section>
 
 <script>
-  function initFinalCopyButton() {
-    const button =
-      document.querySelector<HTMLButtonElement>('button[data-alias]');
+  function initFinalCTA() {
+    const button = document.querySelector('button[data-alias]');
 
-    if (!button || button.dataset.copyInitialized === 'true') return;
+    const feedback = document.querySelector('#alias-copy-feedback');
+
+    if (!button || button.dataset.copyInitialized === 'true') {
+      return;
+    }
 
     button.dataset.copyInitialized = 'true';
 
-    const originalText = button.textContent || 'Copiar alias';
+    const originalIcon = button.innerHTML;
 
     button.addEventListener('click', async () => {
       const alias = button.getAttribute('data-alias') || '';
 
+      if (!alias) return;
+
+      let copied = false;
+
       try {
         await navigator.clipboard.writeText(alias);
+        copied = true;
       } catch {
-        const input = document.createElement('textarea');
+        try {
+          const textarea = document.createElement('textarea');
 
-        input.value = alias;
-        input.style.position = 'fixed';
-        input.style.opacity = '0';
+          textarea.value = alias;
+          textarea.style.position = 'fixed';
+          textarea.style.left = '-9999px';
+          textarea.style.top = '-9999px';
 
-        document.body.appendChild(input);
-        input.select();
-        document.execCommand('copy');
-        document.body.removeChild(input);
+          document.body.appendChild(textarea);
+
+          textarea.focus();
+          textarea.select();
+
+          copied = document.execCommand('copy');
+
+          document.body.removeChild(textarea);
+        } catch {
+          copied = false;
+        }
       }
 
-      button.textContent = '✓ Alias copiado';
+      if (!copied) return;
+
+      button.innerHTML = `
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          class="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path
+            d="M5 12.5L9.5 17L19 7"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      `;
 
       button.classList.remove('bg-primary', 'hover:bg-primary-dark');
+
       button.classList.add('bg-[#1c8a4b]');
 
+      if (feedback) {
+        feedback.classList.remove('opacity-0');
+
+        feedback.classList.add('opacity-100');
+      }
+
       setTimeout(() => {
-        button.textContent = originalText;
+        button.innerHTML = originalIcon;
 
         button.classList.remove('bg-[#1c8a4b]');
+
         button.classList.add('bg-primary');
+
+        if (feedback) {
+          feedback.classList.remove('opacity-100');
+
+          feedback.classList.add('opacity-0');
+        }
       }, 2200);
     });
   }
 
-  initFinalCopyButton();
-  document.addEventListener('astro:page-load', initFinalCopyButton);
+  initFinalCTA();
+
+  document.addEventListener('astro:page-load', initFinalCTA);
 </script>

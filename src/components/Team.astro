@@ -1,59 +1,782 @@
 ---
-import { TEAM } from '../data/config';
+import teamData from '../data/team.json';
+
+const members = teamData.members ?? [];
+
+const slugify = (value: string) => {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
+const membersWithSlug = members.map((member) => ({
+  ...member,
+  slug: slugify(member.id || member.name),
+}));
 ---
 
-<section id="delegacion" class="relative px-5 py-[88px]">
+<section id="delegacion" class="relative overflow-hidden px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
-    <p class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
-      <span class="h-0.5 w-[22px] bg-primary"></span>
-      Quiénes somos
-    </p>
+    <!-- Header -->
+    <div class="mb-12">
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
+        <span class="h-0.5 w-[22px] bg-primary"></span>
+        {teamData.eyebrow}
+      </span>
 
-    <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
-      Nuestra delegación
-    </h2>
+      <h2 class="mb-3.5 font-display text-[clamp(30px,6vw,46px)] leading-[1.02] tracking-[-0.015em] text-foreground">
+        {teamData.title}
+      </h2>
 
-    <p class="mb-10 max-w-[560px] text-base leading-relaxed text-foreground-muted">
-      Competidores y coaches que representan a Argentina en Benidorm.
-    </p>
+      <p class="max-w-[650px] text-base leading-[1.75] text-foreground-muted">
+        {teamData.description}
+      </p>
+    </div>
 
-    <div class="grid grid-cols-2 gap-4 min-[680px]:grid-cols-3 min-[860px]:grid-cols-5">
-      {TEAM.map((member) => (
-        <article class="group overflow-hidden rounded-brand border border-border bg-card shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
-          <div class="relative aspect-[3/4] overflow-hidden rounded-t-brand bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25">
-            <img
-              src={member.image}
-              alt={member.name}
-              loading="lazy"
-              class="absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-500 ease-brand group-hover:scale-[1.03]"
-              onload="this.classList.add('is-loaded')"
-              onerror="this.remove()"
-            />
+    <!-- Team -->
+    <div class="grid grid-cols-2 gap-4 min-[680px]:grid-cols-3 min-[900px]:grid-cols-5">
+      {membersWithSlug.map((member) => (
+        <button
+          type="button"
+          data-member={member.slug}
+          class="group relative overflow-hidden rounded-[22px] border border-border bg-card text-left shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/35 hover:shadow-card-lg"
+        >
+          <!-- Imagen -->
+          <div class="relative aspect-[3/4] overflow-hidden bg-background-soft">
+            {member.image ? (
+              <img
+                src={member.image}
+                alt={member.name}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
+              />
+            ) : (
+              <div class="absolute inset-0 flex items-center justify-center text-foreground-subtle">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="h-10 w-10"
+                  aria-hidden="true"
+                >
+                  <circle
+                    cx="12"
+                    cy="8"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </div>
+            )}
 
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              class="absolute left-1/2 top-1/2 h-[34px] w-[34px] -translate-x-1/2 -translate-y-1/2 opacity-50"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="8" r="4"></circle>
-              <path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"></path>
-            </svg>
-          </div>
+            <!-- Overlay -->
+            <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent"></div>
 
-          <div class="px-4 pt-3.5 pb-[18px]">
-            <div class="text-[15px] font-extrabold text-foreground">
-              {member.name}
-            </div>
-
-            <div class="mt-[3px] text-[11.5px] font-medium uppercase tracking-[0.08em] text-primary">
+            <!-- Tipo -->
+            <span class="absolute left-3 top-3 rounded-full border border-white/15 bg-black/35 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.08em] text-white backdrop-blur-md">
               {member.role}
+            </span>
+          </div>
+
+          <!-- Info -->
+          <div class="p-4">
+            <h3 class="font-display text-[17px] leading-tight text-foreground">
+              {member.name}
+            </h3>
+
+            <div class="mt-2 flex items-center justify-between gap-2">
+              <span class="text-[10px] font-semibold uppercase tracking-[0.08em] text-primary">
+                Ver ficha
+              </span>
+
+              <span class="flex h-7 w-7 items-center justify-center rounded-full border border-border text-foreground-muted transition group-hover:border-primary/30 group-hover:text-primary">
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  class="h-3.5 w-3.5"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 4L13 10L7 16"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
             </div>
           </div>
-        </article>
+        </button>
       ))}
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     MODAL DE INFORMACIÓN
+     ============================================================ -->
+
+<div
+  id="member-modal"
+  class="fixed inset-0 z-[1100] hidden items-end justify-center bg-black/75 p-4 backdrop-blur-sm sm:items-center"
+  aria-hidden="true"
+>
+  <div
+    id="member-panel"
+    class="max-h-[90vh] w-full max-w-2xl translate-y-6 overflow-y-auto rounded-[28px] border border-border bg-card opacity-0 shadow-2xl transition-all duration-300 sm:translate-y-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="member-modal-title"
+  >
+    <!-- Header / image -->
+    <div class="relative">
+      <div class="h-52 overflow-hidden sm:h-64">
+        <img
+          id="member-modal-image"
+          src=""
+          alt=""
+          class="h-full w-full object-cover"
+        />
+      </div>
+
+      <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-card to-transparent"></div>
+
+      <button
+        type="button"
+        data-close-member
+        aria-label="Cerrar"
+        class="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/35 text-white backdrop-blur-md transition hover:border-white/30"
+      >
+        <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4" aria-hidden="true">
+          <path
+            d="M5 5L15 15M15 5L5 15"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="-mt-10 relative px-6 pb-7 sm:px-8">
+      <!-- Nombre + compartir -->
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <div>
+          <span
+            id="member-modal-role"
+            class="mb-2 inline-flex rounded-full border border-primary/25 bg-primary/[0.06] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.08em] text-primary"
+          ></span>
+
+          <h3
+            id="member-modal-title"
+            class="font-display text-[clamp(28px,6vw,38px)] leading-tight text-foreground"
+          ></h3>
+        </div>
+
+        <button
+          type="button"
+          data-share-member
+          class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition hover:border-primary/40 hover:bg-primary/[0.05] hover:text-primary"
+          aria-label="Compartir ficha"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+            <circle
+              cx="18"
+              cy="5"
+              r="2.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <circle
+              cx="6"
+              cy="12"
+              r="2.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <circle
+              cx="18"
+              cy="19"
+              r="2.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path
+              d="M8.2 10.8L15.8 6.2M8.2 13.2L15.8 17.8"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Stats -->
+      <div id="member-modal-stats" class="mb-6 grid grid-cols-2 gap-3"></div>
+
+      <!-- Bio -->
+      <p
+        id="member-modal-bio"
+        class="mb-6 text-[15px] leading-[1.8] text-foreground-muted"
+      ></p>
+
+      <!-- Highlights -->
+      <div class="mb-6">
+        <span class="mb-3 block text-[10px] font-bold uppercase tracking-[0.1em] text-foreground-subtle">
+          Datos destacados
+        </span>
+
+        <ul id="member-modal-highlights" class="space-y-2.5"></ul>
+      </div>
+
+      <!-- Podiums -->
+      <div id="member-modal-podium-section" class="hidden">
+        <div class="mb-3 flex items-center justify-between">
+          <span class="text-[10px] font-bold uppercase tracking-[0.1em] text-foreground-subtle">
+            Podios y resultados
+          </span>
+
+          <span class="text-[10px] uppercase tracking-[0.08em] text-primary">
+            Competidor
+          </span>
+        </div>
+
+        <div id="member-modal-podiums" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Social -->
+      <div id="member-modal-social" class="mt-6 flex flex-wrap gap-2"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODAL DE COMPARTIR
+     ============================================================ -->
+
+<div
+  id="member-share-modal"
+  class="fixed inset-0 z-[1200] hidden items-end justify-center bg-black/75 p-4 backdrop-blur-sm sm:items-center"
+  aria-hidden="true"
+>
+  <div
+    id="member-share-panel"
+    class="w-full max-w-md translate-y-6 rounded-[28px] border border-border bg-card p-6 opacity-0 shadow-2xl transition-all duration-300 sm:translate-y-0"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="member-share-title"
+  >
+    <div class="mb-6 flex items-start justify-between gap-4">
+      <div>
+        <span class="mb-2 block text-[10px] font-bold uppercase tracking-[0.12em] text-primary">
+          Compartir ficha
+        </span>
+
+        <h3
+          id="member-share-title"
+          class="font-display text-2xl leading-tight text-foreground"
+        >
+          Compartir integrante
+        </h3>
+      </div>
+
+      <button
+        type="button"
+        data-close-member-share
+        aria-label="Cerrar"
+        class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition hover:border-primary/40 hover:text-primary"
+      >
+        <svg viewBox="0 0 20 20" fill="none" class="h-4 w-4" aria-hidden="true">
+          <path
+            d="M5 5L15 15M15 5L5 15"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div class="mb-5 rounded-brand-sm border border-border bg-background-soft/60 p-4">
+      <span class="block text-xs text-foreground-muted">
+        Estás compartiendo
+      </span>
+
+      <strong
+        id="member-share-name"
+        class="mt-1 block font-display text-lg text-foreground"
+      ></strong>
+    </div>
+
+    <div class="mb-5 rounded-brand-sm border border-border bg-white/[0.02] p-4">
+      <p
+        id="member-share-text"
+        class="text-sm leading-relaxed text-foreground-muted"
+      ></p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-3">
+      <button
+        type="button"
+        data-member-share-native
+        class="col-span-2 flex items-center justify-center gap-2 rounded-brand-sm bg-primary px-4 py-3 text-sm font-semibold text-white transition hover:bg-primary-dark"
+      >
+        Compartir
+      </button>
+
+      <a
+        id="member-share-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        WhatsApp
+      </a>
+
+      <a
+        id="member-share-telegram"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        Telegram
+      </a>
+
+      <button
+        type="button"
+        data-copy-member-share
+        class="col-span-2 flex items-center justify-center gap-2 rounded-brand-sm border border-border px-4 py-3 text-sm font-medium text-foreground transition hover:border-primary/40 hover:bg-primary/[0.05]"
+      >
+        Copiar texto y enlace
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ members: membersWithSlug }}>
+  const memberModal = document.querySelector('#member-modal');
+
+  const memberPanel = document.querySelector('#member-panel');
+
+  const memberShareModal = document.querySelector('#member-share-modal');
+
+  const memberSharePanel = document.querySelector('#member-share-panel');
+
+  const image = document.querySelector('#member-modal-image');
+
+  const role = document.querySelector('#member-modal-role');
+
+  const title = document.querySelector('#member-modal-title');
+
+  const stats = document.querySelector('#member-modal-stats');
+
+  const bio = document.querySelector('#member-modal-bio');
+
+  const highlights = document.querySelector('#member-modal-highlights');
+
+  const podiumSection = document.querySelector('#member-modal-podium-section');
+
+  const podiums = document.querySelector('#member-modal-podiums');
+
+  const social = document.querySelector('#member-modal-social');
+
+  const shareName = document.querySelector('#member-share-name');
+
+  const shareText = document.querySelector('#member-share-text');
+
+  const shareWhatsapp = document.querySelector('#member-share-whatsapp');
+
+  const shareTelegram = document.querySelector('#member-share-telegram');
+
+  const shareNative = document.querySelector('[data-member-share-native]');
+
+  const copyButton = document.querySelector('[data-copy-member-share]');
+
+  let currentMember = null;
+  let currentUrl = '';
+  let currentShareText = '';
+
+  const formatPosition = (position) => {
+    if (position === '1') return '1°';
+    if (position === '2') return '2°';
+    if (position === '3') return '3°';
+
+    return '•';
+  };
+
+  const openModal = (modal, panel) => {
+    if (!modal || !panel) return;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+
+    modal.setAttribute('aria-hidden', 'false');
+
+    document.body.classList.add('overflow-hidden');
+
+    requestAnimationFrame(() => {
+      panel.classList.remove('translate-y-6', 'opacity-0');
+    });
+  };
+
+  const closeModal = (modal, panel) => {
+    if (!modal || !panel) return;
+
+    panel.classList.add('translate-y-6', 'opacity-0');
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+
+      modal.setAttribute('aria-hidden', 'true');
+
+      const memberOpen = !memberModal?.classList.contains('hidden');
+
+      const shareOpen = !memberShareModal?.classList.contains('hidden');
+
+      if (!memberOpen && !shareOpen) {
+        document.body.classList.remove('overflow-hidden');
+      }
+    }, 250);
+  };
+
+  const buildMemberUrl = (member) => {
+    const url = new URL(window.location.href);
+
+    url.search = '';
+    url.hash = '';
+
+    url.searchParams.set('member', member.slug);
+
+    return url.toString();
+  };
+
+  const populateModal = (member) => {
+    if (!member) return;
+
+    if (image) {
+      image.src = member.image || '';
+      image.alt = member.name;
+      image.style.display = member.image ? 'block' : 'none';
+    }
+
+    if (role) {
+      role.textContent = member.role;
+    }
+
+    if (title) {
+      title.textContent = member.name;
+    }
+
+    if (stats) {
+      const isCompetitor = member.type === 'competidor';
+
+      stats.innerHTML = isCompetitor
+        ? `
+          <div class="rounded-brand-sm border border-border bg-background-soft/50 p-4">
+            <span class="block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+              Edad
+            </span>
+
+            <span class="mt-1 block font-display text-xl text-foreground">
+              ${member.age > 0 ? `${member.age} años` : 'A confirmar'}
+            </span>
+          </div>
+
+          <div class="rounded-brand-sm border border-border bg-background-soft/50 p-4">
+            <span class="block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+              Compite desde
+            </span>
+
+            <span class="mt-1 block font-display text-xl text-foreground">
+              ${member.competingSince > 0 ? member.competingSince : 'A confirmar'}
+            </span>
+          </div>
+        `
+        : `
+          <div class="col-span-2 rounded-brand-sm border border-border bg-background-soft/50 p-4">
+            <span class="block text-[10px] font-semibold uppercase tracking-[0.1em] text-foreground-subtle">
+              Rol dentro de la delegación
+            </span>
+
+            <span class="mt-1 block font-display text-xl text-foreground">
+              ${member.role}
+            </span>
+          </div>
+        `;
+    }
+
+    if (bio) {
+      bio.textContent = member.bio;
+    }
+
+    if (highlights) {
+      highlights.innerHTML = (member.highlights ?? [])
+        .map(
+          (item) => `
+              <li class="flex items-start gap-2.5 text-sm leading-relaxed text-foreground-muted">
+                <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                <span>${item}</span>
+              </li>
+            `,
+        )
+        .join('');
+    }
+
+    if (podiumSection && podiums) {
+      const isCompetitor = member.type === 'competidor';
+
+      const memberPodiums = member.podiums ?? [];
+
+      if (!isCompetitor || memberPodiums.length === 0) {
+        podiumSection.classList.add('hidden');
+
+        podiums.innerHTML = '';
+      } else {
+        podiumSection.classList.remove('hidden');
+
+        podiums.innerHTML = memberPodiums
+          .map(
+            (podium) => `
+                <div class="flex items-center gap-3 rounded-brand-sm border border-border bg-background-soft/40 p-3">
+                  <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/[0.05] font-display text-sm text-primary">
+                    ${formatPosition(String(podium.position))}
+                  </div>
+
+                  <div class="min-w-0">
+                    <span class="block text-sm font-semibold text-foreground">
+                      ${podium.competition}
+                    </span>
+
+                    <span class="mt-0.5 block text-xs text-foreground-muted">
+                      ${podium.year} · ${formatPosition(String(podium.position))} puesto
+                    </span>
+                  </div>
+                </div>
+              `,
+          )
+          .join('');
+      }
+    }
+
+    if (social) {
+      social.innerHTML = '';
+
+      if (member.social?.instagram) {
+        social.innerHTML += `
+          <a
+            href="${member.social.instagram}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-foreground transition hover:border-primary/35 hover:text-primary"
+          >
+            Instagram
+          </a>
+        `;
+      }
+
+      if (member.social?.facebook) {
+        social.innerHTML += `
+          <a
+            href="${member.social.facebook}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-foreground transition hover:border-primary/35 hover:text-primary"
+          >
+            Facebook
+          </a>
+        `;
+      }
+    }
+  };
+
+  const openMember = (slug) => {
+    const member = members.find((item) => item.slug === slug);
+
+    if (!member) return;
+
+    currentMember = member;
+
+    populateModal(member);
+
+    openModal(memberModal, memberPanel);
+  };
+
+  const openShare = (member) => {
+    if (!member) return;
+
+    currentMember = member;
+    currentUrl = buildMemberUrl(member);
+
+    currentShareText = `Conocé a ${member.name}, ${member.role.toLowerCase()} de nuestra delegación rumbo a la Copa del Mundo de Benidorm 2026.`;
+
+    if (shareName) {
+      shareName.textContent = member.name;
+    }
+
+    if (shareText) {
+      shareText.textContent = currentShareText;
+    }
+
+    if (shareWhatsapp) {
+      shareWhatsapp.setAttribute(
+        'href',
+        `https://wa.me/?text=${encodeURIComponent(
+          `${currentShareText}\n${currentUrl}`,
+        )}`,
+      );
+    }
+
+    if (shareTelegram) {
+      shareTelegram.setAttribute(
+        'href',
+        `https://t.me/share/url?url=${encodeURIComponent(
+          currentUrl,
+        )}&text=${encodeURIComponent(currentShareText)}`,
+      );
+    }
+
+    openModal(memberShareModal, memberSharePanel);
+  };
+
+  document.querySelectorAll('[data-member]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const slug = button.dataset.member;
+
+      if (slug) {
+        openMember(slug);
+      }
+    });
+  });
+
+  document
+    .querySelector('[data-share-member]')
+    ?.addEventListener('click', () => {
+      if (currentMember) {
+        openShare(currentMember);
+      }
+    });
+
+  document
+    .querySelector('[data-close-member]')
+    ?.addEventListener('click', () => {
+      closeModal(memberModal, memberPanel);
+    });
+
+  document
+    .querySelector('[data-close-member-share]')
+    ?.addEventListener('click', () => {
+      closeModal(memberShareModal, memberSharePanel);
+    });
+
+  memberModal?.addEventListener('click', (event) => {
+    if (event.target === memberModal) {
+      closeModal(memberModal, memberPanel);
+    }
+  });
+
+  memberShareModal?.addEventListener('click', (event) => {
+    if (event.target === memberShareModal) {
+      closeModal(memberShareModal, memberSharePanel);
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') {
+      return;
+    }
+
+    if (!memberModal?.classList.contains('hidden')) {
+      closeModal(memberModal, memberPanel);
+    }
+
+    if (!memberShareModal?.classList.contains('hidden')) {
+      closeModal(memberShareModal, memberSharePanel);
+    }
+  });
+
+  shareNative?.addEventListener('click', async () => {
+    if (!currentMember || !currentUrl) {
+      return;
+    }
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `${currentMember.name} · Rumbo a España 2026`,
+          text: currentShareText,
+          url: currentUrl,
+        });
+      } catch {
+        // Usuario cerró el selector nativo.
+      }
+
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(`${currentShareText}\n${currentUrl}`);
+
+      if (shareNative) {
+        shareNative.textContent = '✓ Copiado';
+
+        setTimeout(() => {
+          shareNative.textContent = 'Compartir';
+        }, 1800);
+      }
+    } catch {
+      // Clipboard no disponible.
+    }
+  });
+
+  copyButton?.addEventListener('click', async () => {
+    if (!currentUrl) return;
+
+    try {
+      await navigator.clipboard.writeText(`${currentShareText}\n${currentUrl}`);
+
+      copyButton.textContent = '✓ Texto y enlace copiados';
+
+      setTimeout(() => {
+        copyButton.textContent = 'Copiar texto y enlace';
+      }, 1800);
+    } catch {
+      copyButton.textContent = 'No se pudo copiar';
+
+      setTimeout(() => {
+        copyButton.textContent = 'Copiar texto y enlace';
+      }, 1800);
+    }
+  });
+
+  /*
+   * Ficha directa:
+   *
+   * ?member=daniel-galetto
+   */
+  const memberFromUrl = new URLSearchParams(window.location.search).get(
+    'member',
+  );
+
+  if (memberFromUrl) {
+    requestAnimationFrame(() => {
+      openMember(memberFromUrl);
+    });
+  }
+</script>

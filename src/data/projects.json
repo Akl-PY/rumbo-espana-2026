@@ -1,0 +1,97 @@
+{
+  "eyebrow": "Proyectos y servicios",
+  "title": "También podés colaborar con nuestros proyectos",
+  "description": "Además de donar, podés ayudarnos eligiendo alguno de nuestros proyectos, servicios o productos. De esta manera recibís algo a cambio y, al mismo tiempo, contribuís directamente a nuestro viaje.",
+  "items": [
+    {
+      "id": "taekwondo",
+      "name": "Taekwondo",
+      "tagline": "Entrenamiento, clases e indumentaria",
+      "description": "Nuestra escuela de Taekwondo es parte fundamental de este camino. Podés colaborar comenzando a entrenar, sumándote a nuestras clases o adquiriendo indumentaria y equipamiento.",
+      "badge": "🥋",
+      "collaborations": [
+        "Comenzar clases de Taekwondo",
+        "Clases y entrenamiento personalizado",
+        "Comprar indumentaria de la escuela",
+        "Adquirir equipamiento deportivo",
+        "Consultar por propuestas para instituciones"
+      ],
+      "ctaText": "Conocer Taekwondo",
+      "url": "https://example.com/taekwondo",
+      "whatsappMessage": "Hola! Vi la campaña Rumbo a España 2026 y quiero consultar sobre las clases, indumentaria o equipamiento de Taekwondo.",
+      "shareText": "También podés colaborar con nuestra delegación conociendo nuestro proyecto de Taekwondo, comenzando clases o adquiriendo indumentaria y equipamiento."
+    },
+    {
+      "id": "scalinky",
+      "name": "Scalinky",
+      "tagline": "Tecnología y desarrollo digital",
+      "description": "Scalinky es nuestro proyecto tecnológico. Podés colaborar contratando desarrollo web, sistemas a medida, soluciones digitales o servicios tecnológicos para tu emprendimiento.",
+      "badge": "💻",
+      "collaborations": [
+        "Desarrollo de sitios web",
+        "Aplicaciones y sistemas a medida",
+        "Soluciones digitales para emprendimientos",
+        "Mantenimiento y mejoras de proyectos",
+        "Asesoramiento tecnológico"
+      ],
+      "ctaText": "Conocer Scalinky",
+      "url": "https://scalinky.online",
+      "whatsappMessage": "Hola! Vi la campaña Rumbo a España 2026 y quiero consultar por los servicios de Scalinky.",
+      "shareText": "Podés apoyar nuestra campaña contratando servicios de desarrollo y tecnología a través de Scalinky."
+    },
+    {
+      "id": "aim-marketing",
+      "name": "AIM Marketing",
+      "tagline": "Marketing, redes y presencia digital",
+      "description": "Podés colaborar contratando servicios de marketing, redes sociales, desarrollo de presencia digital y soluciones para mejorar la comunicación de tu emprendimiento o negocio.",
+      "badge": "📈",
+      "collaborations": [
+        "Gestión de redes sociales",
+        "Estrategias de marketing digital",
+        "Presencia y comunicación online",
+        "Contenido para marcas y emprendimientos",
+        "Desarrollo de identidad y posicionamiento digital"
+      ],
+      "ctaText": "Conocer AIM Marketing",
+      "url": "https://example.com/aim-marketing",
+      "whatsappMessage": "Hola! Vi la campaña Rumbo a España 2026 y quiero consultar por los servicios de AIM Marketing.",
+      "shareText": "Podés ayudar a nuestra delegación contratando servicios de marketing y presencia digital a través de AIM Marketing."
+    },
+    {
+      "id": "hes1994",
+      "name": "HES1994",
+      "tagline": "Stickers y productos personalizados",
+      "description": "HES1994 nos permite colaborar a través de productos físicos. Podés encargar stickers, productos personalizados y otros artículos mientras ayudás directamente a financiar nuestro viaje.",
+      "badge": "🏷️",
+      "collaborations": [
+        "Comprar stickers",
+        "Encargar diseños personalizados",
+        "Comprar productos de la marca",
+        "Pedidos para emprendimientos",
+        "Productos personalizados para eventos"
+      ],
+      "ctaText": "Conocer HES1994",
+      "url": "https://example.com/hes1994",
+      "whatsappMessage": "Hola! Vi la campaña Rumbo a España 2026 y quiero consultar por los stickers o productos de HES1994.",
+      "shareText": "También podés apoyar nuestra campaña comprando stickers y productos personalizados de HES1994."
+    },
+    {
+      "id": "servicios-profesionales",
+      "name": "Servicios profesionales",
+      "tagline": "Trabajo, conocimiento y colaboración",
+      "description": "También podés apoyarnos contratando alguno de nuestros servicios profesionales o recomendándonos a personas, comercios e instituciones que puedan necesitarlos.",
+      "badge": "🤝",
+      "collaborations": [
+        "Contratar servicios profesionales",
+        "Solicitar trabajos personalizados",
+        "Propuestas para comercios",
+        "Propuestas para instituciones",
+        "Recomendarnos con potenciales clientes"
+      ],
+      "ctaText": "Consultar servicios",
+      "url": "https://wa.me/",
+      "whatsappMessage": "Hola! Vi la campaña Rumbo a España 2026 y quiero consultar por los servicios profesionales disponibles.",
+      "shareText": "Podés apoyar nuestra campaña contratando o recomendando nuestros servicios profesionales."
+    }
+  ]
+}
