@@ -4,23 +4,23 @@
   "loadMoreAmount": 5,
   "items": [
     {
-      "id": "juan-perez-40000",
-      "name": "Juan Pérez",
-      "amount": 40000,
-      "message": "¡Éxitos en Benidorm!",
+      "id": "juan-ledesma",
+      "name": "Juan Ledesma",
+      "amount": 50000,
+      "message": "Mucha suerte!",
       "show": true
     },
     {
-      "id": "maria-gonzalez-25000",
-      "name": "María González",
-      "amount": 25000,
-      "message": "A romperla en España 🇦🇷",
+      "id": "gonza",
+      "name": "Gonzalo Rocca",
+      "amount": 6000,
       "show": true
     },
     {
-      "id": "roberto-15000",
-      "name": "Roberto",
-      "amount": 15000,
+      "id": "Euge-2000",
+      "name": "Maria Eugenia Chiabo",
+      "amount": 2000,
+      "message": "Con ❤️para esos campeones",
       "show": true
     }
   ]
