@@ -35,6 +35,72 @@
       "name": "Torres Victoria Edid",
       "amount": 1000,
       "show": true
+    },
+    {
+      "id": "alejandra-gigena",
+      "name": "Alejandra Gigena",
+      "amount": 10000,
+      "message": "ÉXITOS !! ❤️",
+      "show": true
+    },
+    {
+      "id": "gladis-graciela-moreschi-10000",
+      "name": "Gladis Graciela Moreschi",
+      "amount": 10000,
+      "show": true
+    },
+    {
+      "id": "susana-troncoso",
+      "name": "Susana Troncoso",
+      "amount": 3000,
+      "show": true
+    },
+    {
+      "id": "nilda-moreschi",
+      "name": "Nilda Beatriz Moreschi",
+      "amount": 5000,
+      "message": "Un pequeño empujoncito",
+      "show": true
+    },
+    {
+      "id": "natalia-mercedes",
+      "name": "Natalia Mercedes Olivera",
+      "amount": 5000,
+      "message": "que les vaya bonito y tengan todo el éxito.... que lindo poder colaborar con un sueño....🥰😘",
+      "show": true
+    },
+    {
+      "id": "claudia-liliana-orellana",
+      "name": "Claudia Liliana Orellana",
+      "amount": 2000,
+      "show": true
+    },
+    {
+      "id": "enzo-galetto-y-claudia",
+      "name": "Enzo Galetto Y Claudia",
+      "amount": 10000,
+      "message": "Vamoss",
+      "show": true
+    },
+    {
+      "id": "pedro-alejandro",
+      "name": "Pedro Alejandro Lebeau",
+      "amount": 4000,
+      "message": "Muchos exitos",
+      "show": true
+    },
+    {
+      "id": "hector-ruben-pajon",
+      "name": "Hector Ruben Pajon",
+      "amount": 6000,
+      "show": true
+    },
+    {
+      "id": "vecino-de-la-ciudad",
+      "name": "Vecino de la ciudad",
+      "amount": 3000,
+      "message": "Ojala puedan cumplir su sueños",
+      "show": true
     }
   ]
 }
