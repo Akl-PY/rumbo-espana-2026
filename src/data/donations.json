@@ -1,7 +1,7 @@
 {
   "minAmount": 0,
   "initialLimit": 4,
-  "loadMoreAmount": 4,
+  "loadMoreAmount": 5,
   "items": [
     {
       "id": "juan-perez-40000",
@@ -21,7 +21,6 @@
       "id": "roberto-15000",
       "name": "Roberto",
       "amount": 15000,
-      "message": "",
       "show": true
     }
   ]
