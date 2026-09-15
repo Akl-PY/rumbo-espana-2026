@@ -1,8 +1,33 @@
 {
-  "eyebrow": "Momentos",
+  "eyebrow": "Momento",
   "title": "Galería",
   "description": "Entrenamientos, competencias, viajes y cada momento del camino rumbo a Benidorm.",
   "items": [
+    {
+      "title": "Chile 2025",
+      "description": "Campeonato centro-sudamericano Santiago 2025.",
+      "featured": false
+    },
+    {
+      "title": "Coty en chile",
+      "description": "Por los pasillos del torneo.",
+      "featured": false
+    },
+    {
+      "title": "Equipo femenino",
+      "description": "Entrenamiento de Coty con el equipo femenino de lucha de Argentina para la Copa del Mundo 2026. Realizado en Buenos Aires - Parque Chacabuco.",
+      "featured": true
+    },
+    {
+      "title": "Matías Bustamante",
+      "description": "Entrenamiento con uno de los principales entrenadores de la Selección Argentina. Multiple veces campeon del mundo.",
+      "featured": true
+    },
+    {
+      "title": "Matías Bustamante",
+      "description": "Entrenamiento en el Salón del Sabonim Matías Bustamante, San Miguel - BSAS",
+      "featured": false
+    },
     {
       "title": "PERU 2026",
       "description": "Primer puesto en formas de Constanza en Peru.",
