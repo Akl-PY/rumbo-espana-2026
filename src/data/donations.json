@@ -22,6 +22,19 @@
       "amount": 2000,
       "message": "Con ❤️para esos campeones",
       "show": true
+    },
+    {
+      "id": "Victoria-edid",
+      "name": "Torres Victoria Edid",
+      "amount": 1000,
+      "show": true
+    },
+    {
+      "id": "claudia-moreschi-10000",
+      "name": "Claudia Moreschi",
+      "amount": 10000,
+      "message": "Para que participen con ❤️",
+      "show": true
     }
   ]
 }
