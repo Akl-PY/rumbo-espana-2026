@@ -1,6 +1,6 @@
-import { fields } from '@keystatic/core';
+import { fields, singleton } from '@keystatic/core';
 
-export const gallery = {
+export const gallery = singleton({
   label: 'Galería',
   path: 'src/data/gallery',
   format: { data: 'json' },
@@ -61,4 +61,4 @@ export const gallery = {
       },
     ),
   },
-};
+});

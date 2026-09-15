@@ -21,7 +21,7 @@ export default config({
         kind: 'local',
       },
   cloud: {
-    project: 'tu-usuario-o-org/tu-proyecto-keystatic', // Reemplázalo con tu proyecto de Keystatic Cloud
+    project: 'rumbo-espana/rumbo-espana-2026', // Reemplázalo con tu proyecto de Keystatic Cloud
   },
   singletons: {
     donations: donationsSingleton,
