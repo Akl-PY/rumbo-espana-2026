@@ -1,19 +1,15 @@
 ---
-import { ALIAS } from "../data/config";
+import { ALIAS } from '../data/config';
 ---
 
 <section id="donar" class="relative px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
-    <p
-      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-    >
+    <p class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
       <span class="h-0.5 w-[22px] bg-primary"></span>
       ¿Querés ayudarnos?
     </p>
 
-    <h2
-      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-    >
+    <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
       Podés colaborar con el monto que quieras
     </h2>
 
@@ -22,23 +18,15 @@ import { ALIAS } from "../data/config";
       bancaria o de Mercado Pago.
     </p>
 
-    <div
-      class="grid gap-7 rounded-brand border border-border bg-card p-6 shadow-card sm:p-8 lg:grid-cols-[1.3fr_1fr] lg:items-center"
-    >
+    <div class="grid gap-7 rounded-brand border border-border bg-card p-6 shadow-card sm:p-8 lg:grid-cols-[1.3fr_1fr] lg:items-center">
       <div>
-        <div
-          class="flex flex-col gap-4 rounded-brand-sm border border-border bg-white/[0.05] p-4 sm:flex-row sm:items-center sm:justify-between sm:px-[18px]"
-        >
+        <div class="flex flex-col gap-4 rounded-brand-sm border border-border bg-white/[0.05] p-4 sm:flex-row sm:items-center sm:justify-between sm:px-[18px]">
           <div>
-            <div
-              class="mb-1 text-[11.5px] font-medium uppercase tracking-[0.08em] text-foreground-muted"
-            >
+            <div class="mb-1 text-[11.5px] font-medium uppercase tracking-[0.08em] text-foreground-muted">
               Alias
             </div>
 
-            <div
-              class="font-display text-[clamp(18px,5vw,24px)] tracking-[0.02em] text-accent"
-            >
+            <div class="font-display text-[clamp(18px,5vw,24px)] tracking-[0.02em] text-accent">
               {ALIAS}
             </div>
           </div>
@@ -60,9 +48,7 @@ import { ALIAS } from "../data/config";
       </div>
 
       <div>
-        <div
-          class="relative mx-auto flex h-[180px] w-[180px] items-center justify-center overflow-hidden rounded-brand-sm border border-border bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25"
-        >
+        <div class="relative mx-auto flex h-[180px] w-[180px] items-center justify-center overflow-hidden rounded-brand-sm border border-border bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25">
           <img
             src="/images/qr-donacion.png"
             alt="QR para donar"
@@ -97,48 +83,48 @@ import { ALIAS } from "../data/config";
 <script>
   function initCopyButtons() {
     const buttons =
-      document.querySelectorAll<HTMLButtonElement>("button[data-alias]");
+      document.querySelectorAll<HTMLButtonElement>('button[data-alias]');
 
     buttons.forEach((btn) => {
-      if (btn.dataset.copyInitialized === "true") return;
+      if (btn.dataset.copyInitialized === 'true') return;
 
-      btn.dataset.copyInitialized = "true";
+      btn.dataset.copyInitialized = 'true';
 
-      const originalText = btn.textContent || "Copiar alias";
+      const originalText = btn.textContent || 'Copiar alias';
 
-      btn.addEventListener("click", async () => {
-        const alias = btn.getAttribute("data-alias") || "";
+      btn.addEventListener('click', async () => {
+        const alias = btn.getAttribute('data-alias') || '';
 
         try {
           await navigator.clipboard.writeText(alias);
         } catch {
-          const input = document.createElement("textarea");
+          const input = document.createElement('textarea');
 
           input.value = alias;
-          input.style.position = "fixed";
-          input.style.opacity = "0";
+          input.style.position = 'fixed';
+          input.style.opacity = '0';
 
           document.body.appendChild(input);
           input.select();
-          document.execCommand("copy");
+          document.execCommand('copy');
           document.body.removeChild(input);
         }
 
-        btn.textContent = "✓ Alias copiado";
+        btn.textContent = '✓ Alias copiado';
 
-        btn.classList.remove("bg-primary", "hover:bg-primary-dark");
-        btn.classList.add("bg-[#1c8a4b]");
+        btn.classList.remove('bg-primary', 'hover:bg-primary-dark');
+        btn.classList.add('bg-[#1c8a4b]');
 
         setTimeout(() => {
           btn.textContent = originalText;
 
-          btn.classList.remove("bg-[#1c8a4b]");
-          btn.classList.add("bg-primary");
+          btn.classList.remove('bg-[#1c8a4b]');
+          btn.classList.add('bg-primary');
         }, 2200);
       });
     });
   }
 
   initCopyButtons();
-  document.addEventListener("astro:page-load", initCopyButtons);
+  document.addEventListener('astro:page-load', initCopyButtons);
 </script>

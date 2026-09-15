@@ -1,6 +1,6 @@
 export interface Sponsor {
   name: string;
-  level: "oro" | "plata" | "bronce";
+  level: 'oro' | 'plata' | 'bronce';
   amount: number;
   logo?: string;
   url?: string;
@@ -8,7 +8,7 @@ export interface Sponsor {
 }
 
 export interface SponsorTier {
-  id: "oro" | "plata" | "bronce";
+  id: 'oro' | 'plata' | 'bronce';
   name: string;
   price: number;
   badge: string;
@@ -18,83 +18,88 @@ export interface SponsorTier {
 
 export const SPONSOR_TIERS: SponsorTier[] = [
   {
-    id: "bronce",
-    name: "Bronce",
+    id: 'bronce',
+    name: 'Bronce',
     price: 50000,
-    badge: "🥉",
-    color: "#cd7f32",
+    badge: '🥉',
+    color: '#cd7f32',
     features: [
-      "Logo en la web oficial de la campaña",
-      "Presencia destacada en la sección de sponsors",
-      "Historia de agradecimiento en redes sociales",
-      "Mención en publicaciones oficiales de la campaña",
+      'Logo en la web oficial de la campaña',
+      'Presencia destacada en la sección de sponsors',
+      'Historia de agradecimiento en redes sociales',
+      'Mención en publicaciones oficiales de la campaña',
     ],
   },
   {
-    id: "plata",
-    name: "Plata",
+    id: 'plata',
+    name: 'Plata',
     price: 100000,
-    badge: "🥈",
-    color: "#c0c0c0",
+    badge: '🥈',
+    color: '#c0c0c0',
     features: [
-      "Todo lo incluido en el nivel Bronce",
-      "Logo con mayor tamaño y visibilidad prioritaria",
-      "Publicación dedicada en nuestro feed",
-      "Historias adicionales de difusión durante la preparación",
-      "Mayor exposición en la plataforma web",
+      'Todo lo incluido en el nivel Bronce',
+      'Logo con mayor tamaño y visibilidad prioritaria',
+      'Publicación dedicada en nuestro feed',
+      'Historias adicionales de difusión durante la preparación',
+      'Mayor exposición en la plataforma web',
     ],
   },
   {
-    id: "oro",
-    name: "Oro",
+    id: 'oro',
+    name: 'Oro',
     price: 150000,
-    badge: "🥇",
-    color: "#ffd700",
+    badge: '🥇',
+    color: '#ffd700',
     features: [
-      "Todo lo incluido en Plata y Bronce",
-      "Sponsor principal destacado en cabecera de marcas",
-      "Publicación exclusiva y fija en redes sociales",
-      "Presencia de marca documentada durante el viaje en España",
-      "Contenido y cobertura audiovisual especial con tu logo",
-      "Agradecimiento institucional final al culminar el Mundial",
+      'Todo lo incluido en Plata y Bronce',
+      'Sponsor principal destacado en cabecera de marcas',
+      'Publicación exclusiva y fija en redes sociales',
+      'Presencia de marca documentada durante el viaje en España',
+      'Contenido y cobertura audiovisual especial con tu logo',
+      'Agradecimiento institucional final al culminar el Mundial',
     ],
   },
 ];
 
 export const SPONSORS: Sponsor[] = [
   {
-    name: "Canelo",
-    level: "oro",
-    amount: 0,
-    logo: "/images/sponsors/canelo.png",
-    url: "#",
+    name: 'Canelo',
+    level: 'oro',
+    amount: 150000,
+    logo: '/images/sponsors/canelo.png',
+    url: 'https://instagram.com/canelo',
+    description: 'Indumentaria y equipamiento deportivo especializado.',
   },
   {
-    name: "Esencia Arati",
-    level: "oro",
-    amount: 0,
-    logo: "/images/sponsors/esencia-arati.png",
-    url: "#",
+    name: 'Esencia Arati',
+    level: 'oro',
+    amount: 150000,
+    logo: '/images/sponsors/esencia-arati.png',
+    url: 'https://instagram.com/esenciaarati',
+    description: 'Productos naturales, bienestar y aromaterapia.',
   },
   {
     name: "Nelio's",
-    level: "plata",
-    amount: 0,
-    logo: "/images/sponsors/nelios.png",
-    url: "#",
+    level: 'plata',
+    amount: 100000,
+    logo: '/images/sponsors/nelios.png',
+    url: 'https://instagram.com/nelios',
+    description: 'Gastronomía y espacio de encuentro local.',
   },
   {
-    name: "Laporta",
-    level: "plata",
-    amount: 0,
-    logo: "/images/sponsors/laporta.png",
-    url: "#",
+    name: 'Laporta',
+    level: 'plata',
+    amount: 100000,
+    logo: '/images/sponsors/laporta.png',
+    url: 'https://instagram.com/laporta',
+    description: 'Soluciones comerciales y servicios gráficos.',
   },
   {
-    name: "Disfit",
-    level: "oro",
-    amount: 0,
-    logo: "/images/sponsors/disfit.png",
-    url: "#",
+    name: 'Disfit',
+    level: 'oro',
+    amount: 150000,
+    logo: '/images/sponsors/disfit.png',
+    url: 'https://instagram.com/disfit',
+    description: 'Nutrición deportiva y suplementación de calidad.',
   },
 ];

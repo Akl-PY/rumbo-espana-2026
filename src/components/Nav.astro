@@ -1,19 +1,11 @@
 ---
 ---
 
-<header
-  class="sticky top-0 z-50 border-b border-border bg-background/70 px-5 py-3.5 backdrop-blur-[14px]"
->
-  <div
-    class="mx-auto flex max-w-[1100px] items-center justify-between gap-3"
-  >
-    <a
-      href="#"
-      class="font-display text-sm tracking-[0.02em] text-foreground"
-    >
+<header class="sticky top-0 z-50 border-b border-border bg-background/70 px-5 py-3.5 backdrop-blur-[14px]">
+  <div class="mx-auto flex max-w-[1100px] items-center justify-between gap-3">
+    <a href="#" class="font-display text-sm tracking-[0.02em] text-foreground">
       Rumbo a España <span class="text-primary">2026 🇪🇸</span>
     </a>
-
     <nav class="flex items-center gap-5">
       <a
         href="#como-ayudar"
@@ -21,21 +13,18 @@
       >
         Cómo Ayudar
       </a>
-
       <a
         href="#convertite-en-sponsor"
         class="hidden text-[13.5px] font-semibold text-foreground-muted transition-colors duration-200 hover:text-foreground sm:block"
       >
         Sponsors
       </a>
-
       <a
         href="#nuestros-proyectos"
         class="hidden text-[13.5px] font-semibold text-foreground-muted transition-colors duration-200 hover:text-foreground sm:block"
       >
         Proyectos
       </a>
-
       <a
         href="#donar"
         class="rounded-full bg-primary px-[18px] py-2.5 text-[13.5px] font-bold text-white shadow-[0_8px_24px_rgba(224,30,43,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-[0_10px_30px_rgba(224,30,43,0.5)] active:scale-[0.97]"
@@ -44,4 +33,30 @@
       </a>
     </nav>
   </div>
+  <!-- Barra de progreso -->
+  <div class="absolute bottom-0 left-0 h-[1px] w-full bg-white/10">
+    <div
+      id="scroll-progress"
+      class="h-full w-0 bg-[linear-gradient(90deg,#74ACDF_0%,#FFFFFF_25%,#FFFF00_50%,#FFFFFF_75%,#74ACDF_100%)] shadow-[0_0_10px_rgba(116,172,223,0.6)] transition-[width] duration-75"
+    ></div>
+  </div>
 </header>
+<script>
+  const progress = document.querySelector<HTMLElement>('#scroll-progress');
+  if (progress) {
+    const updateProgress = () => {
+      const scrollTop = window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+      const viewportHeight = window.innerHeight;
+      const scrollableHeight = documentHeight - viewportHeight;
+      const percentage =
+        scrollableHeight > 0
+          ? Math.min(Math.max((scrollTop / scrollableHeight) * 100, 0), 100)
+          : 0;
+      progress.style.width = `${percentage}%`;
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  }
+</script>

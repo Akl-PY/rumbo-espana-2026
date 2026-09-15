@@ -1,29 +1,29 @@
 ---
 const EXPENSES = [
   {
-    icon: "✈️",
-    title: "Pasajes aéreos",
-    desc: "Vuelos ida y vuelta hacia España para competidores y coaches.",
+    icon: '✈️',
+    title: 'Pasajes aéreos',
+    desc: 'Vuelos ida y vuelta hacia España para competidores y coaches.',
   },
   {
-    icon: "🏨",
-    title: "Alojamiento oficial",
-    desc: "Estadía durante los días reglamentarios del certamen en Benidorm.",
+    icon: '🏨',
+    title: 'Alojamiento oficial',
+    desc: 'Estadía durante los días reglamentarios del certamen en Benidorm.',
   },
   {
-    icon: "🥋",
-    title: "Inscripciones y licencias",
-    desc: "Acreditación oficial a la Copa del Mundo y seguros deportivos.",
+    icon: '🥋',
+    title: 'Inscripciones y licencias',
+    desc: 'Acreditación oficial a la Copa del Mundo y seguros deportivos.',
   },
   {
-    icon: "🚕",
-    title: "Traslados internos",
-    desc: "Movilidad aeropuerto-hotel-estadio y logística de la delegación.",
+    icon: '🚕',
+    title: 'Traslados internos',
+    desc: 'Movilidad aeropuerto-hotel-estadio y logística de la delegación.',
   },
   {
-    icon: "🍽️",
-    title: "Nutrición y gastos de viaje",
-    desc: "Alimentación deportiva, pesaje e hidratación durante la competencia.",
+    icon: '🍽️',
+    title: 'Nutrición y gastos de viaje',
+    desc: 'Alimentación deportiva, pesaje e hidratación durante la competencia.',
   },
 ];
 ---
@@ -31,22 +31,16 @@ const EXPENSES = [
 <section id="transparencia" class="px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
     <div class="mb-12 text-center">
-      <span
-        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-      >
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Claridad y Compromiso
       </span>
 
-      <h2
-        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-      >
+      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         ¿A dónde va nuestro objetivo?
       </h2>
 
-      <p
-        class="mx-auto max-w-[600px] text-base leading-relaxed text-foreground-muted"
-      >
+      <p class="mx-auto max-w-[600px] text-base leading-relaxed text-foreground-muted">
         Cada aporte de la comunidad y de los sponsors se destina exclusivamente
         a hacer viable la participación en la Copa del Mundo.
       </p>
@@ -54,12 +48,8 @@ const EXPENSES = [
 
     <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {EXPENSES.map((item) => (
-        <article
-          class="rounded-brand border border-border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
-        >
-          <span class="mb-4 block text-[2rem] leading-none">
-            {item.icon}
-          </span>
+        <article class="rounded-brand border border-border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
+          <span class="mb-4 block text-[2rem] leading-none">{item.icon}</span>
 
           <h3 class="mb-2 font-display text-lg text-foreground">
             {item.title}

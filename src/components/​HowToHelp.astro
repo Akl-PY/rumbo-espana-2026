@@ -1,9 +1,9 @@
 ---
-import { ALIAS } from "../data/config";
+import { ALIAS } from '../data/config';
 
 const getShareLink = () => {
   const text = encodeURIComponent(
-    "¡Hola! Te comparto la campaña Rumbo a España 2026 de la delegación argentina de Taekwondo. Podés sumar tu apoyo o compartirla: https://rumbo-espana-2026.vercel.app",
+    '¡Hola! Te comparto la campaña Rumbo a España 2026 de la delegación argentina de Taekwondo. Podés sumar tu apoyo o compartirla: https://rumbo-espana-2026.vercel.app',
   );
 
   return `https://wa.me/?text=${text}`;
@@ -13,22 +13,16 @@ const getShareLink = () => {
 <section id="como-ayudar" class="px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
     <div class="mb-10 text-center">
-      <span
-        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-      >
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Participá
       </span>
 
-      <h2
-        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-      >
+      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         ¿Cómo podés ayudarnos?
       </h2>
 
-      <p
-        class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted"
-      >
+      <p class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted">
         Hay muchas formas de ser parte de este sueño mundialista. Elegí la que
         mejor se adapte a vos o a tu empresa.
       </p>
@@ -36,23 +30,17 @@ const getShareLink = () => {
 
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <!-- Donar -->
-      <div
-        class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
-      >
+      <div class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
         <div class="mb-4 text-[2.5rem] leading-none">❤️</div>
 
-        <h3 class="mb-3 font-display text-xl text-foreground">
-          Donar
-        </h3>
+        <h3 class="mb-3 font-display text-xl text-foreground">Donar</h3>
 
         <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
           Aportá el monto que puedas desde cualquier billetera virtual o cuenta
           bancaria.
         </p>
 
-        <div
-          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
-        >
+        <div class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted">
           <span>Alias:</span>
           <strong class="ml-1 font-bold text-accent">{ALIAS}</strong>
         </div>
@@ -66,27 +54,19 @@ const getShareLink = () => {
       </div>
 
       <!-- Sponsor -->
-      <div
-        class="group flex flex-col rounded-brand border border-primary/35 bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-primary/60 hover:shadow-card-lg"
-      >
+      <div class="group flex flex-col rounded-brand border border-primary/35 bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-primary/60 hover:shadow-card-lg">
         <div class="mb-4 text-[2.5rem] leading-none">🤝</div>
 
-        <h3 class="mb-3 font-display text-xl text-foreground">
-          Ser Sponsor
-        </h3>
+        <h3 class="mb-3 font-display text-xl text-foreground">Ser Sponsor</h3>
 
         <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
           Impulsá tu marca junto a nuestra delegación con paquetes pensados para
           comercios.
         </p>
 
-        <div
-          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
-        >
-          <span class="font-bold text-primary">$50.000</span>
-          ·
-          <span class="font-bold text-primary">$100.000</span>
-          ·
+        <div class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted">
+          <span class="font-bold text-primary">$50.000</span>·
+          <span class="font-bold text-primary">$100.000</span>·
           <span class="font-bold text-primary">$150.000</span>
         </div>
 
@@ -99,9 +79,7 @@ const getShareLink = () => {
       </div>
 
       <!-- Servicios -->
-      <div
-        class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
-      >
+      <div class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
         <div class="mb-4 text-[2.5rem] leading-none">💼</div>
 
         <h3 class="mb-3 font-display text-xl text-foreground">
@@ -113,9 +91,7 @@ const getShareLink = () => {
           profesionales.
         </p>
 
-        <div
-          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
-        >
+        <div class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted">
           Tecnología · Diseño · Taekwondo
         </div>
 
@@ -128,23 +104,17 @@ const getShareLink = () => {
       </div>
 
       <!-- Compartir -->
-      <div
-        class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
-      >
+      <div class="group flex flex-col rounded-brand border border-border bg-card p-6 text-center shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
         <div class="mb-4 text-[2.5rem] leading-none">📣</div>
 
-        <h3 class="mb-3 font-display text-xl text-foreground">
-          Compartir
-        </h3>
+        <h3 class="mb-3 font-display text-xl text-foreground">Compartir</h3>
 
         <p class="mb-6 flex-grow text-sm leading-relaxed text-foreground-muted">
           Ayudanos haciendo correr la voz entre amigos, familiares o en tus
           redes sociales.
         </p>
 
-        <div
-          class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted"
-        >
+        <div class="mb-6 rounded-brand-sm border border-border bg-white/[0.04] px-3 py-2 text-sm text-foreground-muted">
           Difusión gratuita
         </div>
 

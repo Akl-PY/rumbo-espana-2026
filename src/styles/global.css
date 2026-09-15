@@ -1,58 +1,58 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap");
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import 'tailwindcss';
 
 @theme {
-/* ============================================================
+  /* ============================================================
 COLORES
 ============================================================ */
 
---color-background: #0a0a0a;
---color-background-soft: #141414;
---color-card: #1a1a1a;
+  --color-background: #0a0a0a;
+  --color-background-soft: #141414;
+  --color-card: #1a1a1a;
 
---color-foreground: #fafafa;
---color-foreground-muted: #c9c9c9;
+  --color-foreground: #fafafa;
+  --color-foreground-muted: #c9c9c9;
 
---color-primary: #e01e2b;
---color-primary-dark: #a3141e;
+  --color-primary: #e01e2b;
+  --color-primary-dark: #a3141e;
 
---color-accent: #4fb0d9;
---color-accent-soft: rgba(79, 176, 217, 0.15);
+  --color-accent: #4fb0d9;
+  --color-accent-soft: rgba(79, 176, 217, 0.15);
 
---color-border: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.08);
 
-/* ============================================================
+  /* ============================================================
 TIPOGRAFÍA
 ============================================================ */
 
---font-display: "Archivo Black", "Inter", sans-serif;
---font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Archivo Black', 'Inter', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
-/* ============================================================
+  /* ============================================================
 LAYOUT
 ============================================================ */
 
---container-site: 1100px;
+  --container-site: 1100px;
 
-/* ============================================================
+  /* ============================================================
 RADIOS
 ============================================================ */
 
---radius-brand: 18px;
---radius-brand-sm: 10px;
+  --radius-brand: 18px;
+  --radius-brand-sm: 10px;
 
-/* ============================================================
+  /* ============================================================
 SOMBRAS
 ============================================================ */
 
---shadow-card: 0 4px 16px rgba(0, 0, 0, 0.25);
---shadow-card-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-card-lg: 0 20px 60px rgba(0, 0, 0, 0.45);
 
-/* ============================================================
+  /* ============================================================
 TRANSICIONES
 ============================================================ */
 
---ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ==============================================================
@@ -60,41 +60,41 @@ BASE GLOBAL
 ============================================================== */
 
 html {
-scroll-behavior: smooth;
-scroll-padding-top: 72px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
 }
 
 body {
-min-width: 320px;
-overflow-x: hidden;
+  min-width: 320px;
+  overflow-x: hidden;
 
-background: var(--color-background);
-color: var(--color-foreground);
+  background: var(--color-background);
+  color: var(--color-foreground);
 
-font-family: var(--font-body);
-line-height: 1.55;
+  font-family: var(--font-body);
+  line-height: 1.55;
 
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 img {
-max-width: 100%;
-display: block;
+  max-width: 100%;
+  display: block;
 }
 
 button,
 a {
--webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button {
-font: inherit;
+  font: inherit;
 }
 
 ::selection {
-background: rgba(224, 30, 43, 0.35);
-color: #fff;
+  background: rgba(224, 30, 43, 0.35);
+  color: #fff;
 }
 
 /* ==============================================================
@@ -111,7 +111,7 @@ IMÁGENES CARGADAS PROGRESIVAMENTE
   */
 
 img.opacity-0.is-loaded {
-opacity: 1;
+  opacity: 1;
 }
 
 /* ==============================================================
@@ -126,13 +126,13 @@ ANIMACIONES
   */
 
 @keyframes shine {
-0% {
-transform: translateX(-100%);
-}
+  0% {
+    transform: translateX(-100%);
+  }
 
-100% {
-transform: translateX(340%);
-}
+  100% {
+    transform: translateX(340%);
+  }
 }
 
 /* ==============================================================
@@ -140,16 +140,28 @@ ACCESSIBILITY
 ============================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-*,
-*::before,
-*::after {
-animation-duration: 0.01ms !important;
-animation-iteration-count: 1 !important;
-scroll-behavior: auto !important;
-transition-duration: 0.01ms !important;
-}
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 
-html {
-scroll-behavior: auto;
-}
+  html {
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    scrollbar-width: none;
+  }
+
+  body::-webkit-scrollbar {
+    display: none;
+  }
 }

@@ -1,7 +1,7 @@
 ---
-import { GOAL, RAISED } from "../data/config";
-import { donations } from "../data/donations";
-import { SPONSORS } from "../data/sponsors";
+import { GOAL, RAISED } from '../data/config';
+import { donations } from '../data/donations';
+import { SPONSORS } from '../data/sponsors';
 
 const donationsTotalFromList = donations.reduce(
   (acc, curr) => acc + (curr.amount || 0),
@@ -17,15 +17,12 @@ const totalSponsors = SPONSORS.reduce(
 
 const totalRaised = totalDonations + totalSponsors;
 
-const progressPercent = Math.min(
-  100,
-  Math.round((totalRaised / GOAL) * 100),
-);
+const progressPercent = Math.min(100, Math.round((totalRaised / GOAL) * 100));
 
 const formatCurrency = (val: number) => {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
     maximumFractionDigits: 0,
   }).format(val);
 };
@@ -34,55 +31,39 @@ const formatCurrency = (val: number) => {
 <section id="objetivo" class="px-5 py-[88px]">
   <div class="mx-auto max-w-[900px]">
     <div class="mb-10 text-center">
-      <span
-        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-      >
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Transparencia y Meta
       </span>
 
-      <h2
-        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-      >
+      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         Nuestro Objetivo
       </h2>
 
-      <p
-        class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted"
-      >
-        El viaje a la Copa del Mundo en Benidorm se financia gracias al apoyo
-        de nuestra comunidad y las marcas aliadas.
+      <p class="mx-auto max-w-[560px] text-base leading-relaxed text-foreground-muted">
+        El viaje a la Copa del Mundo en Benidorm se financia gracias al apoyo de
+        nuestra comunidad y las marcas aliadas.
       </p>
     </div>
 
-    <div
-      class="rounded-brand border border-border bg-card p-5 shadow-card sm:p-8"
-    >
+    <div class="rounded-brand border border-border bg-card p-5 shadow-card sm:p-8">
       <div class="mb-5 flex items-end justify-between gap-4">
         <div>
-          <span
-            class="mb-1 block text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted"
-          >
+          <span class="mb-1 block text-xs font-semibold uppercase tracking-[0.08em] text-foreground-muted">
             Meta final
           </span>
 
-          <span
-            class="font-display text-[clamp(30px,8vw,44px)] leading-none text-primary"
-          >
+          <span class="font-display text-[clamp(30px,8vw,44px)] leading-none text-primary">
             {formatCurrency(GOAL)}
           </span>
         </div>
 
         <div class="text-right">
-          <span
-            class="block font-display text-[clamp(28px,7vw,40px)] leading-none text-accent"
-          >
+          <span class="block font-display text-[clamp(28px,7vw,40px)] leading-none text-accent">
             {progressPercent}%
           </span>
 
-          <span
-            class="text-[11px] uppercase tracking-[0.08em] text-foreground-muted"
-          >
+          <span class="text-[11px] uppercase tracking-[0.08em] text-foreground-muted">
             alcanzado
           </span>
         </div>
@@ -103,34 +84,22 @@ const formatCurrency = (val: number) => {
       </div>
 
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div
-          class="rounded-brand-sm border border-primary/30 bg-primary/[0.04] px-4 py-[18px] text-center sm:border-l-4"
-        >
-          <span
-            class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted"
-          >
+        <div class="rounded-brand-sm border border-primary/30 bg-primary/[0.04] px-4 py-[18px] text-center sm:border-l-4">
+          <span class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted">
             Total Recaudado
           </span>
 
-          <span
-            class="block font-display text-[clamp(20px,4vw,24px)] text-primary"
-          >
+          <span class="block font-display text-[clamp(20px,4vw,24px)] text-primary">
             {formatCurrency(totalRaised)}
           </span>
         </div>
 
-        <div
-          class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center"
-        >
-          <span
-            class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted"
-          >
+        <div class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center">
+          <span class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted">
             ❤️ Donaciones
           </span>
 
-          <span
-            class="block font-display text-[clamp(20px,4vw,24px)] text-accent"
-          >
+          <span class="block font-display text-[clamp(20px,4vw,24px)] text-accent">
             {formatCurrency(totalDonations)}
           </span>
 
@@ -139,18 +108,12 @@ const formatCurrency = (val: number) => {
           </span>
         </div>
 
-        <div
-          class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center"
-        >
-          <span
-            class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted"
-          >
+        <div class="rounded-brand-sm border border-border bg-white/[0.02] px-4 py-[18px] text-center">
+          <span class="mb-1 block text-[11.5px] uppercase tracking-[0.06em] text-foreground-muted">
             🤝 Sponsors
           </span>
 
-          <span
-            class="block font-display text-[clamp(20px,4vw,24px)] text-accent"
-          >
+          <span class="block font-display text-[clamp(20px,4vw,24px)] text-accent">
             {formatCurrency(totalSponsors)}
           </span>
 

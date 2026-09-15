@@ -1,57 +1,563 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
 
-import Nav from "../components/Nav.astro";
-
-import Hero from "../components/Hero.astro";
-
-import Goal from "../components/Goal.astro";
-import HowToHelp from "../components/​HowToHelp.astro";
-import CurrentSponsors from "../components/​CurrentSponsors.astro";
-
-import BecomeSponsor from "../components/BecomeSponsor.astro";
-import Projects from "../components/​Projects.astro";
-import CommercialCollab from "../components/CommercialCollab.astro";
-
-import HowToDonate from "../components/HowToDonate.astro";
-import Donations from "../components/Donations.astro";
-import Transparency from "../components/Transparency.astro";
-
-import Team from "../components/Team.astro";
-import Story from "../components/Story.astro";
-import Gallery from "../components/Gallery.astro";
-
-import CTAFinal from "../components/CTAFinal.astro";
-
-import Footer from "../components/Footer.astro";
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Story from '../components/Story.astro';
+import Goal from '../components/Goal.astro';
+import HowToDonate from '../components/HowToDonate.astro';
+import Donations from '../components/Donations.astro';
+import Transparency from '../components/Transparency.astro';
+import CurrentSponsors from '../components/​CurrentSponsors.astro';
+import BecomeSponsor from '../components/BecomeSponsor.astro';
+import HowToHelp from '../components/​HowToHelp.astro';
+import Projects from '../components/​Projects.astro';
+import CommercialCollab from '../components/CommercialCollab.astro';
+import Team from '../components/Team.astro';
+import Gallery from '../components/Gallery.astro';
+import CTAFinal from '../components/CTAFinal.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
   <Nav />
 
-  <main>
-    <Hero />
+  <main class="relative min-h-screen overflow-hidden bg-background">
+    <!--
+      ============================================================
+      DECORATIVE CIRCUIT
+      ============================================================
+    -->
 
-    <Goal />
+    <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <!-- Glow ambiental -->
+      <div
+        class="absolute left-1/2 top-[20%] h-[500px] w-[500px]
+        -translate-x-1/2 rounded-full bg-primary/5 blur-[140px]"
+      ></div>
 
-    <HowToHelp />
-    <CurrentSponsors />
+      <svg
+        class="absolute inset-0 h-full w-full"
+        viewBox="0 0 1440 4200"
+        preserveAspectRatio="none"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- =====================================================
+             CAMINO PRINCIPAL IZQUIERDO
+             ===================================================== -->
 
-    <BecomeSponsor />
+        <path
+          d="
+            M -100 180
+            H 180
+            L 260 260
+            H 520
+            L 610 350
+            V 620
+            L 690 700
+            H 830
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.28"
+        ></path>
 
-    <Projects />
-    <CommercialCollab />
+        <!-- Camino paralelo -->
+        <path
+          d="
+            M -80 230
+            H 150
+            L 230 310
+            H 470
+            L 550 390
+            V 650
+          "
+          stroke="var(--color-primary)"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.12"
+        ></path>
 
-    <HowToDonate />
-    <Transparency />
-    <Donations />
+        <!-- =====================================================
+             RAMIFICACIÓN SUPERIOR
+             ===================================================== -->
 
-    <Team />
-    <Story />
-    <Gallery />
+        <path
+          d="
+            M 260 260
+            V 90
+            H 510
+            L 590 10
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.20"
+        ></path>
 
-    <CTAFinal />
+        <path
+          d="
+            M 510 90
+            L 600 180
+            H 880
+            L 970 270
+            V 450
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.18"
+        ></path>
+
+        <!-- =====================================================
+             CAMINO SUPERIOR DERECHO
+             ===================================================== -->
+
+        <path
+          d="
+            M 1500 120
+            H 1240
+            L 1160 200
+            H 970
+            L 900 270
+            V 520
+            L 820 600
+            H 650
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.25"
+        ></path>
+
+        <path
+          d="
+            M 1500 170
+            H 1270
+            L 1190 250
+            H 1010
+            L 940 320
+            V 480
+          "
+          stroke="var(--color-primary)"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.12"
+        ></path>
+
+        <!-- =====================================================
+             NODO CENTRAL
+             ===================================================== -->
+
+        <path
+          d="
+            M 830 700
+            L 910 780
+            H 1100
+            L 1180 860
+            V 1110
+            L 1260 1190
+            H 1500
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.22"
+        ></path>
+
+        <!-- Ramificación -->
+        <path
+          d="
+            M 910 780
+            V 980
+            L 850 1040
+            H 650
+            L 570 1120
+            V 1320
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.18"
+        ></path>
+
+        <!-- =====================================================
+             CAMINO MEDIO IZQUIERDO
+             ===================================================== -->
+
+        <path
+          d="
+            M -100 950
+            H 180
+            L 260 1030
+            V 1250
+            L 340 1330
+            H 570
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.20"
+        ></path>
+
+        <path
+          d="
+            M -80 1000
+            H 150
+            L 210 1060
+            V 1200
+          "
+          stroke="var(--color-primary)"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.10"
+        ></path>
+
+        <!-- =====================================================
+             CRUCE CENTRAL
+             ===================================================== -->
+
+        <path
+          d="
+            M 570 1120
+            H 800
+            L 880 1200
+            V 1430
+            L 960 1510
+            H 1210
+            L 1290 1590
+            V 1810
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.25"
+        ></path>
+
+        <!-- Camino que cruza -->
+        <path
+          d="
+            M 1380 1000
+            H 1160
+            L 1080 1080
+            V 1300
+            L 1000 1380
+            H 780
+            L 700 1460
+            V 1650
+          "
+          stroke="var(--color-primary)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.16"
+        ></path>
+
+        <!-- =====================================================
+             CAMINO DERECHO MEDIO
+             ===================================================== -->
+
+        <path
+          d="
+            M 1500 1320
+            H 1370
+            L 1290 1400
+            H 1110
+            L 1030 1480
+            V 1700
+            L 950 1780
+            H 760
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.20"
+        ></path>
+
+        <!-- =====================================================
+             PARTE INFERIOR MEDIA
+             ===================================================== -->
+
+        <path
+          d="
+            M -100 1650
+            H 200
+            L 280 1730
+            H 500
+            L 580 1810
+            V 2020
+            L 660 2100
+            H 900
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.22"
+        ></path>
+
+        <!-- Bifurcación -->
+        <path
+          d="
+            M 500 1730
+            V 1530
+            L 580 1450
+            H 760
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.16"
+        ></path>
+
+        <!-- =====================================================
+             GRAN CAMINO DIAGONAL
+             ===================================================== -->
+
+        <path
+          d="
+            M 1540 1900
+            H 1280
+            L 1200 1980
+            V 2200
+            L 1120 2280
+            H 900
+            L 820 2360
+            V 2580
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.24"
+        ></path>
+
+        <path
+          d="
+            M 1500 1950
+            H 1300
+            L 1240 2010
+            V 2170
+          "
+          stroke="var(--color-primary)"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.11"
+        ></path>
+
+        <!-- =====================================================
+             ZONA INFERIOR
+             ===================================================== -->
+
+        <path
+          d="
+            M -100 2300
+            H 240
+            L 320 2380
+            V 2600
+            L 400 2680
+            H 650
+            L 730 2760
+            V 3000
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.20"
+        ></path>
+
+        <path
+          d="
+            M 1540 2500
+            H 1300
+            L 1220 2580
+            H 1030
+            L 950 2660
+            V 2890
+            L 870 2970
+            H 620
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.20"
+        ></path>
+
+        <!-- =====================================================
+             CAMINO INFERIOR CENTRAL
+             ===================================================== -->
+
+        <path
+          d="
+            M 650 3000
+            L 730 3080
+            H 980
+            L 1060 3160
+            V 3380
+            L 1140 3460
+            H 1500
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.24"
+        ></path>
+
+        <!-- Ramificación inferior -->
+        <path
+          d="
+            M 980 3080
+            V 2890
+            L 1060 2810
+            H 1260
+          "
+          stroke="var(--color-primary)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.15"
+        ></path>
+
+        <!-- =====================================================
+             ÚLTIMO TRAMO
+             ===================================================== -->
+
+        <path
+          d="
+            M -100 3200
+            H 180
+            L 260 3280
+            H 480
+            L 560 3360
+            V 3560
+            L 640 3640
+            H 850
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.18"
+        ></path>
+
+        <path
+          d="
+            M 1540 3500
+            H 1280
+            L 1200 3580
+            H 980
+            L 900 3660
+            V 3890
+          "
+          stroke="var(--color-primary)"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.22"
+        ></path>
+
+        <!-- =====================================================
+             NODOS
+             ===================================================== -->
+
+        <g fill="var(--color-primary)">
+          <circle cx="260" cy="260" r="4" opacity="0.55"></circle>
+          <circle cx="610" cy="350" r="3" opacity="0.45"></circle>
+          <circle cx="910" cy="780" r="4" opacity="0.50"></circle>
+          <circle cx="570" cy="1120" r="3" opacity="0.45"></circle>
+          <circle cx="1180" cy="860" r="3" opacity="0.40"></circle>
+          <circle cx="880" cy="1200" r="4" opacity="0.50"></circle>
+          <circle cx="500" cy="1730" r="3" opacity="0.40"></circle>
+          <circle cx="1200" cy="1980" r="4" opacity="0.50"></circle>
+          <circle cx="820" cy="2360" r="3" opacity="0.40"></circle>
+          <circle cx="730" cy="3080" r="4" opacity="0.50"></circle>
+          <circle cx="1060" cy="3160" r="3" opacity="0.40"></circle>
+        </g>
+
+        <!-- Pequeños halos de nodos -->
+        <g fill="var(--color-primary)" opacity="0.08">
+          <circle cx="260" cy="260" r="14"></circle>
+          <circle cx="910" cy="780" r="16"></circle>
+          <circle cx="880" cy="1200" r="14"></circle>
+          <circle cx="1200" cy="1980" r="16"></circle>
+          <circle cx="730" cy="3080" r="16"></circle>
+        </g>
+      </svg>
+
+      <!-- Degradado para que el patrón desaparezca suavemente -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_60%,var(--color-background)_100%)]"></div>
+    </div>
+
+    <!--
+      ============================================================
+      CONTENIDO
+      ============================================================
+    -->
+
+    <div class="relative z-10">
+      <!-- 1. Impacto inicial -->
+      <Hero />
+
+      <!-- 2. Motivo emocional -->
+      <Story />
+
+      <!-- 3. Objetivo económico -->
+      <Goal />
+
+      <!-- 4. Explicación rápida para donar -->
+      <HowToDonate />
+
+      <!-- 5. CONVERSIÓN PRINCIPAL -->
+      <Donations />
+
+      <!-- 6. Confianza después de pedir dinero -->
+      <Transparency />
+
+      <!-- 7. Prueba social -->
+      <CurrentSponsors />
+
+      <!-- 8. SEGUNDO OBJETIVO: SPONSORS -->
+      <BecomeSponsor />
+
+      <!-- 9. Otras formas de ayudar -->
+      <HowToHelp />
+
+      <!-- 10. En qué se utilizará el dinero -->
+      <Projects />
+
+      <!-- 11. Colaboraciones comerciales -->
+      <CommercialCollab />
+
+      <!-- 12. Quiénes participan -->
+      <Team />
+
+      <!-- 13. Evidencia visual -->
+      <Gallery />
+
+      <!-- 14. Última llamada a la acción -->
+      <CTAFinal />
+
+      <Footer />
+    </div>
   </main>
-
-  <Footer />
 </Layout>
+```

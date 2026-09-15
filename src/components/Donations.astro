@@ -1,68 +1,892 @@
 ---
-import { donations } from "../data/donations";
+import donationsData from '../data/donations.json';
 
 function formatARS(n: number) {
-  return new Intl.NumberFormat("es-AR", {
+  return new Intl.NumberFormat('es-AR', {
     maximumFractionDigits: 0,
   }).format(n);
 }
 
-const sorted = [...donations].sort((a, b) => b.amount - a.amount);
+const minAmount = donationsData.minAmount ?? 0;
+const initialLimit = Math.max(1, donationsData.initialLimit ?? 4);
+const loadMoreAmount = Math.max(1, donationsData.loadMoreAmount ?? 4);
+
+const rawDonations = donationsData.items ?? [];
+
+const visibleDonations = rawDonations
+  .filter((donation) => donation.show !== false && donation.amount >= minAmount)
+  .sort((a, b) => b.amount - a.amount);
 ---
 
-<section id="donaciones" class="px-5 py-[88px]">
+<section
+  id="donaciones"
+  class="relative w-full overflow-hidden bg-background px-5 py-[88px]"
+>
   <div class="mx-auto max-w-[1100px]">
-    <span
-      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-    >
-      <span class="h-0.5 w-[22px] bg-primary"></span>
-      Gracias
-    </span>
+    <!-- Encabezado -->
+    <div class="mb-10 w-full text-center">
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
+        <span class="h-0.5 w-[22px] bg-primary"></span>
+        Gracias
+      </span>
 
-    <h2
-      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-    >
-      Quienes ya nos ayudaron
-    </h2>
+      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
+        Quienes ya nos ayudaron
+      </h2>
 
-    <p class="mb-10 max-w-[560px] text-base leading-relaxed text-foreground-muted">
-      Cada aporte, grande o chico, nos acerca un poco más a Benidorm.
-    </p>
+      <div class="flex w-full justify-center">
+        <p class="max-w-[560px] text-center text-base leading-relaxed text-foreground-muted">
+          Cada aporte, grande o chico, nos acerca un poco más a Benidorm.
+          ¡Gracias por el aguante! 🇦🇷
+        </p>
+      </div>
+    </div>
 
-    {
-      sorted.length === 0 ? (
-        <div class="flex flex-col gap-2 rounded-brand border border-border bg-card p-6 shadow-card">
-          <strong class="font-display text-lg text-foreground">
-            Todavía no hay donaciones cargadas
-          </strong>
+    {visibleDonations.length === 0 ? (
+      <div class="flex flex-col gap-2 rounded-brand border border-border bg-card p-6 shadow-card">
+        <strong class="font-display text-lg text-foreground">
+          Todavía no hay donaciones cargadas
+        </strong>
 
-          <span class="text-sm text-foreground-muted">
-            Sé la primera o el primero en ayudarnos a llegar. 🇦🇷
-          </span>
-        </div>
-      ) : (
-        <div class="space-y-3">
-          {sorted.map((d) => (
-            <article class="flex flex-col gap-4 rounded-brand border border-border bg-card p-5 shadow-card transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:border-white/[0.18] sm:flex-row sm:items-center sm:justify-between">
-              <div class="min-w-0">
-                <div class="font-bold text-foreground">
-                  {d.name}
+        <span class="text-sm text-foreground-muted">
+          Sé la primera o el primero en ayudarnos a llegar.
+        </span>
+      </div>
+    ) : (
+      <div class="space-y-6">
+        <!-- Donaciones -->
+        <div id="donations-container" class="grid gap-3 sm:grid-cols-2">
+          {visibleDonations.map((donation, index) => (
+            <article
+              id={`donacion-${donation.id}`}
+              class:list={[
+                'donation-item group relative flex flex-col justify-between gap-5 rounded-brand border border-border bg-card p-5 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-primary/40 hover:shadow-card-lg',
+                index >= initialLimit && 'hidden',
+              ]}
+              data-index={index}
+              data-id={donation.id}
+              data-name={donation.name}
+              data-amount={donation.amount}
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div class="min-w-0">
+                  <h3 class="truncate font-display text-lg font-bold text-foreground">
+                    {donation.name}
+                  </h3>
+
+                  {donation.message && (
+                    <p class="mt-1 text-sm italic leading-relaxed text-foreground-muted">
+                      "{donation.message}"
+                    </p>
+                  )}
                 </div>
 
-                {d.message && (
-                  <div class="mt-1 text-sm italic leading-relaxed text-foreground-muted">
-                    "{d.message}"
-                  </div>
-                )}
+                <div class="shrink-0 rounded-brand-sm border border-primary/20 bg-primary/10 px-3 py-1.5 text-right">
+                  <span class="block text-[10px] font-bold uppercase tracking-wider text-primary">
+                    Aporte
+                  </span>
+
+                  <span class="font-display text-lg font-bold text-primary">
+                    ${formatARS(donation.amount)}
+                  </span>
+                </div>
               </div>
 
-              <div class="shrink-0 font-display text-xl text-primary">
-                ${formatARS(d.amount)}
+              <!-- Acción -->
+              <div class="flex items-center justify-end border-t border-border/60 pt-3">
+                <button
+                  type="button"
+                  class="share-donation inline-flex items-center gap-2 rounded-brand-sm px-3 py-2 text-xs font-bold text-foreground-muted transition-all hover:bg-background-soft hover:text-primary"
+                  data-id={donation.id}
+                  data-name={donation.name}
+                  data-amount={donation.amount}
+                >
+                  <svg
+                    class="h-4 w-4"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                  </svg>
+                  Compartir
+                </button>
               </div>
             </article>
           ))}
         </div>
-      )
-    }
+
+        {visibleDonations.length > initialLimit && (
+          <div class="pt-4 text-center">
+            <button
+              id="load-more-btn"
+              type="button"
+              class="inline-flex items-center justify-center gap-2 rounded-brand border border-border bg-card px-8 py-3.5 text-sm font-bold text-foreground shadow-card transition-all duration-300 hover:border-primary/50 hover:bg-background-soft hover:shadow-card-lg"
+            >
+              <span>Cargar más donaciones</span>
+
+              <svg
+                class="h-4 w-4 text-primary"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+    )}
   </div>
 </section>
+
+<!-- ========================================================= -->
+<!-- MODAL DE COMPARTIR -->
+<!-- ========================================================= -->
+
+<div
+  id="share-modal"
+  class="pointer-events-none fixed inset-0 z-[100] flex items-end justify-center bg-black/0 opacity-0 transition-all duration-300 sm:items-center"
+>
+  <div
+    id="share-backdrop"
+    class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+  ></div>
+
+  <div
+    id="share-dialog"
+    class="relative w-full translate-y-full rounded-t-[28px] border border-border bg-card p-6 shadow-2xl transition-transform duration-300 sm:max-w-[440px] sm:translate-y-4 sm:rounded-[28px]"
+  >
+    <button
+      id="close-share-modal"
+      type="button"
+      aria-label="Cerrar"
+      class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-background-soft hover:text-foreground"
+    >
+      <svg
+        class="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 6l12 12M18 6L6 18"
+        />
+      </svg>
+    </button>
+
+    <div class="mb-6 pr-8">
+      <div class="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <svg
+          class="h-6 w-6"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+          <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+        </svg>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold text-foreground">
+        Compartí el apoyo 🇦🇷
+      </h3>
+
+      <p class="mt-1 text-sm leading-relaxed text-foreground-muted">
+        Ayudanos a que más personas conozcan nuestro viaje a Benidorm.
+      </p>
+    </div>
+
+    <div class="mb-5 rounded-2xl border border-border bg-background-soft p-4">
+      <p
+        id="share-preview"
+        class="text-sm font-medium leading-relaxed text-foreground"
+      ></p>
+    </div>
+
+    <div class="grid gap-2">
+      <!-- Compartir -->
+      <button
+        id="native-share-btn"
+        type="button"
+        class="flex w-full items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3.5 text-left font-bold text-foreground transition-all hover:border-primary/40 hover:bg-background-soft"
+      >
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+        </span>
+
+        <span>
+          <span class="block text-sm">Compartir</span>
+          <span class="block text-xs font-normal text-foreground-muted">
+            WhatsApp, Instagram y otras apps
+          </span>
+        </span>
+      </button>
+
+      <!-- WhatsApp -->
+      <button
+        id="whatsapp-share-btn"
+        type="button"
+        class="flex w-full items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3.5 text-left font-bold text-foreground transition-all hover:border-primary/40 hover:bg-background-soft"
+      >
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 30.667 30.667">
+            <path d="M30.667 14.939c0 8.25-6.74 14.938-15.056 14.938-2.639 0-5.118-.675-7.276-1.857L0 30.667l2.717-8.017a14.8 14.8 0 0 1-2.159-7.712C.559 6.688 7.297 0 15.613 0c8.315.002 15.054 6.689 15.054 14.939zM15.61 2.382c-6.979 0-12.656 5.634-12.656 12.56 0 2.748.896 5.292 2.411 7.362l-1.58 4.663 4.862-1.545a12.5 12.5 0 0 0 6.963 2.076c6.979 0 12.658-5.633 12.658-12.559 0-6.923-5.678-12.557-12.658-12.557z" />
+          </svg>
+        </span>
+
+        <span>
+          <span class="block text-sm">Compartir por WhatsApp</span>
+          <span class="block text-xs font-normal text-foreground-muted">
+            Mandalo directamente a tus contactos
+          </span>
+        </span>
+      </button>
+
+      <!-- Copiar -->
+      <button
+        id="copy-share-btn"
+        type="button"
+        class="flex w-full items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3.5 text-left font-bold text-foreground transition-all hover:border-primary/40 hover:bg-background-soft"
+      >
+        <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="9" y="9" width="10" height="10" rx="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+        </span>
+
+        <span>
+          <span id="copy-title" class="block text-sm">
+            Copiar mensaje
+          </span>
+
+          <span class="block text-xs font-normal text-foreground-muted">
+            Para compartir donde quieras
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- MODAL DESDE LINK COMPARTIDO -->
+<!-- ========================================================= -->
+
+<div
+  id="donation-link-modal"
+  class="pointer-events-none fixed inset-0 z-[110] flex items-end justify-center bg-black/0 opacity-0 transition-all duration-300 sm:items-center"
+>
+  <div
+    id="donation-link-backdrop"
+    class="absolute inset-0 bg-black/60 backdrop-blur-sm"
+  ></div>
+
+  <div
+    id="donation-link-dialog"
+    class="relative w-full translate-y-full rounded-t-[28px] border border-border bg-card p-6 shadow-2xl transition-transform duration-300 sm:max-w-[440px] sm:translate-y-4 sm:rounded-[28px]"
+  >
+    <button
+      id="close-donation-link-modal"
+      type="button"
+      aria-label="Cerrar"
+      class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-foreground-muted transition-colors hover:bg-background-soft hover:text-foreground"
+    >
+      <svg
+        class="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 6l12 12M18 6L6 18"
+        />
+      </svg>
+    </button>
+
+    <div class="pr-8">
+      <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+        <svg
+          class="h-7 w-7"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 3v18"></path>
+          <path d="M17 7H9.5a3.5 3.5 0 000 7H14a3.5 3.5 0 010 7H6"></path>
+        </svg>
+      </div>
+
+      <h3 class="font-display text-2xl font-bold text-foreground">
+        Descubrí cómo ayudar 🇦🇷
+      </h3>
+
+      <p
+        id="donation-link-message"
+        class="mt-2 text-sm leading-relaxed text-foreground-muted"
+      >
+        Este aporte ya forma parte de nuestro camino a Benidorm. ¿Querés
+        sumarte?
+      </p>
+    </div>
+
+    <div class="mt-6 grid gap-3">
+      <!-- Donar -->
+      <button
+        id="go-to-donation-btn"
+        type="button"
+        class="flex w-full items-center gap-4 rounded-2xl border border-primary/20 bg-primary/10 p-4 text-left transition-all hover:border-primary/40 hover:bg-primary/15"
+      >
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary text-background">
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 2v20"></path>
+            <path d="M17 5H9.5a3.5 3.5 0 000 7H14a3.5 3.5 0 010 7H6"></path>
+          </svg>
+        </span>
+
+        <span class="min-w-0">
+          <span class="block font-bold text-foreground">
+            Quiero enviar dinero
+          </span>
+
+          <span class="mt-0.5 block text-xs text-foreground-muted">
+            Quiero colaborar con el viaje
+          </span>
+        </span>
+
+        <svg
+          class="ml-auto h-5 w-5 shrink-0 text-primary"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M9 18l6-6-6-6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <!-- Sponsor -->
+      <button
+        id="go-to-sponsor-btn"
+        type="button"
+        class="flex w-full items-center gap-4 rounded-2xl border border-border bg-background p-4 text-left transition-all hover:border-primary/40 hover:bg-background-soft"
+      >
+        <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <svg
+            class="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </span>
+
+        <span class="min-w-0">
+          <span class="block font-bold text-foreground">
+            Quiero ser sponsor
+          </span>
+
+          <span class="mt-0.5 block text-xs text-foreground-muted">
+            Quiero apoyar el viaje como empresa o marca
+          </span>
+        </span>
+
+        <svg
+          class="ml-auto h-5 w-5 shrink-0 text-primary"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            d="M9 18l6-6-6-6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ initialLimit, loadMoreAmount }}>
+  let visibleCount = initialLimit;
+
+  const formatAmount = (amount) =>
+    new Intl.NumberFormat('es-AR', {
+      maximumFractionDigits: 0,
+    }).format(amount);
+
+  const copyText = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      const textarea = document.createElement('textarea');
+
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      const success = document.execCommand('copy');
+
+      textarea.remove();
+
+      return success;
+    }
+  };
+
+  const setupDonations = () => {
+    const items = document.querySelectorAll('.donation-item');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+
+    const shareModal = document.getElementById('share-modal');
+    const shareDialog = document.getElementById('share-dialog');
+    const shareBackdrop = document.getElementById('share-backdrop');
+    const closeShareBtn = document.getElementById('close-share-modal');
+
+    const preview = document.getElementById('share-preview');
+    const nativeShareBtn = document.getElementById('native-share-btn');
+    const whatsappBtn = document.getElementById('whatsapp-share-btn');
+    const copyBtn = document.getElementById('copy-share-btn');
+    const copyTitle = document.getElementById('copy-title');
+
+    const donationLinkModal = document.getElementById('donation-link-modal');
+    const donationLinkDialog = document.getElementById('donation-link-dialog');
+    const donationLinkBackdrop = document.getElementById(
+      'donation-link-backdrop',
+    );
+    const closeDonationLinkBtn = document.getElementById(
+      'close-donation-link-modal',
+    );
+    const donationLinkMessage = document.getElementById(
+      'donation-link-message',
+    );
+    const goToDonationBtn = document.getElementById('go-to-donation-btn');
+    const goToSponsorBtn = document.getElementById('go-to-sponsor-btn');
+
+    let currentMessage = '';
+    let currentDonationUrl = '';
+    let highlightedDonation = null;
+
+    /*
+     * ============================================================
+     * CARGAR MÁS
+     * ============================================================
+     */
+
+    loadMoreBtn?.addEventListener('click', () => {
+      visibleCount += loadMoreAmount;
+
+      items.forEach((item) => {
+        const index = Number(item.getAttribute('data-index') ?? 0);
+
+        if (index < visibleCount) {
+          item.classList.remove('hidden');
+        }
+      });
+
+      if (visibleCount >= items.length) {
+        loadMoreBtn.style.display = 'none';
+      }
+    });
+
+    /*
+     * ============================================================
+     * MODAL DE COMPARTIR
+     * ============================================================
+     */
+
+    const openShareModal = (name, amount, donationId) => {
+      const formattedAmount = formatAmount(amount);
+
+      const url = new URL(window.location.origin + window.location.pathname);
+
+      url.searchParams.set('donacion', donationId);
+
+      currentDonationUrl = url.toString();
+
+      currentMessage =
+        `${name} ya aportó $${formattedAmount} para ayudarnos a llegar a Benidorm 🇦🇷🥋\n\n` +
+        `¿Qué esperás vos para ayudar?\n\n` +
+        `Podés colaborar con nuestro viaje o convertirte en sponsor.\n\n` +
+        `👉 ${currentDonationUrl}`;
+
+      if (preview) {
+        preview.textContent = `${name} ya aportó $${formattedAmount} para ayudarnos a llegar a Benidorm. ¿Qué esperás vos para ayudar? 🇦🇷🥋`;
+      }
+
+      shareModal?.classList.remove('pointer-events-none', 'opacity-0');
+
+      shareModal?.classList.add('opacity-100');
+
+      shareDialog?.classList.remove('translate-y-full', 'sm:translate-y-4');
+
+      shareDialog?.classList.add('translate-y-0');
+
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeShareModal = () => {
+      shareDialog?.classList.remove('translate-y-0');
+
+      shareDialog?.classList.add('translate-y-full', 'sm:translate-y-4');
+
+      shareModal?.classList.remove('opacity-100');
+
+      shareModal?.classList.add('opacity-0');
+
+      setTimeout(() => {
+        shareModal?.classList.add('pointer-events-none');
+      }, 300);
+
+      document.body.style.overflow = '';
+    };
+
+    document.querySelectorAll('.share-donation').forEach((button) => {
+      button.addEventListener('click', () => {
+        const name = button.getAttribute('data-name') ?? 'Alguien';
+
+        const amount = Number(button.getAttribute('data-amount') ?? 0);
+
+        const donationId = button.getAttribute('data-id');
+
+        if (!donationId) return;
+
+        openShareModal(name, amount, donationId);
+      });
+    });
+
+    closeShareBtn?.addEventListener('click', closeShareModal);
+
+    shareBackdrop?.addEventListener('click', closeShareModal);
+
+    /*
+     * ============================================================
+     * COMPARTIR NATIVO
+     * ============================================================
+     */
+
+    nativeShareBtn?.addEventListener('click', async () => {
+      if (!navigator.share) {
+        const copied = await copyText(currentMessage);
+
+        if (copied && copyTitle) {
+          copyTitle.textContent = '¡Mensaje copiado!';
+
+          setTimeout(() => {
+            copyTitle.textContent = 'Copiar mensaje';
+          }, 2000);
+        }
+
+        return;
+      }
+
+      try {
+        await navigator.share({
+          title: 'Rumbo a Benidorm 🇦🇷',
+          text: currentMessage,
+        });
+      } catch {
+        // El usuario cerró el selector.
+      }
+    });
+
+    /*
+     * ============================================================
+     * WHATSAPP
+     * ============================================================
+     */
+
+    whatsappBtn?.addEventListener('click', () => {
+      const url = `https://wa.me/?text=${encodeURIComponent(currentMessage)}`;
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    /*
+     * ============================================================
+     * COPIAR
+     * ============================================================
+     */
+
+    copyBtn?.addEventListener('click', async () => {
+      const copied = await copyText(currentMessage);
+
+      if (copied && copyTitle) {
+        copyTitle.textContent = '¡Mensaje copiado!';
+
+        setTimeout(() => {
+          copyTitle.textContent = 'Copiar mensaje';
+        }, 2000);
+      }
+    });
+
+    /*
+     * ============================================================
+     * MODAL DEL LINK COMPARTIDO
+     * ============================================================
+     */
+
+    const openDonationLinkModal = (name, amount, donationId) => {
+      const formattedAmount = formatAmount(amount);
+
+      if (donationLinkMessage) {
+        donationLinkMessage.textContent = `${name} ya aportó $${formattedAmount} para ayudarnos a llegar a Benidorm. ¿Querés sumarte vos también?`;
+      }
+
+      donationLinkModal?.setAttribute('data-donation-id', donationId);
+
+      donationLinkModal?.classList.remove('pointer-events-none', 'opacity-0');
+
+      donationLinkModal?.classList.add('opacity-100');
+
+      donationLinkDialog?.classList.remove(
+        'translate-y-full',
+        'sm:translate-y-4',
+      );
+
+      donationLinkDialog?.classList.add('translate-y-0');
+
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeDonationLinkModal = () => {
+      donationLinkDialog?.classList.remove('translate-y-0');
+
+      donationLinkDialog?.classList.add('translate-y-full', 'sm:translate-y-4');
+
+      donationLinkModal?.classList.remove('opacity-100');
+
+      donationLinkModal?.classList.add('opacity-0');
+
+      setTimeout(() => {
+        donationLinkModal?.classList.add('pointer-events-none');
+
+        if (highlightedDonation) {
+          highlightedDonation.classList.remove(
+            'border-primary',
+            'bg-primary/10',
+            'ring-2',
+            'ring-primary/20',
+            'ring-offset-4',
+            'ring-offset-background',
+          );
+
+          highlightedDonation = null;
+        }
+      }, 300);
+
+      document.body.style.overflow = '';
+    };
+
+    closeDonationLinkBtn?.addEventListener('click', closeDonationLinkModal);
+
+    donationLinkBackdrop?.addEventListener('click', closeDonationLinkModal);
+
+    /*
+     * ============================================================
+     * IR A DONAR
+     * ============================================================
+     */
+
+    goToDonationBtn?.addEventListener('click', () => {
+      closeDonationLinkModal();
+
+      setTimeout(() => {
+        const target = document.getElementById('donar');
+
+        if (!target) return;
+
+        window.location.hash = 'donar';
+
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 350);
+    });
+
+    /*
+     * ============================================================
+     * IR A SPONSOR
+     * ============================================================
+     */
+
+    goToSponsorBtn?.addEventListener('click', () => {
+      closeDonationLinkModal();
+
+      setTimeout(() => {
+        const target = document.getElementById('convertite-en-sponsor');
+
+        if (!target) return;
+
+        window.location.hash = 'convertite-en-sponsor';
+
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 350);
+    });
+
+    /*
+     * ============================================================
+     * DETECTAR LINK COMPARTIDO
+     * ============================================================
+     */
+
+    const sharedDonationId = new URLSearchParams(window.location.search).get(
+      'donacion',
+    );
+
+    if (!sharedDonationId) return;
+
+    const targetDonation = Array.from(items).find(
+      (item) => item.getAttribute('data-id') === sharedDonationId,
+    );
+
+    if (!targetDonation) return;
+
+    const targetIndex = Number(targetDonation.getAttribute('data-index') ?? 0);
+
+    const targetName = targetDonation.getAttribute('data-name') ?? 'Alguien';
+
+    const targetAmount = Number(
+      targetDonation.getAttribute('data-amount') ?? 0,
+    );
+
+    /*
+     * Mostrarla aunque esté detrás
+     * de "Cargar más".
+     */
+
+    visibleCount = Math.max(visibleCount, targetIndex + 1);
+
+    items.forEach((item) => {
+      const index = Number(item.getAttribute('data-index') ?? 0);
+
+      if (index < visibleCount) {
+        item.classList.remove('hidden');
+      }
+    });
+
+    /*
+     * Esperamos a que el navegador haya pintado
+     * la página antes de hacer scroll.
+     */
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        targetDonation.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+
+        highlightedDonation = targetDonation;
+
+        targetDonation.classList.add(
+          'border-primary',
+          'bg-primary/10',
+          'ring-2',
+          'ring-primary/20',
+          'ring-offset-4',
+          'ring-offset-background',
+        );
+
+        /*
+         * Abrimos el modal después de que
+         * la tarjeta haya quedado centrada.
+         */
+
+        setTimeout(() => {
+          openDonationLinkModal(targetName, targetAmount, sharedDonationId);
+        }, 3700);
+      });
+    });
+  };
+
+  /*
+   * Astro:
+   * ejecutar después de cada carga de página.
+   */
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupDonations, {
+      once: true,
+    });
+  } else {
+    setupDonations();
+  }
+
+  document.addEventListener('astro:page-load', setupDonations);
+</script>

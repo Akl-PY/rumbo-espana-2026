@@ -1,14 +1,14 @@
 ---
-import { SOCIAL } from "../data/config";
+import { SOCIAL } from '../data/config';
 
 const getCollabLink = () => {
   const text = encodeURIComponent(
-    "Hola, vi la campaña Rumbo a España 2026 y me gustaría colaborar con mi comercio/emprendimiento.",
+    'Hola, vi la campaña Rumbo a España 2026 y me gustaría colaborar con mi comercio/emprendimiento.',
   );
 
-  const baseUrl = SOCIAL.whatsapp.includes("wa.me")
-    ? SOCIAL.whatsapp.replace(/\/$/, "")
-    : "https://wa.me/5490000000000";
+  const baseUrl = SOCIAL.whatsapp.includes('wa.me')
+    ? SOCIAL.whatsapp.replace(/\/$/, '')
+    : 'https://wa.me/5490000000000';
 
   return `${baseUrl}?text=${text}`;
 };
@@ -16,40 +16,28 @@ const getCollabLink = () => {
 
 <section id="colaboraciones-comerciales" class="px-5 py-[88px]">
   <div class="mx-auto max-w-[1000px]">
-    <div
-      class="rounded-brand border border-border bg-card p-6 shadow-card sm:p-10 lg:p-12"
-    >
+    <div class="rounded-brand border border-border bg-card p-6 shadow-card sm:p-10 lg:p-12">
       <div class="text-center">
-        <span
-          class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-        >
+        <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
           <span class="h-0.5 w-[22px] bg-primary"></span>
           Alianzas Comerciales
         </span>
 
-        <h2
-          class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-        >
+        <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
           ¿Tenés un comercio o emprendimiento?
         </h2>
 
-        <p
-          class="mx-auto mb-10 max-w-[650px] text-base leading-relaxed text-foreground-muted"
-        >
+        <p class="mx-auto mb-10 max-w-[650px] text-base leading-relaxed text-foreground-muted">
           Podés acompañarnos rumbo a España y, al mismo tiempo, encontrar una
           forma de colaborar con alguno de nuestros proyectos.
         </p>
       </div>
 
       <div class="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <article
-          class="rounded-brand-sm border border-border bg-white/[0.025] p-5 transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.16]"
-        >
+        <article class="rounded-brand-sm border border-border bg-white/[0.025] p-5 transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.16]">
           <div class="mb-3 text-[1.75rem] leading-none">🤝</div>
 
-          <h3 class="mb-2 font-display text-lg text-foreground">
-            Sponsorizar
-          </h3>
+          <h3 class="mb-2 font-display text-lg text-foreground">Sponsorizar</h3>
 
           <p class="text-sm leading-relaxed text-foreground-muted">
             Elegí entre los niveles de $50.000, $100.000 o $150.000 con
@@ -57,9 +45,7 @@ const getCollabLink = () => {
           </p>
         </article>
 
-        <article
-          class="rounded-brand-sm border border-border bg-white/[0.025] p-5 transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.16]"
-        >
+        <article class="rounded-brand-sm border border-border bg-white/[0.025] p-5 transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.16]">
           <div class="mb-3 text-[1.75rem] leading-none">💼</div>
 
           <h3 class="mb-2 font-display text-lg text-foreground">
@@ -72,9 +58,7 @@ const getCollabLink = () => {
           </p>
         </article>
 
-        <article
-          class="rounded-brand-sm border border-border bg-white/[0.025] p-5 transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.16]"
-        >
+        <article class="rounded-brand-sm border border-border bg-white/[0.025] p-5 transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.16]">
           <div class="mb-3 text-[1.75rem] leading-none">🔄</div>
 
           <h3 class="mb-2 font-display text-lg text-foreground">

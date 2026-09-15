@@ -1,16 +1,13 @@
 ---
-import { SITE } from "../data/config";
-import "../styles/global.css";
+import { SITE } from '../data/config';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title = SITE.title,
-  description = SITE.description,
-} = Astro.props;
+const { title = SITE.title, description = SITE.description } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, SITE.url);
 ---
@@ -37,19 +34,13 @@ const canonicalURL = new URL(Astro.url.pathname, SITE.url);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
-    <meta
-      property="og:image"
-      content={new URL(SITE.ogImage, SITE.url)}
-    />
+    <meta property="og:image" content={new URL(SITE.ogImage, SITE.url)} />
     <meta property="og:locale" content={SITE.locale} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta
-      name="twitter:image"
-      content={new URL(SITE.ogImage, SITE.url)}
-    />
+    <meta name="twitter:image" content={new URL(SITE.ogImage, SITE.url)} />
 
     <meta name="theme-color" content="#0a0a0a" />
   </head>

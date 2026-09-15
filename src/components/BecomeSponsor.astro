@@ -1,11 +1,11 @@
 ---
-import { SPONSOR_TIERS } from "../data/sponsors";
-import { SOCIAL } from "../data/config";
+import { SPONSOR_TIERS } from '../data/sponsors';
+import { SOCIAL } from '../data/config';
 
 const formatCurrency = (val: number) => {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
     maximumFractionDigits: 0,
   }).format(val);
 };
@@ -15,9 +15,9 @@ const getWhatsAppLink = (tierName: string) => {
     `Hola, vi la campaña Rumbo a España 2026 y quiero consultar por el sponsoreo nivel ${tierName}.`,
   );
 
-  const baseUrl = SOCIAL.whatsapp.includes("wa.me")
-    ? SOCIAL.whatsapp.replace(/\/$/, "")
-    : "https://wa.me/5490000000000";
+  const baseUrl = SOCIAL.whatsapp.includes('wa.me')
+    ? SOCIAL.whatsapp.replace(/\/$/, '')
+    : 'https://wa.me/5490000000000';
 
   return `${baseUrl}?text=${text}`;
 };
@@ -26,22 +26,16 @@ const getWhatsAppLink = (tierName: string) => {
 <section id="convertite-en-sponsor" class="px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
     <div class="mb-12 text-center">
-      <span
-        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-      >
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Propuesta Comercial
       </span>
 
-      <h2
-        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-      >
+      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         Convertite en Sponsor
       </h2>
 
-      <p
-        class="mx-auto max-w-[620px] text-base leading-relaxed text-foreground-muted"
-      >
+      <p class="mx-auto max-w-[620px] text-base leading-relaxed text-foreground-muted">
         Sumá tu marca a nuestra delegación rumbo al Mundial. Ofrecemos
         visibilidad genuina, presencia digital y difusión deportiva.
       </p>
@@ -49,39 +43,37 @@ const getWhatsAppLink = (tierName: string) => {
 
     <div class="grid grid-cols-1 items-stretch gap-4 md:grid-cols-3">
       {SPONSOR_TIERS.map((tier) => {
-        const isGold = tier.id === "oro";
+        const isGold = tier.id === 'oro';
 
         return (
           <article
             class:list={[
-              "group flex flex-col justify-between rounded-brand border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg sm:p-7",
+              'group flex flex-col justify-between rounded-brand border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg sm:p-7',
               isGold
-                ? "border-yellow-500/35 hover:border-yellow-400/55"
-                : "border-border hover:border-white/[0.18]",
+                ? 'border-yellow-500/35 hover:border-yellow-400/55'
+                : 'border-border hover:border-white/[0.18]',
             ]}
           >
             <div>
               <div
                 class:list={[
-                  "mb-6 border-b pb-6 text-center",
-                  isGold ? "border-yellow-500/20" : "border-border",
+                  'mb-6 border-b pb-6 text-center',
+                  isGold ? 'border-yellow-500/20' : 'border-border',
                 ]}
               >
                 <span class="mb-3 block text-[2.5rem] leading-none">
                   {tier.badge}
                 </span>
 
-                <h3
-                  class="mb-2 font-display text-[clamp(20px,4vw,24px)] text-foreground"
-                >
+                <h3 class="mb-2 font-display text-[clamp(20px,4vw,24px)] text-foreground">
                   {tier.name}
                 </h3>
 
                 <div>
                   <span
                     class:list={[
-                      "font-display text-[clamp(25px,5vw,32px)]",
-                      isGold ? "text-yellow-400" : "text-accent",
+                      'font-display text-[clamp(25px,5vw,32px)]',
+                      isGold ? 'text-yellow-400' : 'text-accent',
                     ]}
                   >
                     {formatCurrency(tier.price)}
@@ -91,9 +83,7 @@ const getWhatsAppLink = (tierName: string) => {
 
               <ul class="mb-8 space-y-3">
                 {tier.features.map((feature) => (
-                  <li
-                    class="flex items-start gap-3 text-sm leading-relaxed text-foreground-muted"
-                  >
+                  <li class="flex items-start gap-3 text-sm leading-relaxed text-foreground-muted">
                     <svg
                       class="mt-0.5 h-5 w-5 shrink-0 text-primary"
                       viewBox="0 0 20 20"
@@ -118,10 +108,10 @@ const getWhatsAppLink = (tierName: string) => {
               target="_blank"
               rel="noopener noreferrer"
               class:list={[
-                "block w-full rounded-full px-5 py-3.5 text-center text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]",
+                'block w-full rounded-full px-5 py-3.5 text-center text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]',
                 isGold
-                  ? "bg-yellow-600 shadow-[0_8px_24px_rgba(202,138,4,0.25)] hover:bg-yellow-700"
-                  : "bg-primary shadow-[0_8px_24px_rgba(224,30,43,0.25)] hover:bg-primary-dark",
+                  ? 'bg-yellow-600 shadow-[0_8px_24px_rgba(202,138,4,0.25)] hover:bg-yellow-700'
+                  : 'bg-primary shadow-[0_8px_24px_rgba(224,30,43,0.25)] hover:bg-primary-dark',
               ]}
             >
               Elegir {tier.name}

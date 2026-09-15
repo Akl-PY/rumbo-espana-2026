@@ -1,21 +1,19 @@
 ---
-import { COPY } from "../data/config";
-import Countdown from "./Countdown.astro";
+import { COPY } from '../data/config';
+import Countdown from './Countdown.astro';
 ---
 
 <section
   id="hero"
-  class="relative flex min-h-svh items-end overflow-hidden px-5 pt-[120px] pb-14"
+  class="relative flex min-h-[92svh] items-end overflow-hidden px-5 pt-30 pb-14"
 >
   <!-- Fondo -->
-  <div
-    class="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(10,10,10,0.4)_0%,rgba(10,10,10,0.55)_40%,#0a0a0a_92%),radial-gradient(circle_at_15%_15%,rgba(79,176,217,0.12),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(224,30,43,0.18),transparent_50%),linear-gradient(160deg,#1b1b1b,#0a0a0a_60%)]"
-  >
+  <div class="absolute flex flex-col justify-end align-end inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(79,176,217,0.12),transparent_45%),radial-gradient(circle_at_85%_10%,rgba(224,30,43,0.18),transparent_70%)]">
     <img
-      src="/images/hero.jpg"
+      src="/images/hero.png "
       alt=""
       id="hero-image"
-      class="absolute inset-0 -z-10 h-full w-full object-cover opacity-0 transition-opacity duration-700 ease-brand"
+      class="absolute right-0 bottom-0 h-full w-[50%] object-contain opacity-0 transition-opacity duration-700 ease-brand"
       onload="this.classList.add('is-loaded')"
       onerror="this.remove()"
     />
@@ -27,24 +25,18 @@ import Countdown from "./Countdown.astro";
     aria-hidden="true"
   ></span>
 
-  <div class="mx-auto w-full max-w-[1100px]">
+  <div class="mx-auto w-full z-5 max-w-[1100px]">
     <div class="max-w-[760px]">
-      <p
-        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-      >
+      <p class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Copa del Mundo · Benidorm, España
       </p>
 
-      <h1
-        class="mb-2.5 font-display text-[clamp(36px,10vw,68px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-      >
+      <h1 class="mb-2.5 font-display text-[clamp(36px,10vw,68px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         RUMBO A <span class="text-primary">ESPAÑA</span> 2026
       </h1>
 
-      <p
-        class="mb-[18px] text-[clamp(16px,4vw,20px)] font-bold text-accent"
-      >
+      <p class="mb-[18px] text-[clamp(16px,4vw,20px)] font-bold text-accent">
         {COPY.heroSubtitle}
       </p>
 
@@ -54,7 +46,8 @@ import Countdown from "./Countdown.astro";
 
       <div class="mb-11 flex flex-wrap gap-3">
         <a href="#donar" class="btn btn-primary">
-          Quiero ayudar
+          {' '}
+          Quiero ayudar{' '}
         </a>
 
         <a href="#historia" class="btn btn-outline">
@@ -69,6 +62,6 @@ import Countdown from "./Countdown.astro";
 
 <style>
   #hero-image.is-loaded {
-    opacity: 0.55;
+    opacity: 1;
   }
 </style>

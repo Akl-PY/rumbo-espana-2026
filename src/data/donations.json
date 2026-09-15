@@ -1,0 +1,28 @@
+{
+  "minAmount": 0,
+  "initialLimit": 4,
+  "loadMoreAmount": 4,
+  "items": [
+    {
+      "id": "juan-perez-40000",
+      "name": "Juan Pérez",
+      "amount": 40000,
+      "message": "¡Éxitos en Benidorm!",
+      "show": true
+    },
+    {
+      "id": "maria-gonzalez-25000",
+      "name": "María González",
+      "amount": 25000,
+      "message": "A romperla en España 🇦🇷",
+      "show": true
+    },
+    {
+      "id": "roberto-15000",
+      "name": "Roberto",
+      "amount": 15000,
+      "message": "",
+      "show": true
+    }
+  ]
+}

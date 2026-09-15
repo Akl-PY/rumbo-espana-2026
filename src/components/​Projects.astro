@@ -1,13 +1,13 @@
 ---
-import { PROJECTS } from "../data/projects";
-import { SOCIAL } from "../data/config";
+import { PROJECTS } from '../data/projects';
+import { SOCIAL } from '../data/config';
 
 const getProjectWhatsApp = (msg: string) => {
   const text = encodeURIComponent(msg);
 
-  const baseUrl = SOCIAL.whatsapp.includes("wa.me")
-    ? SOCIAL.whatsapp.replace(/\/$/, "")
-    : "https://wa.me/5490000000000";
+  const baseUrl = SOCIAL.whatsapp.includes('wa.me')
+    ? SOCIAL.whatsapp.replace(/\/$/, '')
+    : 'https://wa.me/5490000000000';
 
   return `${baseUrl}?text=${text}`;
 };
@@ -16,22 +16,16 @@ const getProjectWhatsApp = (msg: string) => {
 <section id="nuestros-proyectos" class="px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
     <div class="mb-12 text-center">
-      <span
-        class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-      >
+      <span class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
         <span class="h-0.5 w-[22px] bg-primary"></span>
         Emprendimientos & Servicios
       </span>
 
-      <h2
-        class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-      >
+      <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
         También podés colaborar con nuestros proyectos
       </h2>
 
-      <p
-        class="mx-auto max-w-[650px] text-base leading-relaxed text-foreground-muted"
-      >
+      <p class="mx-auto max-w-[650px] text-base leading-relaxed text-foreground-muted">
         Detrás del equipo hay trabajo profesional y proyectos que podés
         contratar o impulsar mediante alianzas estratégicas.
       </p>
@@ -39,22 +33,20 @@ const getProjectWhatsApp = (msg: string) => {
 
     <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
       {PROJECTS.map((project) => {
-        const isScalinky = project.id === "scalinky";
+        const isScalinky = project.id === 'scalinky';
 
         return (
           <article
             class:list={[
-              "flex flex-col justify-between rounded-brand border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg sm:p-7",
+              'flex flex-col justify-between rounded-brand border bg-card p-6 shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:shadow-card-lg sm:p-7',
               isScalinky
-                ? "border-accent/30 hover:border-accent/50"
-                : "border-border hover:border-white/[0.18]",
+                ? 'border-accent/30 hover:border-accent/50'
+                : 'border-border hover:border-white/[0.18]',
             ]}
           >
             <div>
               <div class="mb-5 flex items-center gap-3.5">
-                <span class="text-[2rem] leading-none">
-                  {project.badge}
-                </span>
+                <span class="text-[2rem] leading-none">{project.badge}</span>
 
                 <div>
                   <h3 class="font-display text-xl text-foreground">
@@ -63,8 +55,8 @@ const getProjectWhatsApp = (msg: string) => {
 
                   <span
                     class:list={[
-                      "block text-xs font-semibold",
-                      isScalinky ? "text-accent" : "text-primary",
+                      'block text-xs font-semibold',
+                      isScalinky ? 'text-accent' : 'text-primary',
                     ]}
                   >
                     {project.tagline}
@@ -72,26 +64,18 @@ const getProjectWhatsApp = (msg: string) => {
                 </div>
               </div>
 
-              <p
-                class="mb-5 text-sm leading-relaxed text-foreground-muted sm:text-[15px]"
-              >
+              <p class="mb-5 text-sm leading-relaxed text-foreground-muted sm:text-[15px]">
                 {project.description}
               </p>
 
-              <div
-                class="mb-6 rounded-brand-sm border border-border bg-white/[0.025] p-4"
-              >
-                <h4
-                  class="mb-3 text-xs font-bold uppercase tracking-[0.06em] text-foreground"
-                >
+              <div class="mb-6 rounded-brand-sm border border-border bg-white/[0.025] p-4">
+                <h4 class="mb-3 text-xs font-bold uppercase tracking-[0.06em] text-foreground">
                   Formas de colaborar y servicios
                 </h4>
 
                 <ul class="space-y-2">
                   {project.collaborations.map((item) => (
-                    <li
-                      class="flex items-start gap-2.5 text-sm leading-relaxed text-foreground-muted"
-                    >
+                    <li class="flex items-start gap-2.5 text-sm leading-relaxed text-foreground-muted">
                       <span class="font-bold text-primary">›</span>
                       <span>{item}</span>
                     </li>
@@ -105,10 +89,10 @@ const getProjectWhatsApp = (msg: string) => {
               target="_blank"
               rel="noopener noreferrer"
               class:list={[
-                "block rounded-full border px-5 py-3 text-center text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]",
+                'block rounded-full border px-5 py-3 text-center text-sm font-bold transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98]',
                 isScalinky
-                  ? "border-accent/40 bg-accent/10 text-accent hover:bg-accent/20"
-                  : "border-border bg-white/[0.04] text-foreground hover:border-white/25 hover:bg-white/[0.08]",
+                  ? 'border-accent/40 bg-accent/10 text-accent hover:bg-accent/20'
+                  : 'border-border bg-white/[0.04] text-foreground hover:border-white/25 hover:bg-white/[0.08]',
               ]}
             >
               {project.ctaText}

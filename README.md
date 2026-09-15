@@ -69,16 +69,16 @@ las secciones.
 
 Ahí están, todos juntos:
 
-| Qué querés cambiar | Variable |
-|---|---|
-| Objetivo económico | `GOAL` |
-| Monto recaudado (mientras no haya backend) | `RAISED` |
-| Alias para donar | `ALIAS` |
-| Fecha del viaje / countdown | `EVENT_DATE_ISO` y `EVENT_DATE_LABEL` |
-| Título, descripción y SEO | `SITE` |
-| Redes sociales (Instagram, Facebook, WhatsApp) | `SOCIAL` |
-| Nombres y roles de la delegación | `TEAM` |
-| Textos del hero y de la historia | `COPY` |
+| Qué querés cambiar                             | Variable                              |
+| ---------------------------------------------- | ------------------------------------- |
+| Objetivo económico                             | `GOAL`                                |
+| Monto recaudado (mientras no haya backend)     | `RAISED`                              |
+| Alias para donar                               | `ALIAS`                               |
+| Fecha del viaje / countdown                    | `EVENT_DATE_ISO` y `EVENT_DATE_LABEL` |
+| Título, descripción y SEO                      | `SITE`                                |
+| Redes sociales (Instagram, Facebook, WhatsApp) | `SOCIAL`                              |
+| Nombres y roles de la delegación               | `TEAM`                                |
+| Textos del hero y de la historia               | `COPY`                                |
 
 Ejemplo — actualizar lo recaudado a mano:
 
@@ -90,9 +90,9 @@ Ejemplo — agregar una nueva red social o cambiar un link:
 
 ```ts
 export const SOCIAL = {
-  instagram: "https://instagram.com/tu_usuario",
-  facebook: "https://facebook.com/tu_pagina",
-  whatsapp: "https://wa.me/5490000000000",
+  instagram: 'https://instagram.com/tu_usuario',
+  facebook: 'https://facebook.com/tu_pagina',
+  whatsapp: 'https://wa.me/5490000000000',
 };
 ```
 
@@ -170,11 +170,15 @@ Editá el array `TEAM` en `src/data/config.ts`:
 
 ```ts
 export const TEAM: TeamMember[] = [
-  { name: "Daniel Galetto", role: "Competidor", image: "/images/daniel.jpg" },
-  { name: "Constanza Murua", role: "Competidora", image: "/images/constanza.jpg" },
-  { name: "Joaquín Galetto", role: "Competidor", image: "/images/joaquin.jpg" },
-  { name: "Hernán Daniel Galetto", role: "Coach", image: "/images/hernan.jpg" },
-  { name: "Fabiana Ledesma", role: "Coach", image: "/images/fabiana.jpg" },
+  { name: 'Daniel Galetto', role: 'Competidor', image: '/images/daniel.jpg' },
+  {
+    name: 'Constanza Murua',
+    role: 'Competidora',
+    image: '/images/constanza.jpg',
+  },
+  { name: 'Joaquín Galetto', role: 'Competidor', image: '/images/joaquin.jpg' },
+  { name: 'Hernán Daniel Galetto', role: 'Coach', image: '/images/hernan.jpg' },
+  { name: 'Fabiana Ledesma', role: 'Coach', image: '/images/fabiana.jpg' },
 ];
 ```
 

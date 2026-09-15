@@ -1,19 +1,15 @@
 ---
-import { TEAM } from "../data/config";
+import { TEAM } from '../data/config';
 ---
 
 <section id="delegacion" class="relative px-5 py-[88px]">
   <div class="mx-auto max-w-[1100px]">
-    <p
-      class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary"
-    >
+    <p class="mb-3.5 inline-flex items-center gap-2 text-[12.5px] font-bold uppercase tracking-[0.14em] text-primary">
       <span class="h-0.5 w-[22px] bg-primary"></span>
       Quiénes somos
     </p>
 
-    <h2
-      class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground"
-    >
+    <h2 class="mb-3.5 font-display text-[clamp(28px,6vw,42px)] leading-[1.05] tracking-[-0.01em] text-foreground">
       Nuestra delegación
     </h2>
 
@@ -23,12 +19,8 @@ import { TEAM } from "../data/config";
 
     <div class="grid grid-cols-2 gap-4 min-[680px]:grid-cols-3 min-[860px]:grid-cols-5">
       {TEAM.map((member) => (
-        <article
-          class="group overflow-hidden rounded-brand border border-border bg-card shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg"
-        >
-          <div
-            class="relative aspect-[3/4] overflow-hidden rounded-t-brand bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25"
-          >
+        <article class="group overflow-hidden rounded-brand border border-border bg-card shadow-card transition-all duration-300 ease-brand hover:-translate-y-1 hover:border-white/[0.18] hover:shadow-card-lg">
+          <div class="relative aspect-[3/4] overflow-hidden rounded-t-brand bg-[radial-gradient(circle_at_30%_20%,rgba(79,176,217,0.15),transparent_55%),linear-gradient(135deg,#1c1c1c,#0d0d0d)] text-white/25">
             <img
               src={member.image}
               alt={member.name}
@@ -56,9 +48,7 @@ import { TEAM } from "../data/config";
               {member.name}
             </div>
 
-            <div
-              class="mt-[3px] text-[11.5px] font-medium uppercase tracking-[0.08em] text-primary"
-            >
+            <div class="mt-[3px] text-[11.5px] font-medium uppercase tracking-[0.08em] text-primary">
               {member.role}
             </div>
           </div>
