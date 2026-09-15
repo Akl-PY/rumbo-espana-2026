@@ -4,63 +4,38 @@
   "description": "Entrenamientos, competencias, viajes y cada momento del camino rumbo a Benidorm.",
   "items": [
     {
-      "image": "/images/gallery/gallery-1.jpg",
-      "title": "Preparación",
-      "description": "Entrenando para el próximo desafío.",
+      "image": "/images/gallery/items/0/image.jpeg",
+      "title": "Chile 2025",
+      "description": "Campeonato centro-sudamericano Santiago 2025.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/items/1/image.jpeg",
+      "title": "Coty en chile",
+      "description": "Por los pasillos del torneo.",
+      "featured": false
+    },
+    {
+      "image": "/images/gallery/items/2/image.jpeg",
+      "title": "Equipo femenino",
+      "description": "Entrenamiento de Coty con el equipo femenino de lucha de Argentina para la Copa del Mundo 2026. Realizado en Buenos Aires - Parque Chacabuco.",
       "featured": true
     },
     {
-      "image": "/images/gallery/gallery-2.jpg",
-      "title": "Competencia",
-      "description": "Representando a nuestra escuela.",
-      "featured": false
-    },
-    {
-      "image": "/images/gallery/gallery-3.jpg",
-      "title": "Entrenamiento",
-      "description": "Trabajo y constancia detrás de cada resultado.",
-      "featured": false
-    },
-    {
-      "image": "/images/gallery/gallery-4.jpg",
-      "title": "Equipo",
-      "description": "Juntos dentro y fuera del tatami.",
+      "image": "/images/gallery/items/3/image.jpeg",
+      "title": "Matías Bustamante",
+      "description": "Entrenamiento con uno de los principales entrenadores de la Selección Argentina. Multiple veces campeon del mundo.",
       "featured": true
     },
     {
-      "image": "/images/gallery/gallery-5.jpg",
-      "title": "Viaje",
-      "description": "Kilómetros recorridos por este objetivo.",
+      "image": "/images/gallery/items/4/image.jpeg",
+      "title": "Matías Bustamante",
+      "description": "Entrenamiento en el Salón del Sabonim Matías Bustamante, San Miguel - BSAS",
       "featured": false
     },
     {
-      "image": "/images/gallery/gallery-6.jpg",
-      "title": "Competencia internacional",
-      "description": "Una experiencia más que forma parte de nuestra historia.",
-      "featured": false
-    },
-    {
-      "image": "/images/gallery/gallery-7.jpg",
-      "title": "Preparación final",
-      "description": "Cada entrenamiento nos acerca un poco más.",
-      "featured": false
-    },
-    {
-      "image": "/images/gallery/gallery-8.jpg",
-      "title": "Nuestra delegación",
-      "description": "Cinco personas, un mismo objetivo.",
-      "featured": true
-    },
-    {
-      "image": "/images/gallery/gallery-9.jpg",
-      "title": "Rumbo a España",
-      "description": "Todo lo que hacemos apunta a Benidorm.",
-      "featured": false
-    },
-    {
-      "image": "/images/gallery/gallery-10.jpg",
-      "title": "Momentos compartidos",
-      "description": "Una historia construida entre todos.",
+      "title": "PERU 2026",
+      "description": "Primer puesto en formas de Constanza en Peru.",
       "featured": false
     }
   ]
