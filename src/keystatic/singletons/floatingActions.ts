@@ -1,6 +1,6 @@
-import { fields } from '@keystatic/core';
+import { fields, singleton } from '@keystatic/core';
 
-export const floatingActions = {
+export const floatingActions = singleton({
   label: 'Acciones flotantes',
 
   path: 'src/data/floating-actions',
@@ -218,4 +218,4 @@ export const floatingActions = {
       },
     ),
   },
-};
+});
