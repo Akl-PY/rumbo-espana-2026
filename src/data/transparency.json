@@ -6,22 +6,22 @@
     {
       "title": "Pasajes aéreos",
       "description": "Vuelos de ida y vuelta hacia España para los competidores y coaches.",
-      "amount": 8000000
+      "amount": 10000000
     },
     {
       "title": "Alojamiento",
       "description": "Estadía durante los días del certamen y el período necesario para la delegación.",
-      "amount": 1500000
+      "amount": 2800000
     },
     {
       "title": "Inscripciones y licencias",
       "description": "Acreditación oficial, inscripción al torneo y licencias correspondientes.",
-      "amount": 2400000
+      "amount": 3000000
     },
     {
       "title": "Traslados internos",
       "description": "Movilidad entre aeropuerto, alojamiento, competencia y otros puntos necesarios.",
-      "amount": 500000
+      "amount": 900000
     },
     {
       "title": "Alimentación y gastos de viaje",
