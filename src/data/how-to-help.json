@@ -1,9 +1,8 @@
-
 {
   "eyebrow": "Participá",
   "title": "¿Cómo podés ayudarnos?",
   "description": "Hay muchas formas de ser parte de este sueño mundialista. Elegí la que mejor se adapte a vos, a tu empresa o a tus posibilidades.",
-  "donationAlias": "RUMBOESP26",
+  "donationAlias": "RUMBOESP2026",
   "items": [
     {
       "id": "donar",
@@ -43,4 +42,3 @@
     }
   ]
 }
-
