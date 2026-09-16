@@ -13,7 +13,7 @@ export const GOAL = 4_000_000;
 export const RAISED = 0;
 
 // --- DATOS DE DONACIÓN ---
-export const ALIAS = 'RUMBOESP26';
+export const ALIAS = 'RUMBOESP2026';
 
 // Rutas de imágenes de QR (colocá los archivos reales en /public/images)
 export const QR_MERCADOPAGO = '/images/qr-donacion.png';
